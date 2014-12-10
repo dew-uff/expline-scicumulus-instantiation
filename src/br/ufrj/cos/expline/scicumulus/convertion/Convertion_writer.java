@@ -175,7 +175,7 @@ public class Convertion_writer implements IWriter{
 		Element sciCumulusRelation = this.scicumulusXML.createElement("relation");
 		
 		Attr sciCumulusRelationReltype = this.scicumulusXML.createAttribute("reltype");
-		sciCumulusRelationReltype.setNodeValue("Input");
+		sciCumulusRelationReltype.setNodeValue("Output");
 		
 		
 		Attr sciCumulusRelationName = this.scicumulusXML.createAttribute("name");
