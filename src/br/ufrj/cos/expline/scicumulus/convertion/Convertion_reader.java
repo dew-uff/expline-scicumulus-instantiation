@@ -125,9 +125,17 @@ public class Convertion_reader {
 				
 				/* ------------Relation---------- */
 				
-				String iModAct = "IMod"+auxElem.getAttribute("value");
+				
+				char[] tempVector = auxElem.getAttribute("value").toCharArray();
+				char charAux = tempVector[0];
+				String df = new Character(charAux).toString();
+				df = df.toUpperCase();
+				tempVector[0] = df.charAt(0);
+				df = new String(tempVector);
+				
+				String iModAct = "IMod"+df;
 				System.out.println(iModAct);
-				String oModAct = "OMod"+auxElem.getAttribute("value");
+				String oModAct = "OMod"+df;
 				System.out.println(oModAct);
 				
 				writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
