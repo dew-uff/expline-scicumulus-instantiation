@@ -260,6 +260,8 @@ public class Convertion_writer implements IWriter{
 		System.out.print("sql: ");
 		sciCumulusQuerySQL.setNodeValue(entry.nextLine());
 		
+		sciCumulusQuery.setAttributeNode(sciCumulusQuerySQL);
+		
 		
 		
 		this.root.appendChild(sciCumulusQuery);
@@ -295,6 +297,14 @@ public class Convertion_writer implements IWriter{
 		Attr sciCumulusDatabasePath = this.scicumulusXML.createAttribute("path");
 		System.out.println("Database path:");
 		sciCumulusDatabase.setNodeValue(entry.nextLine());
+		
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseName);
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseUsername);
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabasePassword);
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabasePort);
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseServer);
+		sciCumulusDatabase.setAttributeNode(sciCumulusDatabasePath);
+		
 		
 		
 		
