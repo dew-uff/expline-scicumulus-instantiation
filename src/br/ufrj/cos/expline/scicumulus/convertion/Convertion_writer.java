@@ -320,43 +320,45 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
+	@Override
 	public void setDependency(String activityTag, String relationDependency){
-		
+		//System.out.println("11111111111111");
 		NodeList conceptualWorkflow = this.root.getElementsByTagName("conceptualWorkflow");
-		
-		for (int i = 0; i < conceptualWorkflow.getLength(); i++) {
+		if(conceptualWorkflow.item(0).getNodeType() == Node.ELEMENT_NODE)
+		{
+			Element conceptualElement = (Element)conceptualWorkflow.item(0);
 			
-			Element currentActivity = (Element)conceptualWorkflow.item(i);
+			NodeList activities = conceptualElement.getElementsByTagName("activity");
 			
-			if(currentActivity.getAttribute("tag").equals(activityTag)){
-				
-				NodeList relationList = currentActivity.getElementsByTagName("relation");
-				
-				for (int j = 0; j < relationList.getLength(); j++) {
-					
-					Element currentRelation = (Element) relationList.item(j);
-					
-					if(currentRelation.getAttributeNode("reltype").equals("input")){
+			for (int i = 0; i < activities.getLength(); i++) {
+				//System.out.println("222222222222222222");
+				if(activities.item(i).getNodeType() == Node.ELEMENT_NODE)
+				{
+					Element currentActivity = (Element)activities.item(i);
+					//System.out.println(activityTag);
+					//System.out.println(currentActivity.getAttribute("tag"));
+					if(currentActivity.getAttribute("tag").equals(activityTag)){
+						//System.out.println("33333333333333333");
+						NodeList relationList = currentActivity.getElementsByTagName("relation");
 						
-						Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
-						sciCumulusRelationDependency.setNodeValue(relationDependency);
-						currentRelation.setAttributeNode(sciCumulusRelationDependency);
-						
+						for (int j = 0; j < relationList.getLength(); j++) {
+							//System.out.println("4444444444444");
+							if(relationList.item(j).getNodeType() == Node.ELEMENT_NODE)
+							{
+								Element currentRelation = (Element) relationList.item(j);
+								if(currentRelation.getAttribute("reltype").equals("Input")){
+									//System.out.println("5555555555555");
+									Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
+									sciCumulusRelationDependency.setNodeValue(relationDependency);
+									currentRelation.setAttributeNode(sciCumulusRelationDependency);
+									
+								}
+							}
+						}
 					}
 				}
-				
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-
 }
 	

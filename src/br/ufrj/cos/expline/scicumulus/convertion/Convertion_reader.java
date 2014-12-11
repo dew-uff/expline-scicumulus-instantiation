@@ -13,6 +13,9 @@ import org.w3c.dom.Node;
 public class Convertion_reader {
 	private final IWriter writer;
 	private Document document;
+	private final String SOURCE = "source";
+	private final String TARGET = "target";
+	
 	public Convertion_reader()
 	{
 		writer = null;
@@ -43,24 +46,8 @@ public class Convertion_reader {
 	private void startReading(Document document)
 	{
 		Element root = document.getDocumentElement();
-		NodeList childrenList = root.getChildNodes();
 		
-		/*for(int i = 0;i<childrenList.getLength();i++)
-		{
-			if(!childrenList.item(i).getNodeName().equals("#text"))
-			{
-				System.out.println(childrenList.item(i).getNodeName());
-			}
-		}*/
-		
-		/*
-		 * Catching Edges
-		 */
-		NodeList rootChildrenEdge = root.getElementsByTagName("Edge");
-		
-		for(int i = 0; i < rootChildrenEdge.getLength();i++){
-			Element auxElem = (Element)rootChildrenEdge.item(i);
-		}
+		//NodeList childrenList = root.getChildNodes();
 		
 		/*
 		 * Catching Activities 
@@ -187,6 +174,32 @@ public class Convertion_reader {
 				
 			}	
 		}
+		
+		
+		/*
+		 * Catching Edges
+		 */
+		NodeList rootChildrenEdge = root.getElementsByTagName("Edge");
+		
+		/* ------INICIO Dependency------ */
+		
+		for(int i = 0; i < rootChildrenEdge.getLength();i++)
+		{
+			Element auxElem = (Element)rootChildrenEdge.item(i);
+			String source = auxElem.getAttribute(SOURCE);
+			String target = auxElem.getAttribute(TARGET);
+			
+			Element activitySource = getActivity(SOURCE,source,rootChildrenActivity);
+			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
+			
+			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
+			
+			//System.out.println(activitySource.getAttribute("value")+" -> "+activityTarget.getAttribute("value"));
+			
+		}
+				
+		/* ------FIM Dependency--------- */
+		
 	}
 	
 	private void printNodeList(NodeList nodList)
@@ -216,7 +229,7 @@ public class Convertion_reader {
 				Element elemTemp = (Element)list.item(i);
 				String nameElem = elemTemp.getAttribute("name");
 				
-				System.out.println(nameAux + "-->" + nameElem);
+				//System.out.println(nameAux + "-->" + nameElem);
 				
 				if(nameAux.equals(nameElem))
 				{
@@ -225,6 +238,67 @@ public class Convertion_reader {
 			}
 		}
 		return false;
+	}
+	
+	private Element getActivity(String type, String idPort,NodeList rootChildrenActivity)
+	{
+		Element temp = null;
+		
+		for(int i = 0 ; i < rootChildrenActivity.getLength();i++)
+		{
+			if(rootChildrenActivity.item(i).getNodeType() == Node.ELEMENT_NODE)
+			{
+				Element auxElem = (Element) rootChildrenActivity.item(i);
+				
+				NodeList ports = auxElem.getElementsByTagName("Ports");
+				Element elemPorts = (Element)ports.item(0);
+				//printNodeList(elemPorts.getChildNodes());
+		
+				if(type.equals(TARGET))
+				{
+					NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
+					Element elemInputPorts = (Element)inputPorts.item(0);
+					//printNodeList(elemInputPorts.getChildNodes());
+					
+					NodeList portInput = elemInputPorts.getElementsByTagName("Port");
+					for(int k = 0;k < portInput.getLength();k++)
+					{
+						if(portInput.item(k).getNodeType() == Node.ELEMENT_NODE)
+						{
+							Element elemPortInput = (Element)portInput.item(k);
+							String aux = elemPortInput.getAttribute("id");
+							if(aux.equals(idPort)) 
+							{
+								return auxElem;
+							}
+						}
+					}
+					Element elemPortInput = (Element)portInput.item(0);
+				}
+				else if(type.equals(SOURCE))
+				{
+					NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
+					Element elemOutputPorts = (Element)outputPorts.item(0);
+					//printNodeList(elemOutputPorts.getChildNodes());
+					
+					NodeList portOutput = elemOutputPorts.getElementsByTagName("Port");
+					for(int k = 0;k < portOutput.getLength();k++)
+					{
+						if(portOutput.item(k).getNodeType() == Node.ELEMENT_NODE)
+						{
+							Element elemPortOutput = (Element)portOutput.item(k);
+							String aux = elemPortOutput.getAttribute("id");
+							if(aux.equals(idPort)) 
+							{
+								return auxElem;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return temp;
 	}
 	
 }
