@@ -33,9 +33,11 @@ public class Convertion_writer implements IWriter{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		this.scicumulusXML = builder.newDocument();
+		this.insertUserInformation();
 		}catch(Exception e){
 			System.out.println("Error while creating the XML document");
 		}
+		
 	}
 	
 	
@@ -225,7 +227,7 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void insertEnvironment(){
+	private void insertEnvironment(){
 
 		Element sciCumulusenvironment = this.scicumulusXML.createElement("environment");
 		
@@ -247,7 +249,7 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void insertQuery(){
+	private void insertQuery(){
 		
 		
 		Scanner entry = new Scanner(System.in);
@@ -265,7 +267,7 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void insertDatabase(){
+	private void insertDatabase(){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -304,17 +306,36 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void insertWorkspace(){
+	private void insertWorkspace(){
 		
 		Scanner entry = new Scanner(System.in);
 		
-		
+		entry.close();
 	}
 	
-	public void insertCredentials(){
+	private void insertCredentials(){
 		
 		Scanner entry = new Scanner(System.in);
 		
+		Element sciCumulusCredentials = this.scicumulusXML.createElement("credentials");
+		
+		
+		Attr sciCumulusBinaryAccessKey = this.scicumulusXML.createAttribute("access_key");
+		System.out.println("Binary Access Key");
+		sciCumulusBinaryAccessKey.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusBinarySecretAccessKey = this.scicumulusXML.createAttribute("secret_access_key");
+		System.out.println("Binary Secret Access Key");
+		sciCumulusBinarySecretAccessKey.setNodeValue(entry.nextLine());
+		
+		
+		sciCumulusCredentials.setAttributeNode(sciCumulusBinaryAccessKey);
+		sciCumulusCredentials.setAttributeNode(sciCumulusBinarySecretAccessKey);
+		
+		entry.close();
+		
+		this.root.appendChild(sciCumulusCredentials);
+
 		
 		
 		
@@ -322,7 +343,7 @@ public class Convertion_writer implements IWriter{
 	
 	@Override
 	public void setDependency(String activityTag, String relationDependency){
-		//System.out.println("11111111111111");
+		
 		NodeList conceptualWorkflow = this.root.getElementsByTagName("conceptualWorkflow");
 		if(conceptualWorkflow.item(0).getNodeType() == Node.ELEMENT_NODE)
 		{
@@ -331,23 +352,22 @@ public class Convertion_writer implements IWriter{
 			NodeList activities = conceptualElement.getElementsByTagName("activity");
 			
 			for (int i = 0; i < activities.getLength(); i++) {
-				//System.out.println("222222222222222222");
+				
 				if(activities.item(i).getNodeType() == Node.ELEMENT_NODE)
 				{
 					Element currentActivity = (Element)activities.item(i);
-					//System.out.println(activityTag);
-					//System.out.println(currentActivity.getAttribute("tag"));
+					
 					if(currentActivity.getAttribute("tag").equals(activityTag)){
-						//System.out.println("33333333333333333");
+						
 						NodeList relationList = currentActivity.getElementsByTagName("relation");
 						
 						for (int j = 0; j < relationList.getLength(); j++) {
-							//System.out.println("4444444444444");
+							
 							if(relationList.item(j).getNodeType() == Node.ELEMENT_NODE)
 							{
 								Element currentRelation = (Element) relationList.item(j);
 								if(currentRelation.getAttribute("reltype").equals("Input")){
-									//System.out.println("5555555555555");
+									
 									Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
 									sciCumulusRelationDependency.setNodeValue(relationDependency);
 									currentRelation.setAttributeNode(sciCumulusRelationDependency);
@@ -360,5 +380,57 @@ public class Convertion_writer implements IWriter{
 			}
 		}
 	}
+
+	private void insertBinary(){
+		
+		Scanner entry = new Scanner(System.in);
+		
+		Element sciCumulusBinary = this.scicumulusXML.createElement("binary");
+		
+		Attr sciCumulusBinaryDirectory = this.scicumulusXML.createAttribute("directory");
+		System.out.println("Binary directory");
+		sciCumulusBinaryDirectory.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusBinaryConceptualVersion = this.scicumulusXML.createAttribute("conceptual_version");
+		System.out.println("Binary conceptual version");
+		sciCumulusBinaryConceptualVersion.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusBinaryExecutionVersion = this.scicumulusXML.createAttribute("execution_version");
+		System.out.println("Binary execution version");
+		sciCumulusBinaryExecutionVersion.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusBinaryStarterVersion = this.scicumulusXML.createAttribute("starter_version");
+		System.out.println("Binary starter version");
+		sciCumulusBinaryStarterVersion.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusBinaryQueryVersion = this.scicumulusXML.createAttribute("query_version");
+		System.out.println("Binary Query version");
+		sciCumulusBinaryQueryVersion.setNodeValue(entry.nextLine());
+		
+		sciCumulusBinary.setAttributeNode(sciCumulusBinaryDirectory);
+		sciCumulusBinary.setAttributeNode(sciCumulusBinaryConceptualVersion);
+		sciCumulusBinary.setAttributeNode(sciCumulusBinaryExecutionVersion);
+		sciCumulusBinary.setAttributeNode(sciCumulusBinaryStarterVersion);
+		sciCumulusBinary.setAttributeNode(sciCumulusBinaryQueryVersion);
+		
+		entry.close();
+		
+		this.root.appendChild(sciCumulusBinary);
+		
+	}
+
+	public void insertUserInformation(){
+		
+		this.insertCredentials();
+		this.insertEnvironment();
+		this.insertBinary();
+		this.insertWorkspace();
+		this.insertDatabase();
+		this.insertQuery();
+		
+		
+		
+	}
+	
 }
 	

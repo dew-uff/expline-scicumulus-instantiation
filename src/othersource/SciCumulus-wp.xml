@@ -21,7 +21,7 @@
 		<activity tag="act1" description="" type="MAP" activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%">
 			<relation reltype="Input" name="IMod1Act1"/>
 			<relation reltype="Output" name="OMod1Act1" />
-			<field name="ID" type="float" input="IMod1Act1" output="OMod1Act1" decimalplaces="0"/>
+			<field name="ID" type="float" input="IMod1Act1" output="OMod1Act1" decimalplaces="0"/>	
 			<field name="T1" type="float" input="IMod1Act1" decimalplaces="0"/>
 			<field name="T2" type="float" input="IMod1Act1" output="OMod1Act1" decimalplaces="0"/>
     	</activity>
