@@ -99,9 +99,9 @@ public class Convertion_reader {
 				//printNodeList(elemArray.getChildNodes());
 				
 				NodeList relationSchemaAttributeInput = elemArrayInput.getChildNodes();
-				System.out.println("Input");
-				printNodeList(relationSchemaAttributeInput);
-				System.out.println("---");
+				//System.out.println("Input");
+				//printNodeList(relationSchemaAttributeInput);
+				//System.out.println("---");
 				/* -----------FIM INPUT--------- */
 				
 				
@@ -120,16 +120,17 @@ public class Convertion_reader {
 				//printNodeList(elemRelationSchemaOutput.getChildNodes());
 				
 				NodeList arrayOutput = elemRelationSchemaOutput.getElementsByTagName("Array");
+				NodeList relationSchemaAttributeOutput = null;
 				if(arrayOutput.getLength() > 0)
 				{
 					//System.out.println(arrayOutput.item(0).getNodeName());
 					Element elemArrayOutput = (Element)arrayOutput.item(0);
 					//printNodeList(elemArrayOutput.getChildNodes());
 					
-					NodeList relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
-					System.out.println("Output");
-					printNodeList(relationSchemaAttributeOutput);
-					System.out.println("-----");
+					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
+					//System.out.println("Output");
+					//printNodeList(relationSchemaAttributeOutput);
+					//System.out.println("-----");
 					/**/
 				}
 				/* -----------FIM OUTPUT--------- */
@@ -138,7 +139,9 @@ public class Convertion_reader {
 				/* ------------Relation---------- */
 				
 				String iModAct = "IMod"+auxElem.getAttribute("value");
+				System.out.println(iModAct);
 				String oModAct = "OMod"+auxElem.getAttribute("value");
+				System.out.println(oModAct);
 				
 				writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
 				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
@@ -163,13 +166,19 @@ public class Convertion_reader {
 					if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
 					{
 						Element elemAux = (Element)relationSchemaAttributeInput.item(j);
-						if(hasInNodeList(relationSchemaOutput, elemAux))
+						if(relationSchemaAttributeOutput == null)
 						{
 							writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
-						}
-						else
+						}else
 						{
-							writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+							if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
+							{
+								writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
+							}
+							else
+							{
+								writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+							}
 						}
 					}
 				}
@@ -199,12 +208,17 @@ public class Convertion_reader {
 	
 	private boolean hasInNodeList(NodeList list, Element elem)
 	{
+		String nameAux = elem.getAttribute("name");
 		for(int i = 0; i < list.getLength();i++)
 		{
 			if(list.item(i).getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element elemTemp = (Element)list.item(i);
-				if(elemTemp.getAttribute("name").equals(elem.getAttribute("name")))
+				String nameElem = elemTemp.getAttribute("name");
+				
+				System.out.println(nameAux + "-->" + nameElem);
+				
+				if(nameAux.equals(nameElem))
 				{
 					return true;
 				}
