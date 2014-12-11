@@ -33,7 +33,6 @@ public class Convertion_writer implements IWriter{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		this.scicumulusXML = builder.newDocument();
-		this.insertUserInformation();
 		}catch(Exception e){
 			System.out.println("Error while creating the XML document");
 		}
@@ -70,7 +69,7 @@ public class Convertion_writer implements IWriter{
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerfactory.newTransformer();
 		DOMSource documentSource = new DOMSource(this.scicumulusXML);
-		StreamResult result = new StreamResult(new File("SciCumulus-wp.xml"));
+		StreamResult result = new StreamResult(new File("SciCumulus-wp_novo.xml"));
 		transformer.transform(documentSource, result);
 		System.out.println("File Saved");
 		}catch(Exception e){
@@ -261,7 +260,7 @@ public class Convertion_writer implements IWriter{
 		System.out.print("sql: ");
 		sciCumulusQuerySQL.setNodeValue(entry.nextLine());
 		
-		entry.close();
+		
 		
 		this.root.appendChild(sciCumulusQuery);
 		
@@ -297,7 +296,7 @@ public class Convertion_writer implements IWriter{
 		System.out.println("Database path:");
 		sciCumulusDatabase.setNodeValue(entry.nextLine());
 		
-		entry.close();
+		
 		
 		root.appendChild(sciCumulusDatabase);
 		
@@ -308,9 +307,9 @@ public class Convertion_writer implements IWriter{
 	
 	private void insertWorkspace(){
 		
-		Scanner entry = new Scanner(System.in);
 		
-		entry.close();
+		
+		
 	}
 	
 	private void insertCredentials(){
@@ -332,7 +331,7 @@ public class Convertion_writer implements IWriter{
 		sciCumulusCredentials.setAttributeNode(sciCumulusBinaryAccessKey);
 		sciCumulusCredentials.setAttributeNode(sciCumulusBinarySecretAccessKey);
 		
-		entry.close();
+		
 		
 		this.root.appendChild(sciCumulusCredentials);
 
@@ -413,7 +412,7 @@ public class Convertion_writer implements IWriter{
 		sciCumulusBinary.setAttributeNode(sciCumulusBinaryStarterVersion);
 		sciCumulusBinary.setAttributeNode(sciCumulusBinaryQueryVersion);
 		
-		entry.close();
+		
 		
 		this.root.appendChild(sciCumulusBinary);
 		

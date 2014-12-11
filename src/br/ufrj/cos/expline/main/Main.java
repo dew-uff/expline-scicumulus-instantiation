@@ -10,6 +10,7 @@ public class Main
 	{
 		Convertion_writer writer = new Convertion_writer();
 		writer.scicumulusMainNodeCreation();
+		writer.insertUserInformation();
 		writer.scicumulusConceptualWorkflowCreation();
 		new Convertion_reader(writer);
 		writer.saveDocumentToDisk();
