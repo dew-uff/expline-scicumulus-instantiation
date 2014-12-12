@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.scicumulus.convertion;
+package br.ufrj.cos.expline.scicumulus.conversion;
 
 import java.io.File;
 import java.util.Scanner;
@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 
 
 
-public class Convertion_writer implements IWriter{
+public class Conversion_writer implements IWriter{
 
 	
 	
@@ -27,7 +27,7 @@ public class Convertion_writer implements IWriter{
 	Element root;
 	
 	
-	public Convertion_writer(){
+	public Conversion_writer(){
 		
 		try{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

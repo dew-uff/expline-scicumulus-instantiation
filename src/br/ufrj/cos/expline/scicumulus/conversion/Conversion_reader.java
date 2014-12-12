@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.scicumulus.convertion;
+package br.ufrj.cos.expline.scicumulus.conversion;
 
 import java.io.File;
 
@@ -10,18 +10,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
-public class Convertion_reader {
+public class Conversion_reader {
 	private final IWriter writer;
 	private Document document;
 	private final String SOURCE = "source";
 	private final String TARGET = "target";
 	
-	public Convertion_reader()
+	public Conversion_reader()
 	{
 		writer = null;
 	}
 	
-	public Convertion_reader(IWriter writer)
+	public Conversion_reader(IWriter writer)
 	{
 		this.writer = writer;
 		initConvertion();

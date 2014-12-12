@@ -1,18 +1,18 @@
 package br.ufrj.cos.expline.main;
 
-import br.ufrj.cos.expline.scicumulus.convertion.Convertion_reader;
-import br.ufrj.cos.expline.scicumulus.convertion.Convertion_writer;
-import br.ufrj.cos.expline.scicumulus.convertion.IWriter;
+import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
+import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
+import br.ufrj.cos.expline.scicumulus.conversion.IWriter;
 
 public class Main 
 {
 	public static void main(String [] args)
 	{
-		Convertion_writer writer = new Convertion_writer();
+		Conversion_writer writer = new Conversion_writer();
 		writer.scicumulusMainNodeCreation();
 		writer.insertUserInformation();
 		writer.scicumulusConceptualWorkflowCreation();
-		new Convertion_reader(writer);
+		new Conversion_reader(writer);
 		writer.saveDocumentToDisk();
 	}
 }

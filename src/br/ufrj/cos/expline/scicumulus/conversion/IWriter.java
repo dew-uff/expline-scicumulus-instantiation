@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.scicumulus.convertion;
+package br.ufrj.cos.expline.scicumulus.conversion;
 
 import org.w3c.dom.Element;
 
