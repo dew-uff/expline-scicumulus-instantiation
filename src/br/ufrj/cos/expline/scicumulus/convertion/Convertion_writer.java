@@ -317,6 +317,43 @@ public class Convertion_writer implements IWriter{
 	
 	private void insertWorkspace(){
 		
+		Scanner entry = new Scanner(System.in);
+		
+		
+		Element sciCumulusWorkspace = this.scicumulusXML.createElement("workspace");
+		
+		Attr sciCumulusWorkspaceUpload = this.scicumulusXML.createAttribute("upload");
+		System.out.println("Workspace upload");
+		sciCumulusWorkspaceUpload.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusWorkspaceBucketName = this.scicumulusXML.createAttribute("bucket_name");
+		System.out.println("Workspace bucket name");
+		sciCumulusWorkspaceBucketName.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusWorkspaceWorkflowDir = this.scicumulusXML.createAttribute("workflow_dir");
+		System.out.println("Workspace workflow dir");
+		sciCumulusWorkspaceWorkflowDir.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusWorkspaceCompressedWorkspace = this.scicumulusXML.createAttribute("compressed_workspace");
+		System.out.println("Workspace compressed workspace");
+		sciCumulusWorkspaceCompressedWorkspace.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusWorkspaceCompressedDir = this.scicumulusXML.createAttribute("compressed_dir");
+		System.out.println("Workspace compressed dir");
+		sciCumulusWorkspaceCompressedDir.setNodeValue(entry.nextLine());
+		
+		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceUpload);
+		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceBucketName);
+		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceWorkflowDir);
+		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceCompressedWorkspace);
+		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceCompressedDir);
+		
+		this.root.appendChild(sciCumulusWorkspace);
+		
+		
+		
+		
+		
 		
 		
 		
@@ -436,10 +473,93 @@ public class Convertion_writer implements IWriter{
 		this.insertWorkspace();
 		this.insertDatabase();
 		this.insertQuery();
+		this.insertExecutionWorkflow();
 		
 		
 		
 	}
 	
+
+	private void insertExecutionWorkflow(){
+		
+		Scanner entry = new Scanner(System.in);
+		
+		Element sciCumulusExecutionWorkflow = this.scicumulusXML.createElement("executionWorkflow");
+		
+		Attr sciCumulusExecutionWorkflowTag = this.scicumulusXML.createAttribute("tag");
+		sciCumulusExecutionWorkflowTag.setNodeValue("workflow-1");
+		
+		Attr sciCumulusExecutionWorkflowExecmodel = this.scicumulusXML.createAttribute("execmodel");
+		sciCumulusExecutionWorkflowExecmodel.setNodeValue("DYN_FAF");
+		
+		Attr sciCumulusExecutionWorkflowExpdir = this.scicumulusXML.createAttribute("expdir");
+		System.out.println("Execution workflow expdir");
+		sciCumulusExecutionWorkflowExpdir.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusExecutionWorkflowMaxFailure = this.scicumulusXML.createAttribute("max_failure");
+		sciCumulusExecutionWorkflowMaxFailure.setNodeValue("5");
+		
+		Attr sciCumulusExecutionWorkflowUserInteraction = this.scicumulusXML.createAttribute("user_interaction");
+		sciCumulusExecutionWorkflowUserInteraction.setNodeValue("false");
+		
+		Attr sciCumulusExecutionWorkflowRedundancy = this.scicumulusXML.createAttribute("redundancy");
+		sciCumulusExecutionWorkflowRedundancy.setNodeValue("true");
+		
+		Attr sciCumulusExecutionWorkflowReliability = this.scicumulusXML.createAttribute("reliability");
+		sciCumulusExecutionWorkflowReliability.setNodeValue("0.9");
+		
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowTag);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowExecmodel);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowExpdir);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowMaxFailure);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowUserInteraction);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowRedundancy);
+		sciCumulusExecutionWorkflow.setAttributeNode(sciCumulusExecutionWorkflowReliability);
+		
+		this.root.appendChild(sciCumulusExecutionWorkflow);
+		
+		
+		this.insertsciCumulusExecutionWorkflowRelation();
+		
+		
+	}
+
+	private void insertsciCumulusExecutionWorkflowRelation(){
+		
+		Scanner entry = new Scanner(System.in);
+		
+		Element sciCumulusExecutionWorkflowRelation = this.scicumulusXML.createElement("relation");
+		
+		
+		Attr sciCumulusExecutionWorkflowRelationName = this.scicumulusXML.createAttribute("name");
+		System.out.println("Execution workflow relation name");
+		sciCumulusExecutionWorkflowRelationName.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusExecutionWorkflowRelationFilename = this.scicumulusXML.createAttribute("filename");
+		System.out.println("Execution workflow relation filename");
+		sciCumulusExecutionWorkflowRelationFilename.setNodeValue(entry.nextLine());
+		
+		sciCumulusExecutionWorkflowRelation.setAttributeNode(sciCumulusExecutionWorkflowRelationName);
+		sciCumulusExecutionWorkflowRelation.setAttributeNode(sciCumulusExecutionWorkflowRelationFilename);
+		
+		appendExecutionWorkflowChild(sciCumulusExecutionWorkflowRelation);
+		
+		
+		
+		
+		
+	}
+	
+	private void appendExecutionWorkflowChild(Element relation){
+		
+		NodeList executionWorkflow = this.root.getElementsByTagName("executionWorkflow");
+		
+		Element executionWorkflowElement = (Element)executionWorkflow.item(0);
+		
+		executionWorkflowElement.appendChild(relation);
+		
+		
+	}
+
 }
 	
