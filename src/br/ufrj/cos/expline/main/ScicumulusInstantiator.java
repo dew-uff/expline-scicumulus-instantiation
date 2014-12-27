@@ -19,8 +19,12 @@ public class ScicumulusInstantiator implements Instantiator{
 	@Override
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
 		
+		//inserindo dados
+		properties.put("login", "andymarinho");
 		
 		
+		//resgatando dados
+		String login = properties.get("login");
 	}
 
 	
