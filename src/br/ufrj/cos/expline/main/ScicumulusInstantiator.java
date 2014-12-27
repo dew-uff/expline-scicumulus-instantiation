@@ -1,6 +1,7 @@
 package br.ufrj.cos.expline.main;
 
 import java.io.File;
+import java.util.Map;
 
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
@@ -14,13 +15,20 @@ public class ScicumulusInstantiator implements Instantiator{
 		writer.saveDocumentToDisk();
 		
 	}
+	
+	@Override
+	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
+		
+		
+		
+	}
 
 	
 	public static void main(String[] args){
 		
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
-		File read = new File("C:\\Users\\claudio\\Desktop\\Repositories\\ProjetoFinal\\src\\othersource\\AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("C:\\Users\\claudio\\Desktop\\Repositories\\ProjetoFinal\\src\\othersource\\concrete.xml");
+		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
+		File writer = new File("src/othersource/concrete.xml");
 		scicumulusInstantiator.instantiate(read, writer);
 	}
 	
