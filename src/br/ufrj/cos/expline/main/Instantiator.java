@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.instantiation.scicumulus;
+package br.ufrj.cos.expline.main;
 
 import java.io.File;
 

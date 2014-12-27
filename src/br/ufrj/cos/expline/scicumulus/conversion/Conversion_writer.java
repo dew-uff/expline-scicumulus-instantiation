@@ -25,10 +25,11 @@ public class Conversion_writer implements IWriter{
 	
 	Document scicumulusXML;
 	Element root;
+	File fileToWrite;
 	
 	
-	public Conversion_writer(){
-		
+	public Conversion_writer(File file){
+		this.fileToWrite = file;
 		try{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -36,6 +37,9 @@ public class Conversion_writer implements IWriter{
 		}catch(Exception e){
 			System.out.println("Error while creating the XML document");
 		}
+		this.scicumulusMainNodeCreation();
+		this.insertUserInformation();
+		this.scicumulusConceptualWorkflowCreation();
 		
 	}
 	
@@ -69,7 +73,7 @@ public class Conversion_writer implements IWriter{
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerfactory.newTransformer();
 		DOMSource documentSource = new DOMSource(this.scicumulusXML);
-		StreamResult result = new StreamResult(new File("SciCumulus-wp_novo.xml"));
+		StreamResult result = new StreamResult(fileToWrite);
 		transformer.transform(documentSource, result);
 		System.out.println("File Saved");
 		}catch(Exception e){

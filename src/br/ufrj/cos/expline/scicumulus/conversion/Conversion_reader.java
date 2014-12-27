@@ -15,14 +15,17 @@ public class Conversion_reader {
 	private Document document;
 	private final String SOURCE = "source";
 	private final String TARGET = "target";
+	private final File fileToRead;
 	
-	public Conversion_reader()
+	public Conversion_reader(File file)
 	{
+		this.fileToRead = file;
 		writer = null;
 	}
 	
-	public Conversion_reader(IWriter writer)
+	public Conversion_reader(IWriter writer, File file)
 	{
+		this.fileToRead = file;
 		this.writer = writer;
 		initConvertion();
 	}
@@ -30,7 +33,7 @@ public class Conversion_reader {
 	private void initConvertion()
 	{
 		try{
-			File explineFile = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
+			File explineFile = fileToRead;
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = factory.newDocumentBuilder();
 			document = dBuilder.parse(explineFile);

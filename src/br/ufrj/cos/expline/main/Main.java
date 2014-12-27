@@ -8,11 +8,8 @@ public class Main
 {
 	public static void main(String [] args)
 	{
-		Conversion_writer writer = new Conversion_writer();
-		writer.scicumulusMainNodeCreation();
-		writer.insertUserInformation();
-		writer.scicumulusConceptualWorkflowCreation();
-		new Conversion_reader(writer);
-		writer.saveDocumentToDisk();
+		//Conversion_writer writer = new Conversion_writer();
+		//new Conversion_reader(writer);
+		//writer.saveDocumentToDisk();
 	}
 }
