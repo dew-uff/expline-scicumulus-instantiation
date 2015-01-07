@@ -1,6 +1,9 @@
 package br.ufrj.cos.expline.main;
 
 import java.io.File;
+
+
+import java.util.HashMap;
 import java.util.Map;
 
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
@@ -10,7 +13,7 @@ public class ScicumulusInstantiator implements Instantiator{
 
 	@Override
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow) {
-		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow);
+		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
 		new Conversion_reader(writer,explineAbstractWorkflow);
 		writer.saveDocumentToDisk();
 		
@@ -21,10 +24,30 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		//inserindo dados
 		properties.put("login", "andymarinho");
+		properties.put("senha", "1234");
+		
+		
+		
+		
+		properties.put("CompressedDir","-");
+		properties.put("AccessKey","-");
+		properties.put("SecretAccessKey","-");
+		properties.put("Directory","-");
+		properties.put("ConceptualVersion","-");
+		properties.put("ExecutionVersion","-");
+		properties.put("StarterVersion","-");
+		properties.put("QueryVersion","-");
+		properties.put("WorkflowExpdir","-");
+		properties.put("WorkflowRelationName","-");
+		properties.put("WorkflowRelationFilename","-");
+		
+		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);
+		new Conversion_reader(writer,explineAbstractWorkflow);
+		writer.saveDocumentToDisk();
 		
 		
 		//resgatando dados
-		String login = properties.get("login");
+				String login = properties.get("login");
 	}
 
 	
@@ -33,7 +56,8 @@ public class ScicumulusInstantiator implements Instantiator{
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
 		File writer = new File("src/othersource/concrete.xml");
-		scicumulusInstantiator.instantiate(read, writer);
+		HashMap<String,String> auxTempMap = new HashMap<String, String>();
+		scicumulusInstantiator.instantiate(read, writer, auxTempMap );
 	}
 	
 }
