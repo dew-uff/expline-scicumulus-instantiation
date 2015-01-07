@@ -23,20 +23,42 @@ public class ScicumulusInstantiator implements Instantiator{
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
 		
 		//inserindo dados
-		properties.put("login", "andymarinho");
+		/*properties.put("login", "andymarinho");
 		properties.put("senha", "1234");
+		*/
 		
 		
 		
 		
+		properties.put("ActivityActivation", "-");
+		
+		//Database node
+		properties.put("DatabaseName", "-");
+		properties.put("DatabaseUsername", "-");
+		properties.put("DatabasePassword", "-");
+		properties.put("DatabasePort", "-");
+		properties.put("DatabaseServer", "-");
+		properties.put("DatabasePath", "-");
+		
+		//Workspace node
+		properties.put("WorkspaceUpload", "-");
+		properties.put("WorkspaceBucketName", "-");
+		properties.put("WorkspaceWorkflowDir", "-");
+		properties.put("WorkspaceCompressedWorkspace", "-");
 		properties.put("CompressedDir","-");
+		
+		//Credentials node
 		properties.put("AccessKey","-");
 		properties.put("SecretAccessKey","-");
+		
+		//Binary node
 		properties.put("Directory","-");
 		properties.put("ConceptualVersion","-");
 		properties.put("ExecutionVersion","-");
 		properties.put("StarterVersion","-");
 		properties.put("QueryVersion","-");
+		
+		//Executionworkflow node
 		properties.put("WorkflowExpdir","-");
 		properties.put("WorkflowRelationName","-");
 		properties.put("WorkflowRelationFilename","-");
@@ -61,3 +83,4 @@ public class ScicumulusInstantiator implements Instantiator{
 	}
 	
 }
+
