@@ -1,8 +1,8 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class BinaryTab extends JFrame
+public class BinaryTab extends JPanel
 {
 
 }
