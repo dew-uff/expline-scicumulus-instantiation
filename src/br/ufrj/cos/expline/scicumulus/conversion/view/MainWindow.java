@@ -22,7 +22,7 @@ public class MainWindow extends JFrame
 		this.add(jtp);
 		
 		JPanel aloha = new JPanel();
-		JPanel aloha1 = new JPanel();
+		JPanel aloha1 = new CredentialsTab();
 		
 		jtp.addTab("Claudio", aloha );
 		
