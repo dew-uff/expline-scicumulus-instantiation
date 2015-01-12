@@ -22,12 +22,19 @@ public class ScicumulusInstantiator implements Instantiator{
 	@Override
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
 		
-		//inserindo dados
-		/*properties.put("login", "andymarinho");
-		properties.put("senha", "1234");
-		*/
+		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);
+		new Conversion_reader(writer,explineAbstractWorkflow);
+		writer.saveDocumentToDisk();
 		
+	}
+
+	
+	public static void main(String[] args){
 		
+		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
+		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
+		File writer = new File("src/othersource/concrete.xml");
+		Map<String,String> properties = new HashMap<String, String>();
 		
 		
 		properties.put("ActivityActivation", "-");
@@ -63,23 +70,8 @@ public class ScicumulusInstantiator implements Instantiator{
 		properties.put("WorkflowRelationName","-");
 		properties.put("WorkflowRelationFilename","-");
 		
-		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);
-		new Conversion_reader(writer,explineAbstractWorkflow);
-		writer.saveDocumentToDisk();
 		
-		
-		//resgatando dados
-				String login = properties.get("login");
-	}
-
-	
-	public static void main(String[] args){
-		
-		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
-		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("src/othersource/concrete.xml");
-		HashMap<String,String> auxTempMap = new HashMap<String, String>();
-		scicumulusInstantiator.instantiate(read, writer, auxTempMap );
+		scicumulusInstantiator.instantiate(read, writer, properties );
 	}
 	
 }
