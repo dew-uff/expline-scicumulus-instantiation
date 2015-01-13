@@ -23,20 +23,24 @@ public class CredentialsTab extends JPanel
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		labelAccessKey = new JLabel("Access Key: ");
 		
-		textFieldAccessKey = new JTextField();
-		textFieldAccessKey.setSize(100, 10);
+		labelAccessKey = new JLabel("Access Key: ");
+		labelAccessKey.setLocation(10, 10);
+		
+		textFieldAccessKey = new JTextField(20);
+		textFieldAccessKey.setLocation(labelAccessKey.getWidth() + 10, 10);
 		
 		labelSecretAccessKey = new JLabel("Secret Access Key: ");
+		labelSecretAccessKey.setLocation(10,labelAccessKey.getY() + labelAccessKey.getHeight() + 10);
 		
-		textFieldSecretAccessKey = new JTextField();
-		textFieldSecretAccessKey.setSize(100, 10);
+		textFieldSecretAccessKey = new JTextField(20);
+		textFieldSecretAccessKey.setLocation(labelSecretAccessKey.getWidth()+10,labelAccessKey.getY() + labelAccessKey.getHeight() + 10);
 		
 		this.add(labelAccessKey);
 		this.add(textFieldAccessKey);
 		this.add(labelSecretAccessKey);
 		this.add(textFieldSecretAccessKey);
+		
 	}
 	
 }

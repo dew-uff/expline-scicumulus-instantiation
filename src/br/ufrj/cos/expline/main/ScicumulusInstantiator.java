@@ -14,7 +14,7 @@ public class ScicumulusInstantiator implements Instantiator{
 	@Override
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow) {
 		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
-		new Conversion_reader(writer,explineAbstractWorkflow);
+		new Conversion_reader(writer,explineAbstractWorkflow,null);
 		writer.saveDocumentToDisk();
 		
 	}
@@ -23,8 +23,13 @@ public class ScicumulusInstantiator implements Instantiator{
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
 		
 		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);
-		new Conversion_reader(writer,explineAbstractWorkflow);
+		new Conversion_reader(writer,explineAbstractWorkflow,properties);
 		writer.saveDocumentToDisk();
+		
+		for(String p:properties.keySet())
+		{
+			System.out.println(p);
+		}
 		
 	}
 

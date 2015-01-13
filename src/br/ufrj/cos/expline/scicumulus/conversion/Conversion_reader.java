@@ -7,8 +7,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
+import java.util.Map;
 
 public class Conversion_reader {
 	private final IWriter writer;
@@ -16,15 +20,18 @@ public class Conversion_reader {
 	private final String SOURCE = "source";
 	private final String TARGET = "target";
 	private final File fileToRead;
+	private Map<String, String> properties;
 	
-	public Conversion_reader(File file)
+	public Conversion_reader(File file, Map<String,String> properties)
 	{
+		this.properties = properties;
 		this.fileToRead = file;
 		writer = null;
 	}
 	
-	public Conversion_reader(IWriter writer, File file)
+	public Conversion_reader(IWriter writer, File file,Map<String,String> properties)
 	{
+		this.properties = properties;
 		this.fileToRead = file;
 		this.writer = writer;
 		initConvertion();
@@ -65,6 +72,8 @@ public class Conversion_reader {
 				Element auxElem = (Element) rootChildrenActivity.item(i);
 				String value = auxElem.getAttribute("value");
 				String algebraicOperator = auxElem.getAttribute("algebraicOperator");
+				String id = auxElem.getAttribute("id");
+				properties.put("activity_"+id, "-");
 				writer.insertActivity(value, algebraicOperator);
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");

@@ -30,12 +30,15 @@ public class MainWindow extends JFrame
 		
 		JTextField jtf = new JTextField();
 		jtf.setText("Alo meu amigo");
+		jtf.setLocation(0, 0);
 		
 		
 		
 		aloha.add(jtf);
 		
-		this.repaint();
+		this.setResizable(false);
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.setVisible(true);
 		
