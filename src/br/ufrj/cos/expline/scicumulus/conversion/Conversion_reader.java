@@ -57,8 +57,6 @@ public class Conversion_reader {
 	{
 		Element root = document.getDocumentElement();
 		
-		//NodeList childrenList = root.getChildNodes();
-		
 		/*
 		 * Catching Activities 
 		 */
@@ -78,66 +76,46 @@ public class Conversion_reader {
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
 				Element elemPorts = (Element)ports.item(0);
-				//printNodeList(elemPorts.getChildNodes());
 				
 				/* -----------INICIO INPUT--------- */
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
-				//printNodeList(elemInputPorts.getChildNodes());
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
 				Element elemPortInput = (Element)portInput.item(0);
-				//printNodeList(elemPortInput.getChildNodes());
 				
 				NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
 				Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
-				//printNodeList(elemRelationSchema.getChildNodes());
 				
 				NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
 				Element elemArrayInput = (Element)arrayInput.item(0);
-				//printNodeList(elemArray.getChildNodes());
 				
 				NodeList relationSchemaAttributeInput = elemArrayInput.getChildNodes();
-				//System.out.println("Input");
-				//printNodeList(relationSchemaAttributeInput);
-				//System.out.println("---");
 				/* -----------FIM INPUT--------- */
 				
 				
 				/* -----------INICIO OUTPUT--------- */
-				
 				NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 				Element elemOutputPorts = (Element)outputPorts.item(0);
-				//printNodeList(elemOutputPorts.getChildNodes());
 				
 				NodeList portOutput = elemOutputPorts.getElementsByTagName("Port");
 				Element elemPortOutput = (Element)portOutput.item(0);
-				//printNodeList(elemPortOutput.getChildNodes());
 				
 				NodeList relationSchemaOutput = elemPortOutput.getElementsByTagName("RelationSchema");
 				Element elemRelationSchemaOutput = (Element)relationSchemaOutput.item(0);
-				//printNodeList(elemRelationSchemaOutput.getChildNodes());
 				
 				NodeList arrayOutput = elemRelationSchemaOutput.getElementsByTagName("Array");
 				NodeList relationSchemaAttributeOutput = null;
 				if(arrayOutput.getLength() > 0)
 				{
-					//System.out.println(arrayOutput.item(0).getNodeName());
 					Element elemArrayOutput = (Element)arrayOutput.item(0);
-					//printNodeList(elemArrayOutput.getChildNodes());
 					
 					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
-					//System.out.println("Output");
-					//printNodeList(relationSchemaAttributeOutput);
-					//System.out.println("-----");
-					/**/
 				}
 				/* -----------FIM OUTPUT--------- */
 				
 				
 				/* ------------Relation---------- */
-				
-				
 				char[] tempVector = auxElem.getAttribute("value").toCharArray();
 				char charAux = tempVector[0];
 				String df = new Character(charAux).toString();
@@ -152,22 +130,10 @@ public class Conversion_reader {
 				
 				writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
 				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
-				
-				if(i == 0)
-				{
-					
-				}
-				else
-				{
-					
-				}
-				
 				/* --------- Fim Relation ------- */
-				
-				
+								
 				
 				/* --------- Colocar Field ------ */
-				
 				for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
 				{
 					if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
@@ -213,9 +179,6 @@ public class Conversion_reader {
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
 			
 			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
-			
-			//System.out.println(activitySource.getAttribute("value")+" -> "+activityTarget.getAttribute("value"));
-			
 		}
 				
 		/* ------FIM Dependency--------- */
@@ -272,8 +235,7 @@ public class Conversion_reader {
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
 				Element elemPorts = (Element)ports.item(0);
-				//printNodeList(elemPorts.getChildNodes());
-		
+				
 				if(type.equals(TARGET))
 				{
 					NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
@@ -299,7 +261,6 @@ public class Conversion_reader {
 				{
 					NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 					Element elemOutputPorts = (Element)outputPorts.item(0);
-					//printNodeList(elemOutputPorts.getChildNodes());
 					
 					NodeList portOutput = elemOutputPorts.getElementsByTagName("Port");
 					for(int k = 0;k < portOutput.getLength();k++)
