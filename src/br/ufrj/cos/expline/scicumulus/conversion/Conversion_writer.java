@@ -18,6 +18,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 
 
 public class Conversion_writer implements IWriter{
@@ -104,7 +106,7 @@ public class Conversion_writer implements IWriter{
 		
 		Attr sciCumulusActivityActivation = this.scicumulusXML.createAttribute("activation");
 		System.out.println("Activation:");
-		sciCumulusActivityActivation.setValue(properties.get("ActivityActivation"));
+		//sciCumulusActivityActivation.setValue(properties.get("ActivityActivation"));
 		
 		
 		activity.setAttributeNode(sciCumulusActivityTag);
@@ -575,6 +577,40 @@ public class Conversion_writer implements IWriter{
 		
 		executionWorkflowElement.appendChild(relation);
 		
+		
+	}
+	
+	public void insertAllActivations(Map<String,String> onlyActivations){
+		
+		for(String activation : onlyActivations.keySet()){
+			
+			String tag = Util.getActivityId(activation);
+			this.insertSpecificActivation(tag, onlyActivations.get(activation));
+			
+			
+		}
+		
+		
+	}
+	
+	private void insertSpecificActivation(String activityTag, String activation){
+		
+		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
+		
+		Element currentChild = (Element)sciCumulusChildren.item(0);
+		
+		NodeList conceptualWorkflowChildren = currentChild.getElementsByTagName("activity");
+		
+		for (int i = 0; i < conceptualWorkflowChildren.getLength(); i++) {
+			
+			Element currentActivity = (Element)conceptualWorkflowChildren.item(i);
+			String currentActivityTag = currentActivity.getAttribute("tag");
+			
+			if (currentActivityTag.equals(activityTag)) {
+				currentActivity.setAttribute("activation", activation);
+			}
+
+		}
 		
 	}
 
