@@ -1,41 +1,56 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.util.Map;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
 public class MainWindow extends JFrame 
 {
-	public MainWindow()
+	private Map<String,String> onlyActivation;
+	
+	public MainWindow(Map<String,String> onlyActivation)
 	{
 		super();
 		
-		this.setSize(400, 400);
+		this.onlyActivation = onlyActivation;
 		
+		this.setSize(500, 300);
 		this.setLocationRelativeTo(null);
-		
+		this.setLayout(null);
 		this.setTitle("Scicumulus Instantiation");
-		
+				
 		JTabbedPane jtp = new JTabbedPane();
+		jtp.setBounds(0,0,this.getWidth(), this.getHeight()-70);
 		//jtp.setSize(width, height);
 		this.add(jtp);
 		
-		JPanel aloha = new JPanel();
-		JPanel aloha1 = new CredentialsTab();
+		JButton finishButton = new JButton("Finish");
+		int diff = this.getHeight() - jtp.getHeight();
+		finishButton.setBounds(this.getWidth() - 10 - 100,jtp.getHeight()+((diff /6)),100,25);
+		this.add(finishButton);
 		
-		jtp.addTab("Claudio", aloha );
+		JPanel databaseTab 		= new DataBaseTab();
+		JPanel workspaceTab 	= new WorkspaceTab();
+		JPanel credentialsTab 	= new CredentialsTab();
+		JPanel binaryTab		= new BinaryTab();
+		JPanel workflowTab		= new WorkflowTab();
+		JPanel activityTab		= new ActivityTab(this.onlyActivation);
 		
-		jtp.addTab("Joao", aloha1 );
+		jtp.addTab("Database", databaseTab );
 		
-		JTextField jtf = new JTextField();
-		jtf.setText("Alo meu amigo");
-		jtf.setLocation(0, 0);
+		jtp.addTab("Workspace", workspaceTab );
 		
+		jtp.addTab("Credentials", credentialsTab );
 		
+		jtp.addTab("Binary", binaryTab );
 		
-		aloha.add(jtf);
+		jtp.addTab("Workflow", workflowTab );
 		
+		jtp.addTab("Activities", activityTab );
+				
 		this.setResizable(false);
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

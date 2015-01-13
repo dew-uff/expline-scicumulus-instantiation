@@ -1,11 +1,11 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import javax.swing.JFrame;
+import java.util.HashMap;
 
 public class main 
 {
 	public static void main(String[] args)
 	{
-		new MainWindow();
+		new MainWindow(new HashMap<String,String>());
 	}
 }
