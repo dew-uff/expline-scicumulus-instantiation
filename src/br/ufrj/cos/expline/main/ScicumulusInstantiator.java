@@ -27,18 +27,10 @@ public class ScicumulusInstantiator implements Instantiator{
 		new Conversion_reader(writer,explineAbstractWorkflow,properties);
 		Map<String,String> temp = Util.getOnlyActivities(properties);
 		
+		
 		for(String p:temp.keySet())
 		{
-			
-			String tag = Util.getActivityTag(p);
-			if(tag.equals("act1"))
-			{
-				temp.put(p, "joaoRomao");
-			}
-			else
-			{
-				temp.put(p, "dollartest");
-			}
+		temp.put(p, "java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%");
 		}
 		
 		writer.saveDocumentToDisk(temp);
@@ -56,8 +48,6 @@ public class ScicumulusInstantiator implements Instantiator{
 		Map<String,String> properties = new HashMap<String, String>();
 		
 		
-		properties.put("ActivityActivation", "-");
-		
 		//Database node
 		properties.put("DatabaseName", "-");
 		properties.put("DatabaseUsername", "-");
@@ -74,20 +64,22 @@ public class ScicumulusInstantiator implements Instantiator{
 		properties.put("CompressedDir","-");
 		
 		//Credentials node
-		properties.put("AccessKey","-");
-		properties.put("SecretAccessKey","-");
+		properties.put("AccessKey","chave de acesso");
+		properties.put("SecretAccessKey","chave secreta de acesso");
 		
 		//Binary node
-		properties.put("Directory","-");
-		properties.put("ConceptualVersion","-");
-		properties.put("ExecutionVersion","-");
-		properties.put("StarterVersion","-");
-		properties.put("QueryVersion","-");
+		properties.put("Directory","/root/programs");
+		properties.put("ConceptualVersion","SciCumulusSetup.jar");
+		properties.put("ExecutionVersion","SciCumulusCore.jar");
+		properties.put("StarterVersion","SciCumulusStarter.jar");
+		properties.put("QueryVersion","SciCumulusStarter.jar");
 		
 		//Executionworkflow node
-		properties.put("WorkflowExpdir","-");
-		properties.put("WorkflowRelationName","-");
-		properties.put("WorkflowRelationFilename","-");
+		properties.put("WorkflowExpdir","%=WFDIR%/exp");
+		
+		
+		properties.put("WorkflowRelationName","IMod1Act1");
+		properties.put("WorkflowRelationFilename","Input.dataset");
 		
 		
 		scicumulusInstantiator.instantiate(read, writer, properties );
