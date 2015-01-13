@@ -49,19 +49,19 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		
 		//Database node
-		properties.put("DatabaseName", "-");
-		properties.put("DatabaseUsername", "-");
-		properties.put("DatabasePassword", "-");
-		properties.put("DatabasePort", "-");
-		properties.put("DatabaseServer", "-");
-		properties.put("DatabasePath", "-");
+		properties.put("DatabaseName", "scc2");
+		properties.put("DatabaseUsername", "postgres");
+		properties.put("DatabasePassword", "pass");
+		properties.put("DatabasePort", "5432");
+		properties.put("DatabaseServer", "servidor bd ec2");
+		properties.put("DatabasePath", "/var/lib/pgsql");
 		
 		//Workspace node
-		properties.put("WorkspaceUpload", "-");
-		properties.put("WorkspaceBucketName", "-");
-		properties.put("WorkspaceWorkflowDir", "-");
-		properties.put("WorkspaceCompressedWorkspace", "-");
-		properties.put("CompressedDir","-");
+		properties.put("WorkspaceUpload", "true");
+		properties.put("WorkspaceBucketName", "vitor-starter");
+		properties.put("WorkspaceWorkflowDir", "/root/workflow_1");
+		properties.put("WorkspaceCompressedWorkspace", "temp_workflow_1.zip");
+		properties.put("CompressedDir","temp_workflow_1");
 		
 		//Credentials node
 		properties.put("AccessKey","chave de acesso");
@@ -80,6 +80,9 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		properties.put("WorkflowRelationName","IMod1Act1");
 		properties.put("WorkflowRelationFilename","Input.dataset");
+		
+		//query Node
+		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
 		
 		
 		scicumulusInstantiator.instantiate(read, writer, properties );
