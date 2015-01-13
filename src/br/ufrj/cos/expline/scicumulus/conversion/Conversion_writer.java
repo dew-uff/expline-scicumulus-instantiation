@@ -72,7 +72,9 @@ public class Conversion_writer implements IWriter{
 	}
 	
 	
-	public void saveDocumentToDisk(){
+	public void saveDocumentToDisk(Map<String,String> onlyActivation){
+		
+		insertAllActivations(onlyActivation);
 		
 		try{
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
@@ -584,7 +586,7 @@ public class Conversion_writer implements IWriter{
 		
 		for(String activation : onlyActivations.keySet()){
 			
-			String tag = Util.getActivityId(activation);
+			String tag = Util.getActivityTag(activation);
 			this.insertSpecificActivation(tag, onlyActivations.get(activation));
 			
 			

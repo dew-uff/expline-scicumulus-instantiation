@@ -8,6 +8,7 @@ import java.util.Map;
 
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class ScicumulusInstantiator implements Instantiator{
 
@@ -15,7 +16,7 @@ public class ScicumulusInstantiator implements Instantiator{
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow) {
 		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
 		new Conversion_reader(writer,explineAbstractWorkflow,null);
-		writer.saveDocumentToDisk();
+		writer.saveDocumentToDisk(null);
 		
 	}
 	
@@ -24,12 +25,25 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);
 		new Conversion_reader(writer,explineAbstractWorkflow,properties);
-		writer.saveDocumentToDisk();
+		Map<String,String> temp = Util.getOnlyActivities(properties);
 		
-		for(String p:properties.keySet())
+		for(String p:temp.keySet())
 		{
-			System.out.println(p);
+			
+			String tag = Util.getActivityTag(p);
+			if(tag.equals("act1"))
+			{
+				temp.put(p, "joaoRomao");
+			}
+			else
+			{
+				temp.put(p, "dollartest");
+			}
 		}
+		
+		writer.saveDocumentToDisk(temp);
+		
+		
 		
 	}
 
