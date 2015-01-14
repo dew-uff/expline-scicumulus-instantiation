@@ -23,6 +23,8 @@ public class ScicumulusInstantiator implements Instantiator{
 	}
 	
 	@Override
+	
+
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow, Map<String, String> properties) {
 		
 		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,properties);

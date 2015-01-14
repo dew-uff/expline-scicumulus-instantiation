@@ -28,6 +28,7 @@ public class MainWindow extends JFrame
 	private BinaryTab binaryTab;
 	private WorkflowTab workflowTab;	
 	private ActivityTab activityTab;
+	private QueryTab queryTab;
 	
 	public MainWindow(Map<String,String> properties, ClassesController classesController)
 	{
@@ -37,7 +38,7 @@ public class MainWindow extends JFrame
 		
 		this.properties = properties;
 		
-		this.setSize(500, 300);
+		this.setSize(600, 300);
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
 		this.setTitle("Scicumulus Instantiation");
@@ -55,12 +56,14 @@ public class MainWindow extends JFrame
 		finishButton.setBounds(this.getWidth() - 10 - 100,jtp.getHeight()+((diff /6)),100,25);
 		this.add(finishButton);
 		
-		this.databaseTab 	= new DataBaseTab();
-		this.workspaceTab 	= new WorkspaceTab();
+		this.databaseTab 		= new DataBaseTab();
+		this.workspaceTab 		= new WorkspaceTab();
 		this.credentialsTab 	= new CredentialsTab();
-		this.binaryTab		= new BinaryTab();
+		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
 		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
+		this.queryTab			= new QueryTab();
+
 		
 		jtp.addTab("Database", this.databaseTab );
 		
@@ -72,13 +75,20 @@ public class MainWindow extends JFrame
 		
 		jtp.addTab("Workflow", this.workflowTab );
 		
+		jtp.addTab("Query", this.queryTab);
+		
 		jtp.addTab("Activities", this.activityTab );
+		
+		
 				
 		this.setResizable(false);
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.setVisible(true);
+		
+		
+		
 		
 	}
 	
@@ -98,7 +108,8 @@ public class MainWindow extends JFrame
 			   workspaceTab.checkFilledOut() &&
 			   credentialsTab.checkFilledOut() &&
 			   binaryTab.checkFilledOut() &&
-			   workflowTab.checkFilledOut());
+			   workflowTab.checkFilledOut() &&
+			   queryTab.checkFilledOut());
 	}
 	
 	public Map<String,String> fillOutTheMap()
@@ -135,7 +146,9 @@ public class MainWindow extends JFrame
 		properties.put("WorkflowRelationFilename",workflowTab.getRelationFileName());
 		
 		//query Node
-		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
+		properties.put("QuerySQL",queryTab.getSql());
+		
+//		select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;
 		
 		//loopParaPreencherActivity
 		
