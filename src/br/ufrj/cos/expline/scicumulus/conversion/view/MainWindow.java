@@ -41,6 +41,7 @@ public class MainWindow extends JFrame
 		JPanel credentialsTab 	= new CredentialsTab();
 		JPanel binaryTab		= new BinaryTab();
 		JPanel workflowTab		= new WorkflowTab();
+		JPanel queryTab			= new QueryTab();
 		JPanel activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
 		
 		jtp.addTab("Database", databaseTab );
@@ -54,12 +55,17 @@ public class MainWindow extends JFrame
 		jtp.addTab("Workflow", workflowTab );
 		
 		jtp.addTab("Activities", activityTab );
+		
+		jtp.addTab("Query", queryTab);
 				
 		this.setResizable(false);
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.setVisible(true);
+		
+		
+		
 		
 	}
 }
