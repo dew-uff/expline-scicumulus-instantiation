@@ -35,9 +35,8 @@ public class ScicumulusInstantiator implements Instantiator{
 		temp.put(p, "java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%");
 		}
 		
-		writer.saveDocumentToDisk(temp);
-		
-		
+		writer.insertAllActivations(temp);
+		writer.saveDocumentToDisk();
 		
 	}
 
@@ -45,8 +44,9 @@ public class ScicumulusInstantiator implements Instantiator{
 	public static void main(String[] args){
 		
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
+		
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("src/othersource/concrete_new.xml");
+		File writer = new File("src/othersource/concrete.xml");
 		Map<String,String> properties = new HashMap<String, String>();
 		
 		
@@ -86,7 +86,7 @@ public class ScicumulusInstantiator implements Instantiator{
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
 		
-//		scicumulusInstantiator.instantiate(read, writer,properties); forma usando o properties criado aqui, sem interface grafica
+//		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
 		
 		scicumulusInstantiator.instantiate(read, writer);
 	}

@@ -7,10 +7,10 @@ import javax.swing.JTextField;
 public class CredentialsTab extends JPanel
 {
 	
-	private JLabel labelAccessKey;
-	private JTextField textFieldAccessKey;
-	private JLabel labelSecretAccessKey;
-	private JTextField textFieldSecretAccessKey;
+	private JLabel lbAccessKey;
+	private JTextField tfAccessKey;
+	private JLabel lbSecretAccessKey;
+	private JTextField tfSecretAccessKey;
 	
 	public CredentialsTab()
 	{
@@ -25,23 +25,42 @@ public class CredentialsTab extends JPanel
 		// TODO Auto-generated method stub
 		this.setLayout(null);
 		
-		labelAccessKey = new JLabel("Access Key: ");
-		labelAccessKey.setBounds(10, 10, 80, 15);
+		lbAccessKey = new JLabel("Access Key: ");
+		lbAccessKey.setBounds(10, 10, 80, 15);
 		
-		textFieldAccessKey = new JTextField(20);
-		textFieldAccessKey.setBounds(10+labelAccessKey.getWidth(), 10,390, 20);
+		tfAccessKey = new JTextField(20);
+		tfAccessKey.setBounds(10+lbAccessKey.getWidth(), 10,390, 20);
 		
-		labelSecretAccessKey = new JLabel("Secret Access Key: ");
-		labelSecretAccessKey.setBounds(10, 10+labelAccessKey.getHeight()+labelAccessKey.getY(), 125, 15);
+		lbSecretAccessKey = new JLabel("Secret Access Key: ");
+		lbSecretAccessKey.setBounds(10, 10+lbAccessKey.getHeight()+lbAccessKey.getY(), 125, 15);
 		
-		textFieldSecretAccessKey = new JTextField(20);
-		textFieldSecretAccessKey.setBounds(10 + labelSecretAccessKey.getWidth(), labelSecretAccessKey.getY(), 345, 20);
+		tfSecretAccessKey = new JTextField(20);
+		tfSecretAccessKey.setBounds(10 + lbSecretAccessKey.getWidth(), lbSecretAccessKey.getY(), 345, 20);
 		
-		this.add(labelAccessKey);
-		this.add(textFieldAccessKey);
-		this.add(labelSecretAccessKey);
-		this.add(textFieldSecretAccessKey);
+		this.add(lbAccessKey);
+		this.add(tfAccessKey);
+		this.add(lbSecretAccessKey);
+		this.add(tfSecretAccessKey);
 		
+	}
+	
+	public boolean checkFilledOut()
+	{
+		if(tfAccessKey.getText().equals("")) return false;	
+		else if(tfSecretAccessKey.getText().equals("")) return false;
+			
+		return true;
+		
+	}
+	
+	public String getAccessKey()
+	{
+		return tfAccessKey.getText();
+	}
+	
+	public String getSecretAccessKey()
+	{
+		return tfSecretAccessKey.getText();
 	}
 	
 }

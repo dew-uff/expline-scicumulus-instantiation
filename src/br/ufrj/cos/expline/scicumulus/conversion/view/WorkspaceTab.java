@@ -71,4 +71,42 @@ public class WorkspaceTab extends JPanel
 		this.add(tfCompressedDir);
 		
 	}
+	
+	 
+	public boolean checkFilledOut()
+	{
+			
+		if(tfUpload.getText().equals("")) return false;	
+		else if(tfBucketName.getText().equals("")) return false;
+		else if(tfWorkflowDir.getText().equals("")) return false;
+		else if(tfCompressedWorkspace.getText().equals("")) return false;
+		else if(tfCompressedDir.getText().equals("")) return false;
+					
+		return true;
+	}
+	
+	public String getUpload()
+	{
+		return tfUpload.getText();
+	}
+	
+	public String getBucketName()
+	{
+		return tfBucketName.getText();
+	}
+	
+	public String getWorkflowDir()
+	{
+		return tfWorkflowDir.getText();
+	}
+	
+	public String getCompressedWorkspace()
+	{
+		return tfCompressedWorkspace.getText();
+	}
+	
+	public String getCompressedDir()
+	{
+		return tfCompressedDir.getText();
+	}
 }

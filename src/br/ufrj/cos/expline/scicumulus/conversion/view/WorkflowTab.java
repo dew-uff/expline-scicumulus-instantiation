@@ -52,4 +52,29 @@ public class WorkflowTab extends JPanel
 		this.add(tfRelationFileName);
 		
 	}
+	
+	public boolean checkFilledOut()
+	{
+			
+		if(tfDirectory.getText().equals("")) return false;	
+		else if(tfRelationName.getText().equals("")) return false;
+		else if(tfRelationFileName.getText().equals("")) return false;
+							
+		return true;
+	}
+	
+	public String getExpDir()
+	{
+		return tfDirectory.getText();
+	}
+	
+	public String getRelationName()
+	{
+		return tfRelationName.getText();
+	}
+	
+	public String getRelationFileName()
+	{
+		return tfRelationFileName.getText();
+	}
 }

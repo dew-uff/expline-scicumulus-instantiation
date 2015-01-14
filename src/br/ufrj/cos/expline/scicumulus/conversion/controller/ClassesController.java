@@ -32,36 +32,36 @@ public class ClassesController
 		this.properties = new HashMap<>();
 		
 		//Database node
-		properties.put("DatabaseName", "scc2");
-		properties.put("DatabaseUsername", "postgres");
-		properties.put("DatabasePassword", "pass");
-		properties.put("DatabasePort", "5432");
-		properties.put("DatabaseServer", "servidor bd ec2");
-		properties.put("DatabasePath", "/var/lib/pgsql");
+		properties.put("DatabaseName", "");
+		properties.put("DatabaseUsername", "");
+		properties.put("DatabasePassword", "");
+		properties.put("DatabasePort", "");
+		properties.put("DatabaseServer", "");
+		properties.put("DatabasePath", "");
 		
 		//Workspace node
-		properties.put("WorkspaceUpload", "true");
-		properties.put("WorkspaceBucketName", "vitor-starter");
-		properties.put("WorkspaceWorkflowDir", "/root/workflow_1");
-		properties.put("WorkspaceCompressedWorkspace", "temp_workflow_1.zip");
-		properties.put("CompressedDir","temp_workflow_1");
+		properties.put("WorkspaceUpload", "");
+		properties.put("WorkspaceBucketName", "");
+		properties.put("WorkspaceWorkflowDir", "");
+		properties.put("WorkspaceCompressedWorkspace", "");
+		properties.put("CompressedDir","");
 		
 		//Credentials node
-		properties.put("AccessKey","chave de acesso");
-		properties.put("SecretAccessKey","chave secreta de acesso");
+		properties.put("AccessKey","");
+		properties.put("SecretAccessKey","");
 		
 		//Binary node
-		properties.put("Directory","/root/programs");
-		properties.put("ConceptualVersion","SciCumulusSetup.jar");
-		properties.put("ExecutionVersion","SciCumulusCore.jar");
-		properties.put("StarterVersion","SciCumulusStarter.jar");
-		properties.put("QueryVersion","SciCumulusStarter.jar");
+		properties.put("Directory","");
+		properties.put("ConceptualVersion","");
+		properties.put("ExecutionVersion","");
+		properties.put("StarterVersion","");
+		properties.put("QueryVersion","");
 		
 		//Executionworkflow node
-		properties.put("WorkflowExpdir","%=WFDIR%/exp");
+		properties.put("WorkflowExpdir","");
 		
-		properties.put("WorkflowRelationName","IMod1Act1");
-		properties.put("WorkflowRelationFilename","Input.dataset");
+		properties.put("WorkflowRelationName","");
+		properties.put("WorkflowRelationFilename","");
 		
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
@@ -72,9 +72,16 @@ public class ClassesController
 		writer = new Conversion_writer(this.ScicumulusWorkflow,this.properties);
 		reader = new Conversion_reader(this.writer,this.explineAbstractWorkflow,this.properties);
 		
-		mainWindow = new MainWindow(this.properties);
+		mainWindow = new MainWindow(this.properties,this);
 		
-		writer.saveDocumentToDisk(Util.getOnlyActivities(this.properties));
+//		writer.saveDocumentToDisk(Util.getOnlyActivities(this.properties));
+//		writer.saveDocumentToDisk();
+	}
+	
+	public void finishXML(Map<String,String> propertiesDone)
+	{
+		writer.insertAllActivations(Util.getOnlyActivities(propertiesDone));
+		writer.saveDocumentToDisk();
 	}
 	
 }

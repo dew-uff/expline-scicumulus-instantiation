@@ -71,4 +71,40 @@ public class BinaryTab extends JPanel
 		this.add(tfQueryVersion);
 		
 	}
+	
+	public boolean checkFilledOut()
+	{
+		if(tfDirectory.getText().equals("")) return false;	
+		else if(tfConceptualVersion.getText().equals("")) return false;
+		else if(tfExecutionVersion.getText().equals("")) return false;
+		else if(tfStarterVersion.getText().equals("")) return false;
+		else if(tfQueryVersion.getText().equals("")) return false;
+		
+		return true;
+	}
+	
+	public String getDirectory()
+	{
+		return tfDirectory.getText();
+	}
+	
+	public String getConceptualVersion()
+	{
+		return tfConceptualVersion.getText();
+	}
+	
+	public String getExecutionVersion()
+	{
+		return tfExecutionVersion.getText();
+	}
+	
+	public String getStarterVersion()
+	{
+		return tfStarterVersion.getText();
+	}
+	
+	public String getQueryVersion()
+	{
+		return tfQueryVersion.getText();
+	}
 }

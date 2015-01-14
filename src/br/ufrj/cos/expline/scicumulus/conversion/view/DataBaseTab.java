@@ -80,4 +80,47 @@ public class DataBaseTab extends JPanel
 		tfPath.setBounds(lbPath.getWidth(), lbPath.getY(), 435, 20);
 		this.add(tfPath);
 	}
+	
+	public boolean checkFilledOut()
+	{
+		
+		if(tfName.getText().equals("")) return false;	
+		else if(tfUserName.getText().equals("")) return false;
+		else if(tfPassword.getText().equals("")) return false;
+		else if(tfPort.getText().equals("")) return false;
+		else if(tfServer.getText().equals("")) return false;
+		else if(tfPath.getText().equals("")) return false;
+		
+		return true;
+	}
+	
+	public String getName()
+	{
+		return tfName.getText();
+	}
+	
+	public String getUserName()
+	{
+		return tfUserName.getText();
+	}
+	
+	public String getPassword()
+	{
+		return tfPassword.getText();
+	}
+	
+	public String getPort()
+	{
+		return tfPort.getText();
+	}
+	
+	public String getServer()
+	{
+		return tfServer.getText();
+	}
+	
+	public String getPath()
+	{
+		return tfPath.getText();
+	}
 }
