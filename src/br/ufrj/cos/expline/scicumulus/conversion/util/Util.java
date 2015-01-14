@@ -34,4 +34,16 @@ public class Util
 		
 		return onlyActivities;
 	}
+	
+	public static Map<String,String> getFakeActivities()
+	{
+		Map<String,String> temp = new HashMap<>();
+		
+		for(int i =0;i<20;i++)
+		{
+			temp.put("activity_"+i, "-");
+		}
+					
+		return temp;
+	}
 }

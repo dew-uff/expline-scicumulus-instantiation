@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
@@ -61,7 +62,7 @@ public class MainWindow extends JFrame
 		this.credentialsTab 	= new CredentialsTab();
 		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
-		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
+		this.activityTab		= new ActivityTab(Util.getFakeActivities());//Util.getOnlyActivities(this.properties));
 		this.queryTab			= new QueryTab();
 
 		
@@ -78,9 +79,7 @@ public class MainWindow extends JFrame
 		jtp.addTab("Query", this.queryTab);
 		
 		jtp.addTab("Activities", this.activityTab );
-		
-		
-				
+						
 		this.setResizable(false);
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -80,7 +81,8 @@ public class Conversion_writer implements IWriter{
 		DOMSource documentSource = new DOMSource(this.scicumulusXML);
 		StreamResult result = new StreamResult(fileToWrite);
 		transformer.transform(documentSource, result);
-		System.out.println("File Saved");
+//		System.out.println("File Saved");
+		JOptionPane.showMessageDialog(null, "File Saved");
 		}catch(Exception e){
 			System.out.println("Error while saving the XML file");
 		}
@@ -105,7 +107,7 @@ public class Conversion_writer implements IWriter{
 		sciCumulusActivityType.setValue(type);
 		
 		Attr sciCumulusActivityActivation = this.scicumulusXML.createAttribute("activation");
-		System.out.println("Activation:");
+		//System.out.println("Activation:");
 		//sciCumulusActivityActivation.setValue(properties.get("ActivityActivation"));
 		
 		
@@ -284,27 +286,27 @@ public class Conversion_writer implements IWriter{
 		Element sciCumulusDatabase = this.scicumulusXML.createElement("database");
 		
 		Attr sciCumulusDatabaseName = this.scicumulusXML.createAttribute("name");
-		System.out.println("Database name: ");
+//		System.out.println("Database name: ");
 		sciCumulusDatabaseName.setNodeValue(properties.get("DatabaseName"));
 		
 		Attr sciCumulusDatabaseUsername = this.scicumulusXML.createAttribute("Username");
-		System.out.println("Username: ");
+//		System.out.println("Username: ");
 		sciCumulusDatabaseUsername.setNodeValue(properties.get("DatabaseUsername"));
 		
 		Attr sciCumulusDatabasePassword = this.scicumulusXML.createAttribute("password");
-		System.out.println("Database password");
+//		System.out.println("Database password");
 		sciCumulusDatabasePassword.setNodeValue(properties.get("DatabasePassword"));
 		
 		Attr sciCumulusDatabasePort = this.scicumulusXML.createAttribute("port");
-		System.out.println("Database port:");
+//		System.out.println("Database port:");
 		sciCumulusDatabasePort.setNodeValue(properties.get("DatabasePort"));
 		
 		Attr sciCumulusDatabaseServer = this.scicumulusXML.createAttribute("server");
-		System.out.println("Database Server: ");
+//		System.out.println("Database Server: ");
 		sciCumulusDatabase.setNodeValue(properties.get("DatabaseServer"));
 		
 		Attr sciCumulusDatabasePath = this.scicumulusXML.createAttribute("path");
-		System.out.println("Database path:");
+//		System.out.println("Database path:");
 		sciCumulusDatabase.setNodeValue(properties.get("DatabasePath"));
 		
 		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseName);
@@ -332,23 +334,23 @@ public class Conversion_writer implements IWriter{
 		Element sciCumulusWorkspace = this.scicumulusXML.createElement("workspace");
 		
 		Attr sciCumulusWorkspaceUpload = this.scicumulusXML.createAttribute("upload");
-		System.out.println("Workspace upload");
+//		System.out.println("Workspace upload");
 		sciCumulusWorkspaceUpload.setNodeValue(properties.get("WorkspaceUpload"));
 		
 		Attr sciCumulusWorkspaceBucketName = this.scicumulusXML.createAttribute("bucket_name");
-		System.out.println("Workspace bucket name");
+//		System.out.println("Workspace bucket name");
 		sciCumulusWorkspaceBucketName.setNodeValue(properties.get("WorkspaceBucketName"));
 		
 		Attr sciCumulusWorkspaceWorkflowDir = this.scicumulusXML.createAttribute("workflow_dir");
-		System.out.println("Workspace workflow dir");
+//		System.out.println("Workspace workflow dir");
 		sciCumulusWorkspaceWorkflowDir.setNodeValue(properties.get("WorkspaceWorkflowDir"));
 		
 		Attr sciCumulusWorkspaceCompressedWorkspace = this.scicumulusXML.createAttribute("compressed_workspace");
-		System.out.println("Workspace compressed workspace");
+//		System.out.println("Workspace compressed workspace");
 		sciCumulusWorkspaceCompressedWorkspace.setNodeValue(properties.get("WorkspaceCompressedWorkspace"));
 		
 		Attr sciCumulusWorkspaceCompressedDir = this.scicumulusXML.createAttribute("compressed_dir");
-		System.out.println("Workspace compressed dir");
+//		System.out.println("Workspace compressed dir");
 		//sciCumulusWorkspaceCompressedDir.setNodeValue(entry.nextLine());
 		sciCumulusWorkspaceCompressedDir.setNodeValue(properties.get("CompressedDir"));
 		
@@ -377,12 +379,12 @@ public class Conversion_writer implements IWriter{
 		
 		
 		Attr sciCumulusBinaryAccessKey = this.scicumulusXML.createAttribute("access_key");
-		System.out.println("Binary Access Key");
+//		System.out.println("Binary Access Key");
 		//sciCumulusBinaryAccessKey.setNodeValue(entry.nextLine());
 		sciCumulusBinaryAccessKey.setNodeValue(properties.get("AccessKey"));
 		
 		Attr sciCumulusBinarySecretAccessKey = this.scicumulusXML.createAttribute("secret_access_key");
-		System.out.println("Binary Secret Access Key");
+//		System.out.println("Binary Secret Access Key");
 		//sciCumulusBinarySecretAccessKey.setNodeValue(entry.nextLine());
 		sciCumulusBinarySecretAccessKey.setNodeValue(properties.get("SecretAccessKey"));		
 		
@@ -445,27 +447,27 @@ public class Conversion_writer implements IWriter{
 		Element sciCumulusBinary = this.scicumulusXML.createElement("binary");
 		
 		Attr sciCumulusBinaryDirectory = this.scicumulusXML.createAttribute("directory");
-		System.out.println("Binary directory");
+//		System.out.println("Binary directory");
 		//sciCumulusBinaryDirectory.setNodeValue(entry.nextLine());
 		sciCumulusBinaryDirectory.setNodeValue(properties.get("Directory")); 
 		
 		Attr sciCumulusBinaryConceptualVersion = this.scicumulusXML.createAttribute("conceptual_version");
-		System.out.println("Binary conceptual version");
+//		System.out.println("Binary conceptual version");
 		//sciCumulusBinaryConceptualVersion.setNodeValue(entry.nextLine());
 		sciCumulusBinaryConceptualVersion.setNodeValue(properties.get("ConceptualVersion"));
 		
 		Attr sciCumulusBinaryExecutionVersion = this.scicumulusXML.createAttribute("execution_version");
-		System.out.println("Binary execution version");
+//		System.out.println("Binary execution version");
 		//sciCumulusBinaryExecutionVersion.setNodeValue(entry.nextLine());
 		sciCumulusBinaryExecutionVersion.setNodeValue(properties.get("ExecutionVersion"));
 		
 		Attr sciCumulusBinaryStarterVersion = this.scicumulusXML.createAttribute("starter_version");
-		System.out.println("Binary starter version");
+//		System.out.println("Binary starter version");
 		//sciCumulusBinaryStarterVersion.setNodeValue(entry.nextLine());
 		sciCumulusBinaryStarterVersion.setNodeValue(properties.get("StarterVersion"));
 		
 		Attr sciCumulusBinaryQueryVersion = this.scicumulusXML.createAttribute("query_version");
-		System.out.println("Binary Query version");
+//		System.out.println("Binary Query version");
 		//sciCumulusBinaryQueryVersion.setNodeValue(entry.nextLine());
 		sciCumulusBinaryQueryVersion.setNodeValue(properties.get("QueryVersion"));
 		
@@ -509,7 +511,7 @@ public class Conversion_writer implements IWriter{
 		sciCumulusExecutionWorkflowExecmodel.setNodeValue("DYN_FAF");
 		
 		Attr sciCumulusExecutionWorkflowExpdir = this.scicumulusXML.createAttribute("expdir");
-		System.out.println("Execution workflow expdir");
+//		System.out.println("Execution workflow expdir");
 		//sciCumulusExecutionWorkflowExpdir.setNodeValue(entry.nextLine());
 		sciCumulusExecutionWorkflowExpdir.setNodeValue(properties.get("WorkflowExpdir"));
 		
@@ -549,12 +551,12 @@ public class Conversion_writer implements IWriter{
 		
 		
 		Attr sciCumulusExecutionWorkflowRelationName = this.scicumulusXML.createAttribute("name");
-		System.out.println("Execution workflow relation name");
+//		System.out.println("Execution workflow relation name");
 		//sciCumulusExecutionWorkflowRelationName.setNodeValue(entry.nextLine());
 		sciCumulusExecutionWorkflowRelationName.setNodeValue(properties.get("WorkflowRelationName"));
 		
 		Attr sciCumulusExecutionWorkflowRelationFilename = this.scicumulusXML.createAttribute("filename");
-		System.out.println("Execution workflow relation filename");
+//		System.out.println("Execution workflow relation filename");
 		//sciCumulusExecutionWorkflowRelationFilename.setNodeValue(entry.nextLine());
 		sciCumulusExecutionWorkflowRelationFilename.setNodeValue(properties.get("WorkflowRelationFilename"));
 		
