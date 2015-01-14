@@ -8,16 +8,18 @@ import java.util.Map;
 
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
+import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class ScicumulusInstantiator implements Instantiator{
 
 	@Override
 	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow) {
-		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
-		new Conversion_reader(writer,explineAbstractWorkflow,null);
-		writer.saveDocumentToDisk(null);
+//		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
+//		new Conversion_reader(writer,explineAbstractWorkflow,null);
+//		writer.saveDocumentToDisk(null);
 		
+		new ClassesController(explineAbstractWorkflow,ScimulusWorkflow);
 	}
 	
 	@Override
@@ -44,7 +46,7 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("src/othersource/concrete.xml");
+		File writer = new File("src/othersource/concrete_new.xml");
 		Map<String,String> properties = new HashMap<String, String>();
 		
 		
@@ -84,8 +86,9 @@ public class ScicumulusInstantiator implements Instantiator{
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
 		
+//		scicumulusInstantiator.instantiate(read, writer,properties); forma usando o properties criado aqui, sem interface grafica
 		
-		scicumulusInstantiator.instantiate(read, writer, properties );
+		scicumulusInstantiator.instantiate(read, writer);
 	}
 	
 }

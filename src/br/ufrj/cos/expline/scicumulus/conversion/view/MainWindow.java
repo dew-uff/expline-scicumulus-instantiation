@@ -7,15 +7,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 public class MainWindow extends JFrame 
 {
-	private Map<String,String> onlyActivation;
+	private Map<String,String> properties;
+	private ClassesController classesController;
 	
-	public MainWindow(Map<String,String> onlyActivation)
+	public MainWindow(Map<String,String> properties)
 	{
 		super();
 		
-		this.onlyActivation = onlyActivation;
+		this.properties = properties;
 		
 		this.setSize(500, 300);
 		this.setLocationRelativeTo(null);
@@ -37,7 +41,7 @@ public class MainWindow extends JFrame
 		JPanel credentialsTab 	= new CredentialsTab();
 		JPanel binaryTab		= new BinaryTab();
 		JPanel workflowTab		= new WorkflowTab();
-		JPanel activityTab		= new ActivityTab(this.onlyActivation);
+		JPanel activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
 		
 		jtp.addTab("Database", databaseTab );
 		
