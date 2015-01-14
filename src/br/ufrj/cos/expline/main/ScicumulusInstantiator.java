@@ -86,9 +86,9 @@ public class ScicumulusInstantiator implements Instantiator{
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
 		
-//		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
+		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
 		
-		scicumulusInstantiator.instantiate(read, writer);
+//		scicumulusInstantiator.instantiate(read, writer);
 	}
 	
 }
