@@ -170,7 +170,7 @@ public class MainWindow extends JFrame
 			
 			if(hasEmptyField)
 			{
-				JOptionPane.showMessageDialog(null, "Has Empty Field", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Has Empty Field, MotherFucker", "Error", JOptionPane.ERROR_MESSAGE);
 			}else
 			{
 				

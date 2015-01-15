@@ -538,7 +538,7 @@ public class Conversion_writer implements IWriter{
 		this.root.appendChild(sciCumulusExecutionWorkflow);
 		
 		
-		this.insertsciCumulusExecutionWorkflowRelation();
+		//this.insertsciCumulusExecutionWorkflowRelation();
 		
 		
 	}
