@@ -163,7 +163,8 @@ public class MainWindow extends JFrame
 			JButton finishButton = (JButton)e.getSource();
 			MainWindow mainFrame = (MainWindow)SwingUtilities.getWindowAncestor(finishButton);
 			
-			ClassesController cc = mainFrame.getClassesController();
+			
+			ClassesController classController = mainFrame.getClassesController();
 			
 			boolean hasEmptyField =  mainFrame.hasEmptyField();
 			
@@ -173,7 +174,7 @@ public class MainWindow extends JFrame
 			}else
 			{
 				
-				cc.finishXML(mainFrame.fillOutTheMap());
+				classController.finishXML(mainFrame.fillOutTheMap());
 			}
 						
 		}

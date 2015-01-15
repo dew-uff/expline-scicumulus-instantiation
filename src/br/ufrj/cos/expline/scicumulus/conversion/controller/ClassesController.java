@@ -60,6 +60,7 @@ public class ClassesController
 		//Executionworkflow node
 		properties.put("WorkflowExpdir","");
 		
+		//Relation (Executionworkflow child)
 		properties.put("WorkflowRelationName","");
 		properties.put("WorkflowRelationFilename","");
 		
@@ -81,6 +82,7 @@ public class ClassesController
 	public void finishXML(Map<String,String> propertiesDone)
 	{
 		writer.insertAllActivations(Util.getOnlyActivities(propertiesDone));
+		writer.insertAllUserInformation(propertiesDone);
 		writer.saveDocumentToDisk();
 	}
 	
