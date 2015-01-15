@@ -38,6 +38,7 @@ public class ScicumulusInstantiator implements Instantiator{
 		}
 		
 		writer.insertAllActivations(temp);
+		writer.insertAllUserInformation(properties);
 		writer.saveDocumentToDisk();
 		
 	}
