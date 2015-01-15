@@ -44,7 +44,7 @@ public class Conversion_writer implements IWriter{
 			System.out.println("Error while creating the XML document");
 		}
 		this.scicumulusMainNodeCreation();
-		this.insertUserInformation();
+		//this.insertUserInformation();
 		this.scicumulusConceptualWorkflowCreation();
 		
 	}
@@ -259,7 +259,7 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private void insertQuery(){
+	private void insertQuery(String SQL){
 		
 		
 		Scanner entry = new Scanner(System.in);
@@ -269,7 +269,7 @@ public class Conversion_writer implements IWriter{
 		
 		Attr sciCumulusQuerySQL = this.scicumulusXML.createAttribute("sql");
 		System.out.print("sql: ");
-		sciCumulusQuerySQL.setNodeValue(properties.get("QuerySQL"));
+		sciCumulusQuerySQL.setNodeValue(SQL);
 		
 		sciCumulusQuery.setAttributeNode(sciCumulusQuerySQL);
 		
@@ -279,7 +279,7 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private void insertDatabase(){
+	private void insertDatabase(String DatabaseName, String DatabaseUsername, String DatabasePassword, String DatabasePort, String DatabaseServer, String DatabasePath){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -287,27 +287,27 @@ public class Conversion_writer implements IWriter{
 		
 		Attr sciCumulusDatabaseName = this.scicumulusXML.createAttribute("name");
 //		System.out.println("Database name: ");
-		sciCumulusDatabaseName.setNodeValue(properties.get("DatabaseName"));
+		sciCumulusDatabaseName.setNodeValue(DatabaseName);
 		
 		Attr sciCumulusDatabaseUsername = this.scicumulusXML.createAttribute("Username");
 //		System.out.println("Username: ");
-		sciCumulusDatabaseUsername.setNodeValue(properties.get("DatabaseUsername"));
+		sciCumulusDatabaseUsername.setNodeValue(DatabaseUsername);
 		
 		Attr sciCumulusDatabasePassword = this.scicumulusXML.createAttribute("password");
 //		System.out.println("Database password");
-		sciCumulusDatabasePassword.setNodeValue(properties.get("DatabasePassword"));
+		sciCumulusDatabasePassword.setNodeValue(DatabasePassword);
 		
 		Attr sciCumulusDatabasePort = this.scicumulusXML.createAttribute("port");
 //		System.out.println("Database port:");
-		sciCumulusDatabasePort.setNodeValue(properties.get("DatabasePort"));
+		sciCumulusDatabasePort.setNodeValue(DatabasePort);
 		
 		Attr sciCumulusDatabaseServer = this.scicumulusXML.createAttribute("server");
 //		System.out.println("Database Server: ");
-		sciCumulusDatabase.setNodeValue(properties.get("DatabaseServer"));
+		sciCumulusDatabase.setNodeValue(DatabaseServer);
 		
 		Attr sciCumulusDatabasePath = this.scicumulusXML.createAttribute("path");
 //		System.out.println("Database path:");
-		sciCumulusDatabase.setNodeValue(properties.get("DatabasePath"));
+		sciCumulusDatabase.setNodeValue(DatabasePath);
 		
 		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseName);
 		sciCumulusDatabase.setAttributeNode(sciCumulusDatabaseUsername);
@@ -326,7 +326,7 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private void insertWorkspace(){
+	private void insertWorkspace(String WorkspaceUpload, String WorkspaceBucketName, String WorkspaceWorkflowDir, String WorkspaceCompressedWorkspace, String WorkspaceCompressedDir){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -335,24 +335,24 @@ public class Conversion_writer implements IWriter{
 		
 		Attr sciCumulusWorkspaceUpload = this.scicumulusXML.createAttribute("upload");
 //		System.out.println("Workspace upload");
-		sciCumulusWorkspaceUpload.setNodeValue(properties.get("WorkspaceUpload"));
+		sciCumulusWorkspaceUpload.setNodeValue(WorkspaceUpload);
 		
 		Attr sciCumulusWorkspaceBucketName = this.scicumulusXML.createAttribute("bucket_name");
 //		System.out.println("Workspace bucket name");
-		sciCumulusWorkspaceBucketName.setNodeValue(properties.get("WorkspaceBucketName"));
+		sciCumulusWorkspaceBucketName.setNodeValue(WorkspaceBucketName);
 		
 		Attr sciCumulusWorkspaceWorkflowDir = this.scicumulusXML.createAttribute("workflow_dir");
 //		System.out.println("Workspace workflow dir");
-		sciCumulusWorkspaceWorkflowDir.setNodeValue(properties.get("WorkspaceWorkflowDir"));
+		sciCumulusWorkspaceWorkflowDir.setNodeValue(WorkspaceWorkflowDir);
 		
 		Attr sciCumulusWorkspaceCompressedWorkspace = this.scicumulusXML.createAttribute("compressed_workspace");
 //		System.out.println("Workspace compressed workspace");
-		sciCumulusWorkspaceCompressedWorkspace.setNodeValue(properties.get("WorkspaceCompressedWorkspace"));
+		sciCumulusWorkspaceCompressedWorkspace.setNodeValue(WorkspaceCompressedWorkspace);
 		
 		Attr sciCumulusWorkspaceCompressedDir = this.scicumulusXML.createAttribute("compressed_dir");
 //		System.out.println("Workspace compressed dir");
 		//sciCumulusWorkspaceCompressedDir.setNodeValue(entry.nextLine());
-		sciCumulusWorkspaceCompressedDir.setNodeValue(properties.get("CompressedDir"));
+		sciCumulusWorkspaceCompressedDir.setNodeValue(WorkspaceCompressedDir);
 		
 		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceUpload);
 		sciCumulusWorkspace.setAttributeNode(sciCumulusWorkspaceBucketName);
@@ -371,7 +371,7 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private void insertCredentials(){
+	private void insertCredentials(String AccessKey, String SecretAccessKey){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -381,12 +381,12 @@ public class Conversion_writer implements IWriter{
 		Attr sciCumulusBinaryAccessKey = this.scicumulusXML.createAttribute("access_key");
 //		System.out.println("Binary Access Key");
 		//sciCumulusBinaryAccessKey.setNodeValue(entry.nextLine());
-		sciCumulusBinaryAccessKey.setNodeValue(properties.get("AccessKey"));
+		sciCumulusBinaryAccessKey.setNodeValue(AccessKey);
 		
 		Attr sciCumulusBinarySecretAccessKey = this.scicumulusXML.createAttribute("secret_access_key");
 //		System.out.println("Binary Secret Access Key");
 		//sciCumulusBinarySecretAccessKey.setNodeValue(entry.nextLine());
-		sciCumulusBinarySecretAccessKey.setNodeValue(properties.get("SecretAccessKey"));		
+		sciCumulusBinarySecretAccessKey.setNodeValue(SecretAccessKey);		
 		
 		sciCumulusCredentials.setAttributeNode(sciCumulusBinaryAccessKey);
 		sciCumulusCredentials.setAttributeNode(sciCumulusBinarySecretAccessKey);
@@ -440,7 +440,7 @@ public class Conversion_writer implements IWriter{
 		}
 	}
 
-	private void insertBinary(){
+	private void insertBinary(String BinaryDirectory, String BinaryConceptualVersion, String BinaryExecutionVersion, String BinaryStarterVersion, String BinaryQueryVersion){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -449,27 +449,27 @@ public class Conversion_writer implements IWriter{
 		Attr sciCumulusBinaryDirectory = this.scicumulusXML.createAttribute("directory");
 //		System.out.println("Binary directory");
 		//sciCumulusBinaryDirectory.setNodeValue(entry.nextLine());
-		sciCumulusBinaryDirectory.setNodeValue(properties.get("Directory")); 
+		sciCumulusBinaryDirectory.setNodeValue(BinaryDirectory); 
 		
 		Attr sciCumulusBinaryConceptualVersion = this.scicumulusXML.createAttribute("conceptual_version");
 //		System.out.println("Binary conceptual version");
 		//sciCumulusBinaryConceptualVersion.setNodeValue(entry.nextLine());
-		sciCumulusBinaryConceptualVersion.setNodeValue(properties.get("ConceptualVersion"));
+		sciCumulusBinaryConceptualVersion.setNodeValue(BinaryConceptualVersion);
 		
 		Attr sciCumulusBinaryExecutionVersion = this.scicumulusXML.createAttribute("execution_version");
 //		System.out.println("Binary execution version");
 		//sciCumulusBinaryExecutionVersion.setNodeValue(entry.nextLine());
-		sciCumulusBinaryExecutionVersion.setNodeValue(properties.get("ExecutionVersion"));
+		sciCumulusBinaryExecutionVersion.setNodeValue(BinaryExecutionVersion);
 		
 		Attr sciCumulusBinaryStarterVersion = this.scicumulusXML.createAttribute("starter_version");
 //		System.out.println("Binary starter version");
 		//sciCumulusBinaryStarterVersion.setNodeValue(entry.nextLine());
-		sciCumulusBinaryStarterVersion.setNodeValue(properties.get("StarterVersion"));
+		sciCumulusBinaryStarterVersion.setNodeValue(BinaryStarterVersion);
 		
 		Attr sciCumulusBinaryQueryVersion = this.scicumulusXML.createAttribute("query_version");
 //		System.out.println("Binary Query version");
 		//sciCumulusBinaryQueryVersion.setNodeValue(entry.nextLine());
-		sciCumulusBinaryQueryVersion.setNodeValue(properties.get("QueryVersion"));
+		sciCumulusBinaryQueryVersion.setNodeValue(BinaryQueryVersion);
 		
 		sciCumulusBinary.setAttributeNode(sciCumulusBinaryDirectory);
 		sciCumulusBinary.setAttributeNode(sciCumulusBinaryConceptualVersion);
@@ -485,20 +485,20 @@ public class Conversion_writer implements IWriter{
 
 	public void insertUserInformation(){
 		
-		this.insertCredentials();
-		this.insertEnvironment();
-		this.insertBinary();
-		this.insertWorkspace();
-		this.insertDatabase();
-		this.insertQuery();
-		this.insertExecutionWorkflow();
+		//this.insertCredentials();
+		//this.insertEnvironment();
+		//this.insertBinary();
+		//this.insertWorkspace();
+		//this.insertDatabase();
+		//this.insertQuery();
+		//this.insertExecutionWorkflow();
 		
 		
 		
 	}
 	
 
-	private void insertExecutionWorkflow(){
+	private void insertExecutionWorkflow(String ExecutionWorkflowExpdir){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -513,7 +513,7 @@ public class Conversion_writer implements IWriter{
 		Attr sciCumulusExecutionWorkflowExpdir = this.scicumulusXML.createAttribute("expdir");
 //		System.out.println("Execution workflow expdir");
 		//sciCumulusExecutionWorkflowExpdir.setNodeValue(entry.nextLine());
-		sciCumulusExecutionWorkflowExpdir.setNodeValue(properties.get("WorkflowExpdir"));
+		sciCumulusExecutionWorkflowExpdir.setNodeValue(ExecutionWorkflowExpdir);
 		
 		Attr sciCumulusExecutionWorkflowMaxFailure = this.scicumulusXML.createAttribute("max_failure");
 		sciCumulusExecutionWorkflowMaxFailure.setNodeValue("5");
@@ -538,12 +538,12 @@ public class Conversion_writer implements IWriter{
 		this.root.appendChild(sciCumulusExecutionWorkflow);
 		
 		
-		this.insertsciCumulusExecutionWorkflowRelation();
+		//this.insertsciCumulusExecutionWorkflowRelation();
 		
 		
 	}
 
-	private void insertsciCumulusExecutionWorkflowRelation(){
+	private void insertsciCumulusExecutionWorkflowRelation(String WorkflowRelationName, String WorkflowRelationFilename){
 		
 		Scanner entry = new Scanner(System.in);
 		
@@ -553,12 +553,12 @@ public class Conversion_writer implements IWriter{
 		Attr sciCumulusExecutionWorkflowRelationName = this.scicumulusXML.createAttribute("name");
 //		System.out.println("Execution workflow relation name");
 		//sciCumulusExecutionWorkflowRelationName.setNodeValue(entry.nextLine());
-		sciCumulusExecutionWorkflowRelationName.setNodeValue(properties.get("WorkflowRelationName"));
+		sciCumulusExecutionWorkflowRelationName.setNodeValue(WorkflowRelationName);
 		
 		Attr sciCumulusExecutionWorkflowRelationFilename = this.scicumulusXML.createAttribute("filename");
 //		System.out.println("Execution workflow relation filename");
 		//sciCumulusExecutionWorkflowRelationFilename.setNodeValue(entry.nextLine());
-		sciCumulusExecutionWorkflowRelationFilename.setNodeValue(properties.get("WorkflowRelationFilename"));
+		sciCumulusExecutionWorkflowRelationFilename.setNodeValue(WorkflowRelationFilename);
 		
 		sciCumulusExecutionWorkflowRelation.setAttributeNode(sciCumulusExecutionWorkflowRelationName);
 		sciCumulusExecutionWorkflowRelation.setAttributeNode(sciCumulusExecutionWorkflowRelationFilename);
@@ -612,6 +612,27 @@ public class Conversion_writer implements IWriter{
 
 		}
 		
+	}
+	
+	public void insertAllUserInformation(Map<String, String> properties){
+		
+		this.insertCredentials(properties.get("AccessKey"), properties.get("SecretAccessKey"));
+		
+		//defaul values. If it has to be set by the user, pass the properties.get() of attributes of the node
+		this.insertEnvironment();
+		
+		this.insertBinary(properties.get("Directory"), properties.get("ConceptualVersion"), properties.get("ExecutionVersion"), properties.get("StarterVersion"), 
+				properties.get("QueryVersion"));
+		
+		
+		this.insertWorkspace(properties.get("WorkspaceUpload"), properties.get("WorkspaceBucketName"), properties.get("WorkspaceWorkflowDir"), properties.get("WorkspaceCompressedWorkspace"), properties.get("CompressedDir"));
+		this.insertDatabase(properties.get("DatabaseName"), properties.get("DatabaseUsername"), properties.get("DatabasePassword"), properties.get("DatabasePort"), properties.get("DatabaseServer"), properties.get("DatabasePath"));
+		
+		this.insertQuery(properties.get("QuerySQL"));
+		
+		this.insertExecutionWorkflow(properties.get("WorkflowExpdir"));
+		
+		this.insertsciCumulusExecutionWorkflowRelation(properties.get("WorkflowRelationName"), properties.get("WorkflowRelationFilename"));
 	}
 
 }

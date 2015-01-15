@@ -49,9 +49,9 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
 		File writer = new File("src/othersource/concrete.xml");
-		Map<String,String> properties = new HashMap<String, String>();
+		//Map<String,String> properties = new HashMap<String, String>();
 		
-		
+		/*
 		//Database node
 		properties.put("DatabaseName", "scc2");
 		properties.put("DatabaseUsername", "postgres");
@@ -85,6 +85,7 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
+		*/
 		
 //		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
 		

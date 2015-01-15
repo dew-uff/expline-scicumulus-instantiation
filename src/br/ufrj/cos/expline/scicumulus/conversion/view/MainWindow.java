@@ -171,17 +171,18 @@ public class MainWindow extends JFrame
 			JButton finishButton = (JButton)e.getSource();
 			MainWindow mainFrame = (MainWindow)SwingUtilities.getWindowAncestor(finishButton);
 			
-			ClassesController cc = mainFrame.getClassesController();
+			
+			ClassesController classController = mainFrame.getClassesController();
 			
 			boolean hasEmptyField =  mainFrame.hasEmptyField();
 			
 			if(hasEmptyField)
 			{
-				JOptionPane.showMessageDialog(null, "Has Empty Field", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Has Empty Field, MotherFucker", "Error", JOptionPane.ERROR_MESSAGE);
 			}else
 			{
 				
-				cc.finishXML(mainFrame.fillOutTheMap());
+				classController.finishXML(mainFrame.fillOutTheMap());
 			}
 						
 		}
