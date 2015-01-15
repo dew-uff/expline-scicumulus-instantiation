@@ -1,5 +1,6 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
@@ -45,7 +46,7 @@ public class MainWindow extends JFrame
 		this.setTitle("Scicumulus Instantiation");
 				
 		JTabbedPane jtp = new JTabbedPane();
-		jtp.setBounds(0,0,this.getWidth(), this.getHeight()-70);
+		jtp.setBounds(0,0,this.getWidth()-5, this.getHeight()-70);
 		//jtp.setSize(width, height);
 		this.add(jtp);
 		
@@ -62,7 +63,8 @@ public class MainWindow extends JFrame
 		this.credentialsTab 	= new CredentialsTab();
 		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
-		this.activityTab		= new ActivityTab(Util.getFakeActivities());//Util.getOnlyActivities(this.properties));
+		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
+//		this.activityTab		= new ActivityTab(Util.getFakeActivities());
 		this.queryTab			= new QueryTab();
 
 		
@@ -108,7 +110,8 @@ public class MainWindow extends JFrame
 			   credentialsTab.checkFilledOut() &&
 			   binaryTab.checkFilledOut() &&
 			   workflowTab.checkFilledOut() &&
-			   queryTab.checkFilledOut());
+			   queryTab.checkFilledOut() &&
+			   activityTab.checkFilledOut());
 	}
 	
 	public Map<String,String> fillOutTheMap()
@@ -150,6 +153,11 @@ public class MainWindow extends JFrame
 //		select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;
 		
 		//loopParaPreencherActivity
+		Map<String,String> activities = activityTab.getMapOnlyActivitiesDone();
+		for(String key: activities.keySet())
+		{
+			properties.put(key, activities.get(key));
+		}
 		
 		return properties;
 	}

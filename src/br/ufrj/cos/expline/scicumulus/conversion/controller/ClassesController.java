@@ -64,7 +64,8 @@ public class ClassesController
 		properties.put("WorkflowRelationFilename","");
 		
 		//query Node
-		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
+		properties.put("QuerySQL", "");
+//		select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;
 	}
 	
 	private void initComponents()

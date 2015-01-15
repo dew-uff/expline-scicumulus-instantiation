@@ -80,8 +80,6 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		//Executionworkflow node
 		properties.put("WorkflowExpdir","%=WFDIR%/exp");
-		
-		
 		properties.put("WorkflowRelationName","IMod1Act1");
 		properties.put("WorkflowRelationFilename","Input.dataset");
 		

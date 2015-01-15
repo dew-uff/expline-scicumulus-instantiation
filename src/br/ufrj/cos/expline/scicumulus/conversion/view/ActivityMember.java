@@ -45,4 +45,14 @@ public class ActivityMember extends JPanel
 	{
 		return keyInTheMap;
 	}
+	
+	public boolean fieldIsEmpty()
+	{
+		return tfActivation.getText().equals("");
+	}
+	
+	public String getActivation()
+	{
+		return tfActivation.getText();
+	}
 }
