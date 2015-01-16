@@ -31,15 +31,21 @@ public class ScicumulusInstantiator implements Instantiator{
 		new Conversion_reader(writer,explineAbstractWorkflow,properties);
 		Map<String,String> temp = Util.getOnlyActivities(properties);
 		
-		
+		/*
 		for(String p:temp.keySet())
 		{
-		temp.put(p, "java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%");
+		System.out.println("tag:");
+		System.out.println(p);
+		//temp.put(p, "java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%");
 		}
+		*/
+		
+		
 		
 		writer.insertAllActivations(temp);
 		writer.insertAllUserInformation(properties);
 		writer.saveDocumentToDisk();
+		
 		
 	}
 
@@ -49,8 +55,16 @@ public class ScicumulusInstantiator implements Instantiator{
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("src/othersource/SciCumulus-wp.xml");
+		File writer = new File("src/othersource/SciCumulus-wp_TESTE.xml");
 		Map<String,String> properties = new HashMap<String, String>();
+		
+		
+		
+		//activations
+		properties.put("activity_act1", "java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%");
+		properties.put("activity_act2", "teste");
+		properties.put("activity_act3", "teste1");
+		
 		
 		
 		//Database node

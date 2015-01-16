@@ -70,7 +70,7 @@ public class Conversion_reader {
 				Element auxElem = (Element) rootChildrenActivity.item(i);
 				String value = auxElem.getAttribute("value");
 				String algebraicOperator = auxElem.getAttribute("algebraicOperator");
-				properties.put("activity_"+value, "-");
+				//properties.put("activity_"+value, "-");
 				writer.insertActivity(value, algebraicOperator);
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
