@@ -8,7 +8,7 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
+		File read = new File("C:\\Users\\t3gq\\AppData\\Local\\Temp\\abstractWorkflow930323260384909305.xml");
 		File writer = new File("src/othersource/concrete.xml");
 		
 		
