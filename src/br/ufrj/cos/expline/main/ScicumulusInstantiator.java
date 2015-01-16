@@ -19,7 +19,7 @@ public class ScicumulusInstantiator implements Instantiator{
 //		new Conversion_reader(writer,explineAbstractWorkflow,null);
 //		writer.saveDocumentToDisk(null);
 		
-		new ClassesController(explineAbstractWorkflow,ScimulusWorkflow);
+//		new ClassesController(explineAbstractWorkflow,ScimulusWorkflow);
 	}
 	
 	@Override
@@ -49,10 +49,10 @@ public class ScicumulusInstantiator implements Instantiator{
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		
 		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File writer = new File("src/othersource/concrete.xml");
-		//Map<String,String> properties = new HashMap<String, String>();
+		File writer = new File("src/othersource/SciCumulus-wp.xml");
+		Map<String,String> properties = new HashMap<String, String>();
 		
-		/*
+		
 		//Database node
 		properties.put("DatabaseName", "scc2");
 		properties.put("DatabaseUsername", "postgres");
@@ -86,11 +86,12 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		//query Node
 		properties.put("QuerySQL", "select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;");
-		*/
 		
-//		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
+		//Activity dentro do metodo Instantiate
 		
-		scicumulusInstantiator.instantiate(read, writer);
+		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
+		
+//		scicumulusInstantiator.instantiate(read, writer);
 	}
 	
 }
