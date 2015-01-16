@@ -1,12 +1,14 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,7 +20,7 @@ import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
 import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
-public class MainWindow extends JFrame 
+public class MainWindow extends JDialog 
 {
 	private Map<String,String> properties;
 	private ClassesController classesController;
@@ -32,9 +34,9 @@ public class MainWindow extends JFrame
 	private ActivityTab activityTab;
 	private QueryTab queryTab;
 	
-	public MainWindow(Map<String,String> properties, ClassesController classesController)
+	public MainWindow(Frame owner, Map<String,String> properties, ClassesController classesController)
 	{
-		super();
+		super(owner);
 		
 		this.classesController = classesController;
 		

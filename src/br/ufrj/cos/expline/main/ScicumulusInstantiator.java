@@ -1,5 +1,6 @@
 package br.ufrj.cos.expline.main;
 
+import java.awt.Frame;
 import java.io.File;
 
 
@@ -14,12 +15,12 @@ import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 public class ScicumulusInstantiator implements Instantiator{
 
 	@Override
-	public void instantiate(File explineAbstractWorkflow, File ScimulusWorkflow) {
+	public void instantiate(Frame owner, File explineAbstractWorkflow, File ScimulusWorkflow) {
 //		Conversion_writer writer = new Conversion_writer(ScimulusWorkflow,null);
 //		new Conversion_reader(writer,explineAbstractWorkflow,null);
 //		writer.saveDocumentToDisk(null);
 		
-//		new ClassesController(explineAbstractWorkflow,ScimulusWorkflow);
+		new ClassesController(owner, explineAbstractWorkflow,ScimulusWorkflow);
 	}
 	
 	@Override
@@ -103,9 +104,9 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		//Activity dentro do metodo Instantiate
 		
-		scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
+		//scicumulusInstantiator.instantiate(read, writer,properties); //forma usando o properties criado aqui, sem interface grafica
 		
-//		scicumulusInstantiator.instantiate(read, writer);
+		//scicumulusInstantiator.instantiate(read, writer);
 	}
 	
 }

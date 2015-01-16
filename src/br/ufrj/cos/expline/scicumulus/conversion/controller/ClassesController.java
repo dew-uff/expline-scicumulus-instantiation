@@ -1,5 +1,6 @@
 package br.ufrj.cos.expline.scicumulus.conversion.controller;
 
+import java.awt.Frame;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +18,13 @@ public class ClassesController
 	private File explineAbstractWorkflow;
 	private File ScicumulusWorkflow;
 	private MainWindow mainWindow;
+	private final Frame owner;
 	
-	public ClassesController(File explineAbstractWorkflow, File ScicumulusWorkflow)
+	public ClassesController(Frame owner, File explineAbstractWorkflow, File ScicumulusWorkflow)
 	{
 		this.explineAbstractWorkflow = explineAbstractWorkflow;
 		this.ScicumulusWorkflow = ScicumulusWorkflow;
+		this.owner = owner;
 		initProperties();
 		initComponents();
 		
@@ -74,7 +77,7 @@ public class ClassesController
 		writer = new Conversion_writer(this.ScicumulusWorkflow,this.properties);
 		reader = new Conversion_reader(this.writer,this.explineAbstractWorkflow,this.properties);
 		
-		mainWindow = new MainWindow(this.properties,this);
+		mainWindow = new MainWindow(owner, this.properties,this);
 		
 //		writer.saveDocumentToDisk(Util.getOnlyActivities(this.properties));
 //		writer.saveDocumentToDisk();
