@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 public class ActivityMember extends JPanel
 {
 	private String keyInTheMap;
@@ -26,7 +28,7 @@ public class ActivityMember extends JPanel
 		
 		
 		
-		title = BorderFactory.createTitledBorder(keyInTheMap);
+		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
 	}
 

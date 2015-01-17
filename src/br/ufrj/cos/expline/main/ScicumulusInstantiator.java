@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
+
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
 import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
@@ -55,10 +57,10 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		
-		File read = new File("src/othersource/AbstractWorkflow-ScicumulusExample.xml");
+		File read = new File("src/othersource/abstractWorkflowGeradoPeloExpLine.xml");
 		File writer = new File("src/othersource/SciCumulus-wp_TESTE.xml");
 		Map<String,String> properties = new HashMap<String, String>();
-		
+		scicumulusInstantiator.instantiate(new JFrame(), read, writer);
 		
 		
 		//activations

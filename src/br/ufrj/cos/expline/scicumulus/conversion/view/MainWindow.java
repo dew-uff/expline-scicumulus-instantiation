@@ -184,6 +184,7 @@ public class MainWindow extends JDialog
 			{
 				
 				cc.finishXML(mainFrame.fillOutTheMap());
+				mainFrame.dispose();
 			}
 						
 		}
