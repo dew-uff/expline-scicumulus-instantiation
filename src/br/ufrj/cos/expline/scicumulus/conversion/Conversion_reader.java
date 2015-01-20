@@ -87,9 +87,13 @@ public class Conversion_reader {
 				Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
 				
 				NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
-				Element elemArrayInput = (Element)arrayInput.item(0);
-				
-				NodeList relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+				NodeList relationSchemaAttributeInput = null;
+				if(arrayInput.getLength() > 0)
+				{
+					Element elemArrayInput = (Element)arrayInput.item(0);
+					
+					relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+				}
 				/* -----------FIM INPUT--------- */
 				
 				
@@ -133,28 +137,32 @@ public class Conversion_reader {
 								
 				
 				/* --------- Colocar Field ------ */
-				for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
+				if(relationSchemaAttributeInput != null)
 				{
-					if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
+					for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
 					{
-						Element elemAux = (Element)relationSchemaAttributeInput.item(j);
-						if(relationSchemaAttributeOutput == null)
+						if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
 						{
-							writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
-						}else
-						{
-							if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
+							Element elemAux = (Element)relationSchemaAttributeInput.item(j);
+							if(relationSchemaAttributeOutput == null)
 							{
 								writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
-							}
-							else
+							}else
 							{
-								writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+								if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
+								{
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
+								}
+								else
+								{
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+								}
 							}
 						}
 					}
+				}else{
+					writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
 				}
-				
 				/* -------- FIM colocar Field---- */
 				
 			}	

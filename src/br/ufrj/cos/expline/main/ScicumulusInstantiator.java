@@ -57,7 +57,8 @@ public class ScicumulusInstantiator implements Instantiator{
 		
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		
-		File read = new File("src/othersource/abstractWorkflowGeradoPeloExpLine.xml");
+//		File read = new File("src/othersource/abstractWorkflowGeradoPeloExpLine.xml");
+		File read = new File("src/othersource/PhylogenomicAbstractWorkflow.xml");
 		File writer = new File("src/othersource/SciCumulus-wp_TESTE.xml");
 		Map<String,String> properties = new HashMap<String, String>();
 		scicumulusInstantiator.instantiate(new JFrame(), read, writer);
