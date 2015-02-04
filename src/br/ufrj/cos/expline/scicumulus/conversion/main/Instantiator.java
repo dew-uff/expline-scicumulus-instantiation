@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.main;
+package br.ufrj.cos.expline.scicumulus.conversion.main;
 
 import java.awt.Frame;
 import java.io.File;

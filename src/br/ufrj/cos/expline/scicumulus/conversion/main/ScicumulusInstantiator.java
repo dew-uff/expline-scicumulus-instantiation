@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.main;
+package br.ufrj.cos.expline.scicumulus.conversion.main;
 
 import java.awt.Frame;
 import java.io.File;
@@ -58,8 +58,8 @@ public class ScicumulusInstantiator implements Instantiator{
 		Instantiator scicumulusInstantiator = new ScicumulusInstantiator();
 		
 //		File read = new File("src/othersource/abstractWorkflowGeradoPeloExpLine.xml");
-		File read = new File("src/othersource/PhylogenomicAbstractWorkflow.xml");
-		File writer = new File("src/othersource/SciCumulus-wp_TESTE.xml");
+		File read = new File("othersource/PhylogenomicAbstractWorkflow.xml");
+		File writer = new File("othersource/SciCumulus-wp_TESTE.xml");
 		Map<String,String> properties = new HashMap<String, String>();
 		scicumulusInstantiator.instantiate(new JFrame(), read, writer);
 		
