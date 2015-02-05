@@ -8,6 +8,4 @@ public interface Instantiator {
 
 	public void instantiate(Frame owner, File explineAbstractWorkflow, File SWfMSworkflow);
 	
-	public void instantiate(File explineAbstractWorkflow, File SWfMSworkflow, Map<String, String> properties);
-	
 }

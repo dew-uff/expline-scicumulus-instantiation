@@ -1,5 +1,7 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,20 +24,19 @@ public class CredentialsTab extends JPanel
 	}
 
 	private void initComponents() {
-		// TODO Auto-generated method stub
-		this.setLayout(null);
+		this.setLayout(new GridLayout(2,2));
 		
 		lbAccessKey = new JLabel("Access Key: ");
-		lbAccessKey.setBounds(10, 10, 80, 15);
+//		lbAccessKey.setBounds(10, 10, 80, 15);
 		
 		tfAccessKey = new JTextField(20);
-		tfAccessKey.setBounds(10+lbAccessKey.getWidth(), 10,390, 20);
+//		tfAccessKey.setBounds(10+lbAccessKey.getWidth(), 10,390, 20);
 		
 		lbSecretAccessKey = new JLabel("Secret Access Key: ");
-		lbSecretAccessKey.setBounds(10, 10+lbAccessKey.getHeight()+lbAccessKey.getY(), 125, 15);
+//		lbSecretAccessKey.setBounds(10, 10+lbAccessKey.getHeight()+lbAccessKey.getY(), 125, 15);
 		
 		tfSecretAccessKey = new JTextField(20);
-		tfSecretAccessKey.setBounds(10 + lbSecretAccessKey.getWidth(), lbSecretAccessKey.getY(), 345, 20);
+//		tfSecretAccessKey.setBounds(10 + lbSecretAccessKey.getWidth(), lbSecretAccessKey.getY(), 345, 20);
 		
 		this.add(lbAccessKey);
 		this.add(tfAccessKey);

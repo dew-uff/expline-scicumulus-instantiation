@@ -3,15 +3,17 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.io.File;
 
 import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
+import br.ufrj.cos.expline.scicumulus.conversion.main.Instantiator;
+import br.ufrj.cos.expline.scicumulus.conversion.main.ScicumulusInstantiator;
 
 public class Main 
 {
 	public static void main(String[] args)
 	{
-		File read = new File("C:\\Users\\t3gq\\AppData\\Local\\Temp\\abstractWorkflow930323260384909305.xml");
-		File writer = new File("src/othersource/concrete.xml");
+		File read = new File("othersource/AbstractWorkflow-ScicumulusExample.xml");
+		File writer = new File("othersource/concrete.xml");
 		
-		
-		new ClassesController(null, read,writer);
+		Instantiator instantiator = new ScicumulusInstantiator();
+		instantiator.instantiate(null, read, writer);
 	}
 }

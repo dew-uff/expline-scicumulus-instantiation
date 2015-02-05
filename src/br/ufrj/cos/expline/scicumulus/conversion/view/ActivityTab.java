@@ -1,6 +1,8 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +22,11 @@ public class ActivityTab extends JPanel
 		super();
 		
 		this.onlyActivation = onlyActivation;
-		this.setLayout(null);
+
 		initComponents();
 		initActivityMembersLayout();
+		
+		initLayout();
 
 	}
 	
@@ -45,7 +49,13 @@ public class ActivityTab extends JPanel
 			ActivityMember tempAM = new ActivityMember(p);
 			activities.add(tempAM);
 		}
-		
+				
+	}
+	
+	private void initLayout()
+	{
+//		constraints.fill = GridBagConstraints.BOTH;
+//		addComponents(panelScrolled, 0, 0, 1, 1);
 	}
 	
 	private void initActivityMembersLayout() 

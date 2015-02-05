@@ -47,7 +47,7 @@ public class MainWindow extends JDialog
 		this.setLayout(null);
 		this.setTitle("Scicumulus Instantiation");
 				
-		JTabbedPane jtp = new JTabbedPane();
+		JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 		jtp.setBounds(0,0,this.getWidth()-5, this.getHeight()-70);
 		//jtp.setSize(width, height);
 		this.add(jtp);
@@ -66,9 +66,7 @@ public class MainWindow extends JDialog
 		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
 		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
-//		this.activityTab		= new ActivityTab(Util.getFakeActivities());
 		this.queryTab			= new QueryTab();
-
 		
 		jtp.addTab("Database", this.databaseTab );
 		
