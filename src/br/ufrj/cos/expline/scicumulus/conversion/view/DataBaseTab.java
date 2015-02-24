@@ -2,6 +2,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
+
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ public class DataBaseTab extends JPanel
 	private JTextField tfPath;
 	
 	private GridBagLayout layout;
+
 	private GridBagConstraints constraints;
 	
 	public DataBaseTab()
@@ -33,21 +35,27 @@ public class DataBaseTab extends JPanel
 		initComponents();
 		
 		this.setVisible(true);
+		
+		initLayout();
 	}
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
+
 //		this.setLayout(null);
+		this.setLayout(layout);
+
 		
 		lbName = new JLabel("Name: ");
-		lbName.setBounds(10,10,50,15);
+		//lbName.setBounds(10,10,50,15);
 		this.add(lbName);
 		
 		tfName = new JTextField();
-		tfName.setBounds(lbName.getWidth(), 10, 430, 20);
+		//tfName.setBounds(lbName.getWidth(), 10, 430, 20);
 		this.add(tfName);
 		
 		lbUserName = new JLabel("User Name: ");
+
 		lbUserName.setBounds(10,10+lbName.getHeight()+lbName.getY(),80,15);
 //		this.add(lbUserName);
 		
@@ -92,16 +100,18 @@ public class DataBaseTab extends JPanel
 		this.setLayout(layout);
 		
 		constraints = new GridBagConstraints();
-		
+
 	}
 	
 	private void initLayout()
 	{
+
 		constraints.fill = GridBagConstraints.BOTH;
 		addComponents(lbName, 0, 0, 2, 1);
 		
 		constraints.fill = GridBagConstraints.BOTH;
 		addComponents(tfName, 0, 2, 3, 1);
+
 	}
 	
 	private void addComponents(Component component,int row,int column,int width,int height)
@@ -112,6 +122,7 @@ public class DataBaseTab extends JPanel
 		constraints.gridheight = height;
 		layout.setConstraints(component, constraints);
 		add(component);
+
 	}
 	
 	public boolean checkFilledOut()
