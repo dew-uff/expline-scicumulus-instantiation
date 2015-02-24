@@ -1,6 +1,9 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +17,19 @@ public class ActivityTab extends JPanel
 	private ArrayList<ActivityMember> activities;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
+	private GridBagLayout layout;
+	private GridBagConstraints constraints;
 	
 	public ActivityTab(Map<String,String> onlyActivation)
 	{
 		super();
 		
 		this.onlyActivation = onlyActivation;
-		this.setLayout(null);
+
 		initComponents();
 		initActivityMembersLayout();
+		
+		initLayout();
 
 	}
 	
@@ -46,6 +53,18 @@ public class ActivityTab extends JPanel
 			activities.add(tempAM);
 		}
 		
+		layout = new GridBagLayout();
+		
+		this.setLayout(null);
+		
+		constraints = new GridBagConstraints();
+				
+	}
+	
+	private void initLayout()
+	{
+//		constraints.fill = GridBagConstraints.BOTH;
+//		addComponents(panelScrolled, 0, 0, 1, 1);
 	}
 	
 	private void initActivityMembersLayout() 
@@ -67,6 +86,16 @@ public class ActivityTab extends JPanel
 		panelScrolled.setPreferredSize(new Dimension(570,height));
 		
 		jsp.revalidate();
+	}
+	
+	private void addComponents(Component component,int row,int column,int width,int height)
+	{
+		constraints.gridx = row;
+		constraints.gridy = column;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		layout.setConstraints(component, constraints);
+		add(component);
 	}
 	
 	public boolean checkFilledOut()
