@@ -49,7 +49,11 @@ public class QueryTab extends JPanel
 	
 	public boolean checkFilledOut()
 	{
-		if(taSQL.getText().equals("")) return false;
+		if(taSQL.getText().equals("")) 
+		{
+			System.out.println("SQL");
+			return false;
+		}
 		return true;
 	}
 	

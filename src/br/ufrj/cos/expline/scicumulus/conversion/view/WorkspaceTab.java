@@ -30,46 +30,47 @@ public class WorkspaceTab extends JPanel
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		this.setLayout(new GridLayout(5,2));
+//		this.setLayout(new GridLayout(5,2));
+		this.setLayout(null);
 		
 		lbUpload = new JLabel("Upload: ");
-//		lbUpload.setBounds(10,10,55,15);
+		lbUpload.setBounds(10,10,55,15);
 		this.add(lbUpload);
 		
 		tfUpload = new JTextField();
-//		tfUpload.setBounds(lbUpload.getWidth(), 10, 425, 20);
+		tfUpload.setBounds(lbUpload.getWidth(), 10, 425, 20);
 		this.add(tfUpload);
 		
 		lbBucketName = new JLabel("Bucket Name: ");
-//		lbBucketName.setBounds(10,10+lbUpload.getHeight()+lbUpload.getY(),95,15);
+		lbBucketName.setBounds(10,10+lbUpload.getHeight()+lbUpload.getY(),95,15);
 		this.add(lbBucketName);
 		
 		tfBucketName = new JTextField();
-//		tfBucketName.setBounds(lbBucketName.getWidth(), lbBucketName.getY(), 385, 20);
+		tfBucketName.setBounds(lbBucketName.getWidth(), lbBucketName.getY(), 385, 20);
 		this.add(tfBucketName);
 		
 		lbWorkflowDir = new JLabel("Workflow Dir: ");
-//		lbWorkflowDir.setBounds(10,10+lbBucketName.getHeight()+lbBucketName.getY(),90,15);
+		lbWorkflowDir.setBounds(10,10+lbBucketName.getHeight()+lbBucketName.getY(),90,15);
 		this.add(lbWorkflowDir);
 		
 		tfWorkflowDir = new JTextField();
-//		tfWorkflowDir.setBounds(lbWorkflowDir.getWidth(), lbWorkflowDir.getY(), 390, 20);
+		tfWorkflowDir.setBounds(lbWorkflowDir.getWidth(), lbWorkflowDir.getY(), 390, 20);
 		this.add(tfWorkflowDir);
 		
 		lbCompressedWorkspace = new JLabel("Compressed Workspace: ");
-//		lbCompressedWorkspace.setBounds(10,10+lbWorkflowDir.getHeight()+lbWorkflowDir.getY(),160,15);
+		lbCompressedWorkspace.setBounds(10,10+lbWorkflowDir.getHeight()+lbWorkflowDir.getY(),160,15);
 		this.add(lbCompressedWorkspace);
 		
 		tfCompressedWorkspace = new JTextField();
-//		tfCompressedWorkspace.setBounds(lbCompressedWorkspace.getWidth(), lbCompressedWorkspace.getY(), 320, 20);
+		tfCompressedWorkspace.setBounds(lbCompressedWorkspace.getWidth(), lbCompressedWorkspace.getY(), 320, 20);
 		this.add(tfCompressedWorkspace);
 		
 		lbCompressedDir = new JLabel("Compressed Dir: ");
-//		lbCompressedDir.setBounds(10,10+lbCompressedWorkspace.getHeight()+lbCompressedWorkspace.getY(),110,15);
+		lbCompressedDir.setBounds(10,10+lbCompressedWorkspace.getHeight()+lbCompressedWorkspace.getY(),110,15);
 		this.add(lbCompressedDir);
 		
 		tfCompressedDir = new JTextField();
-//		tfCompressedDir.setBounds(lbCompressedDir.getWidth(), lbCompressedDir.getY(), 370, 20);
+		tfCompressedDir.setBounds(lbCompressedDir.getWidth(), lbCompressedDir.getY(), 370, 20);
 		this.add(tfCompressedDir);
 		
 	}
@@ -78,11 +79,31 @@ public class WorkspaceTab extends JPanel
 	public boolean checkFilledOut()
 	{
 			
-		if(tfUpload.getText().equals("")) return false;	
-		else if(tfBucketName.getText().equals("")) return false;
-		else if(tfWorkflowDir.getText().equals("")) return false;
-		else if(tfCompressedWorkspace.getText().equals("")) return false;
-		else if(tfCompressedDir.getText().equals("")) return false;
+		if(tfUpload.getText().equals(""))
+		{
+			System.out.println("Workspace");
+			return false;	
+		}
+		else if(tfBucketName.getText().equals(""))
+		{
+			System.out.println("Workspace");
+			return false;
+		}
+		else if(tfWorkflowDir.getText().equals(""))
+		{
+			System.out.println("Workspace");
+			return false;
+		}
+		else if(tfCompressedWorkspace.getText().equals(""))
+		{
+			System.out.println("Workspace");
+			return false;
+		}
+		else if(tfCompressedDir.getText().equals(""))
+		{
+			System.out.println("Workspace");
+			return false;
+		}
 					
 		return true;
 	}

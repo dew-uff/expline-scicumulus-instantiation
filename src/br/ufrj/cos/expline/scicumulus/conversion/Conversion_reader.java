@@ -73,31 +73,45 @@ public class Conversion_reader {
 				properties.put("activity_"+value, "-");
 				writer.insertActivity(value, algebraicOperator);
 				
+				String df = auxElem.getAttribute("value");
+				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
 				Element elemPorts = (Element)ports.item(0);
 				
 				/* -----------INICIO INPUT--------- */
+				String iModAct = "IMod"+df;
+				System.out.println(iModAct);
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
-				Element elemPortInput = (Element)portInput.item(0);
-				
-				NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
-				Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
-				
-				NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
-				NodeList relationSchemaAttributeInput = null;
-				if(arrayInput.getLength() > 0)
+				NodeList relationSchemaAttributeInput = null;;
+				for(int inputPortCount =0;inputPortCount < portInput.getLength();inputPortCount++)
 				{
-					Element elemArrayInput = (Element)arrayInput.item(0);
+					Element elemPortInput = (Element)portInput.item(inputPortCount);
 					
-					relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+					iModAct = "IMod"+df+elemPortInput.getAttribute("id");
+					System.out.println(iModAct);
+					
+					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
+					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
+					
+					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
+				
+					if(arrayInput.getLength() > 0)
+					{
+						Element elemArrayInput = (Element)arrayInput.item(0);
+						
+						relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+					}
+					writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
 				}
 				/* -----------FIM INPUT--------- */
 				
 				
 				/* -----------INICIO OUTPUT--------- */
+				String oModAct = "OMod"+df;
+				System.out.println(oModAct);
 				NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 				Element elemOutputPorts = (Element)outputPorts.item(0);
 				
@@ -115,24 +129,17 @@ public class Conversion_reader {
 					
 					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
 				}
+				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
 				/* -----------FIM OUTPUT--------- */
 				
 				
 				/* ------------Relation---------- */
-				char[] tempVector = auxElem.getAttribute("value").toCharArray();
-				char charAux = tempVector[0];
-				String df = new Character(charAux).toString();
-				df = df.toUpperCase();
-				tempVector[0] = df.charAt(0);
-				df = new String(tempVector);
-				
-				String iModAct = "IMod"+df;
-				System.out.println(iModAct);
-				String oModAct = "OMod"+df;
-				System.out.println(oModAct);
-				
-				writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
-				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
+//				char[] tempVector = auxElem.getAttribute("value").toCharArray();
+//				char charAux = tempVector[0];
+//				String df = new Character(charAux).toString();
+//				df = df.toUpperCase();
+//				tempVector[0] = df.charAt(0);
+//				df = new String(tempVector);
 				/* --------- Fim Relation ------- */
 								
 				

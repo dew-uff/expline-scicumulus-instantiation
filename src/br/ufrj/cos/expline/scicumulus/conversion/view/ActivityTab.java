@@ -88,22 +88,13 @@ public class ActivityTab extends JPanel
 		jsp.revalidate();
 	}
 	
-	private void addComponents(Component component,int row,int column,int width,int height)
-	{
-		constraints.gridx = row;
-		constraints.gridy = column;
-		constraints.gridwidth = width;
-		constraints.gridheight = height;
-		layout.setConstraints(component, constraints);
-		add(component);
-	}
-	
 	public boolean checkFilledOut()
 	{
 		for(ActivityMember am:activities)
 		{
 			if(am.fieldIsEmpty())
 			{
+				System.out.println("Activity");
 				return false;
 			}
 		}

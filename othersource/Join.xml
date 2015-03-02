@@ -1,0 +1,49 @@
+<AbstractWorkflow>
+	<Activity id="15" value="first">
+		<Ports>
+			<InputPorts>
+				<Port id="16">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="17">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity algebraicOperator="MRQuery" id="18" value="third">
+		<Ports>
+			<InputPorts>
+				<Port id="19">
+					<RelationSchema as="relationSchema" />
+				</Port>
+				<Port id="21">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="20">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity id="22" value="second">
+		<Ports>
+			<InputPorts>
+				<Port id="23">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="24">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Edge id="25" source="17" target="19" />
+	<Edge id="26" source="24" target="21" />
+</AbstractWorkflow>
