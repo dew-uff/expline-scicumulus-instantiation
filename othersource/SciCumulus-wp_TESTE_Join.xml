@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SciCumulus>
 	<conceptualWorkflow description="" tag="workflow-1">
-		<activity activation="dsfds" description="" tag="first" type="">
-			<relation name="IModfirst16" reltype="Input" />
-			<relation name="OModfirst" reltype="Output" />
-			<field decimalplaces="0" input="IModfirst16" name="" output="OModfirst"
-				type="" />
+		<activity activation="dfgfdg" description="" tag="act1" type="">
+			<relation name="OMod_act1_3" reltype="Output" />
+			<relation name="IMod_act1_4" reltype="Input" />
+			<field decimalplaces="0" input="IMod_act1_4" name="ID" output="OMod_act1_3"
+				type="float" />
+			<field decimalplaces="0" input="IMod_act1_4" name="T1" type="float" />
+			<field decimalplaces="0" input="IMod_act1_4" name="T2" output="OMod_act1_3"
+				type="float" />
 		</activity>
-		<activity activation="sdfds" description="" tag="third" type="MRQuery">
-			<relation dependency="second" name="IModthird19" reltype="Input" />
-			<relation dependency="second" name="IModthird21" reltype="Input" />
-			<relation name="OModthird" reltype="Output" />
-			<field decimalplaces="0" input="IModthird21" name="" output="OModthird"
-				type="" />
-		</activity>
-		<activity activation="fdsfds" description="" tag="second"
-			type="">
-			<relation name="IModsecond23" reltype="Input" />
-			<relation name="OModsecond" reltype="Output" />
-			<field decimalplaces="0" input="IModsecond23" name="" output="OModsecond"
-				type="" />
+		<activity activation="fdgfdg" description="" tag="act2" type="">
+			<relation name="OMod_act2_6" reltype="Output" />
+			<relation dependency="act1" name="IMod_act2_7" reltype="Input" />
+			<field decimalplaces="0" input="IMod_act2_7" name="ID" output="OMod_act2_6"
+				type="float" />
+			<field decimalplaces="0" input="IMod_act2_7" name="T2" output="OMod_act2_6"
+				type="float" />
 		</activity>
 	</conceptualWorkflow>
-	<credentials access_key="sdfds" secret_access_key="fds" />
+	<credentials access_key="fdgfd" secret_access_key="fdgfd" />
 	<environment cluster_name="vitor" type="CLOUD" verbose="false" />
-	<binary conceptual_version="sdfsd" directory="sdfsd"
-		execution_version="fsd" query_version="dsfdsfsd" starter_version="fdsf" />
-	<workspace bucket_name="dsfdsf" compressed_dir="dsfds"
-		compressed_workspace="fsdf" upload="sdfdsf" workflow_dir="dsfds" />
-	<database Username="sdfds" name="" password="sdf" path=""
-		port="dsfdsf" server="" />
-	<query sql="sdfdsfds" />
-	<executionWorkflow execmodel="DYN_FAF" expdir="dsfds"
+	<binary conceptual_version="dfgfd" directory="dfgfd"
+		execution_version="gfd" query_version="fdgfdg" starter_version="gfdg" />
+	<workspace bucket_name="gfdgfd" compressed_dir="fdgfd"
+		compressed_workspace="dfgfd" upload="dfgfd" workflow_dir="gdfg" />
+	<database Username="dfgfd" name="gfdg" password="gfdg" path=""
+		port="fdgfd" server="" />
+	<query sql="fgfdgfd" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="dfgdf"
 		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
 		user_interaction="false">
-		<relation filename="fdsf" name="fds" />
+		<relation filename="dfgfdg" name="dfg" />
 	</executionWorkflow>
 </SciCumulus>

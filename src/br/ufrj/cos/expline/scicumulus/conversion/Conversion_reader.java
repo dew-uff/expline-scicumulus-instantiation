@@ -77,46 +77,16 @@ public class Conversion_reader {
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
 				Element elemPorts = (Element)ports.item(0);
-				
-				/* -----------INICIO INPUT--------- */
-				String iModAct = "IMod"+df;
-				System.out.println(iModAct);
-				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
-				Element elemInputPorts = (Element)inputPorts.item(0);
-				
-				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
-				NodeList relationSchemaAttributeInput = null;;
-				for(int inputPortCount =0;inputPortCount < portInput.getLength();inputPortCount++)
-				{
-					Element elemPortInput = (Element)portInput.item(inputPortCount);
-					
-					iModAct = "IMod"+df+elemPortInput.getAttribute("id");
-					System.out.println(iModAct);
-					
-					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
-					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
-					
-					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
-				
-					if(arrayInput.getLength() > 0)
-					{
-						Element elemArrayInput = (Element)arrayInput.item(0);
-						
-						relationSchemaAttributeInput = elemArrayInput.getChildNodes();
-					}
-					writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
-				}
-				/* -----------FIM INPUT--------- */
-				
-				
+								
 				/* -----------INICIO OUTPUT--------- */
-				String oModAct = "OMod"+df;
+				String oModAct = "OMod_"+df;
 				System.out.println(oModAct);
 				NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 				Element elemOutputPorts = (Element)outputPorts.item(0);
 				
 				NodeList portOutput = elemOutputPorts.getElementsByTagName("Port");
 				Element elemPortOutput = (Element)portOutput.item(0);
+				oModAct = oModAct+"_"+elemPortOutput.getAttribute("id");
 				
 				NodeList relationSchemaOutput = elemPortOutput.getElementsByTagName("RelationSchema");
 				Element elemRelationSchemaOutput = (Element)relationSchemaOutput.item(0);
@@ -132,6 +102,66 @@ public class Conversion_reader {
 				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
 				/* -----------FIM OUTPUT--------- */
 				
+				/* -----------INICIO INPUT--------- */
+				String iModAct = "IMod"+df;
+				System.out.println(iModAct);
+				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
+				Element elemInputPorts = (Element)inputPorts.item(0);
+				
+				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
+				NodeList relationSchemaAttributeInput = null;;
+				for(int inputPortCount =0;inputPortCount < portInput.getLength();inputPortCount++)
+				{
+					Element elemPortInput = (Element)portInput.item(inputPortCount);
+					
+					iModAct = "IMod_"+df+"_"+elemPortInput.getAttribute("id");
+					System.out.println(iModAct);
+					
+					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
+					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
+					
+					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
+				
+					if(arrayInput.getLength() > 0)
+					{
+						Element elemArrayInput = (Element)arrayInput.item(0);
+						
+						relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+					}
+					writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
+					
+					/* --------- Colocar Field ------ */
+					if(relationSchemaAttributeInput != null)
+					{
+						for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
+						{
+							if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
+							{
+								Element elemAux = (Element)relationSchemaAttributeInput.item(j);
+								if(relationSchemaAttributeOutput == null)
+								{
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
+								}else
+								{
+									if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
+									{
+										writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
+									}
+									else
+									{
+										writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+									}
+								}
+							}
+						}
+					}else{
+						writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
+					}
+					/* -------- FIM colocar Field---- */
+					
+				}
+				/* -----------FIM INPUT--------- */
+				
 				
 				/* ------------Relation---------- */
 //				char[] tempVector = auxElem.getAttribute("value").toCharArray();
@@ -141,37 +171,6 @@ public class Conversion_reader {
 //				tempVector[0] = df.charAt(0);
 //				df = new String(tempVector);
 				/* --------- Fim Relation ------- */
-								
-				
-				/* --------- Colocar Field ------ */
-				if(relationSchemaAttributeInput != null)
-				{
-					for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
-					{
-						if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
-						{
-							Element elemAux = (Element)relationSchemaAttributeInput.item(j);
-							if(relationSchemaAttributeOutput == null)
-							{
-								writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
-							}else
-							{
-								if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
-								{
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
-								}
-								else
-								{
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
-								}
-							}
-						}
-					}
-				}else{
-					writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
-				}
-				/* -------- FIM colocar Field---- */
-				
 			}	
 		}
 		

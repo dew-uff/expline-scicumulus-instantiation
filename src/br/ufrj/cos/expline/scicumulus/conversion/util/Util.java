@@ -46,4 +46,30 @@ public class Util
 					
 		return temp;
 	}
+	
+	public static String getValue(String aux)
+	{
+		String iMod = aux.substring(0,aux.indexOf("_"));
+		
+		String temp = aux.substring(aux.indexOf("_")+1);
+		
+		String value = temp.substring(0,temp.indexOf("_"));
+		
+		String id = temp.substring(temp.indexOf("_")+1);
+		
+		return value;
+	}
+	
+	public static String getId(String aux)
+	{
+		String iMod = aux.substring(0,aux.indexOf("_"));
+		
+		String temp = aux.substring(aux.indexOf("_")+1);
+		
+		String value = temp.substring(0,temp.indexOf("_"));
+		
+		String id = temp.substring(temp.indexOf("_")+1);
+		
+		return id;
+	}
 }

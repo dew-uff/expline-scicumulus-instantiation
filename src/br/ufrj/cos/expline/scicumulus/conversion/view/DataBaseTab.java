@@ -35,7 +35,7 @@ public class DataBaseTab extends JPanel
 		
 		this.setVisible(true);
 		
-		initLayout();
+//		initLayout();
 	}
 
 	private void initComponents() {
@@ -46,15 +46,14 @@ public class DataBaseTab extends JPanel
 
 		
 		lbName = new JLabel("Name: ");
-		//lbName.setBounds(10,10,50,15);
+		lbName.setBounds(10,10,50,15);
 		this.add(lbName);
 		
 		tfName = new JTextField();
-		//tfName.setBounds(lbName.getWidth(), 10, 430, 20);
+		tfName.setBounds(lbName.getWidth(), 10, 430, 20);
 		this.add(tfName);
 		
 		lbUserName = new JLabel("User Name: ");
-
 		lbUserName.setBounds(10,10+lbName.getHeight()+lbName.getY(),80,15);
 		this.add(lbUserName);
 		
@@ -106,21 +105,10 @@ public class DataBaseTab extends JPanel
 	{
 
 		constraints.fill = GridBagConstraints.BOTH;
-		addComponents(lbName, 0, 0, 2, 1);
+//		addComponents(lbName, 0, 0, 2, 1);
 		
 		constraints.fill = GridBagConstraints.BOTH;
-		addComponents(tfName, 0, 2, 3, 1);
-
-	}
-	
-	private void addComponents(Component component,int row,int column,int width,int height)
-	{
-		constraints.gridx = row;
-		constraints.gridy = column;
-		constraints.gridwidth = width;
-		constraints.gridheight = height;
-		layout.setConstraints(component, constraints);
-		add(component);
+//		addComponents(tfName, 0, 2, 3, 1);
 
 	}
 	
@@ -129,12 +117,12 @@ public class DataBaseTab extends JPanel
 		
 		if(tfName.getText().equals(""))
 		{
-			System.out.println("Database");
+			System.out.println("Database_Name");
 			return false;	
 		}
 		else if(tfUserName.getText().equals(""))
 		{
-			System.out.println("Database");
+			System.out.println("Database_User_Name");
 			return false;
 		}
 		else if(tfPassword.getText().equals(""))
