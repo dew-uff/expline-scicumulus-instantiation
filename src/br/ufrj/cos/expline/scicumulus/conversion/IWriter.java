@@ -9,4 +9,5 @@ public interface IWriter
 	public void insertOutputRelation(String name, String activityTag);
 	public void insertField( String name, String type, String input, String output, String activityTag);
 	public void setDependency(String activityTag, String relationDependency);
+	public void setDependency(String activityTag, String relationDependency,String relationUsed);
 }

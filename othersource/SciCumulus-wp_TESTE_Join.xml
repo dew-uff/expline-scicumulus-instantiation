@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SciCumulus>
 	<conceptualWorkflow description="" tag="workflow-1">
-		<activity activation="dfgfdg" description="" tag="act1" type="">
+		<activity activation="asdsa" description="" tag="act1" type="">
 			<relation name="OMod_act1_3" reltype="Output" />
 			<relation name="IMod_act1_4" reltype="Input" />
 			<field decimalplaces="0" input="IMod_act1_4" name="ID" output="OMod_act1_3"
@@ -10,7 +10,7 @@
 			<field decimalplaces="0" input="IMod_act1_4" name="T2" output="OMod_act1_3"
 				type="float" />
 		</activity>
-		<activity activation="fdgfdg" description="" tag="act2" type="">
+		<activity activation="asdsa" description="" tag="act2" type="">
 			<relation name="OMod_act2_6" reltype="Output" />
 			<relation dependency="act1" name="IMod_act2_7" reltype="Input" />
 			<field decimalplaces="0" input="IMod_act2_7" name="ID" output="OMod_act2_6"
@@ -19,18 +19,18 @@
 				type="float" />
 		</activity>
 	</conceptualWorkflow>
-	<credentials access_key="fdgfd" secret_access_key="fdgfd" />
+	<credentials access_key="asdsa" secret_access_key="dsadsa" />
 	<environment cluster_name="vitor" type="CLOUD" verbose="false" />
-	<binary conceptual_version="dfgfd" directory="dfgfd"
-		execution_version="gfd" query_version="fdgfdg" starter_version="gfdg" />
-	<workspace bucket_name="gfdgfd" compressed_dir="fdgfd"
-		compressed_workspace="dfgfd" upload="dfgfd" workflow_dir="gdfg" />
-	<database Username="dfgfd" name="gfdg" password="gfdg" path=""
-		port="fdgfd" server="" />
-	<query sql="fgfdgfd" />
-	<executionWorkflow execmodel="DYN_FAF" expdir="dfgdf"
+	<binary conceptual_version="sad" directory="sadsa"
+		execution_version="sadas" query_version="dsad" starter_version="dsa" />
+	<workspace bucket_name="dsa" compressed_dir="dsad"
+		compressed_workspace="sadsa" upload="asdas" workflow_dir="dsad" />
+	<database Username="asdsa" name="dsad" password="asdas" path=""
+		port="dsadsa" server="" />
+	<query sql="asdsa" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="asdsa"
 		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
 		user_interaction="false">
-		<relation filename="dfgfdg" name="dfg" />
+		<relation filename="sadsa" name="asd" />
 	</executionWorkflow>
 </SciCumulus>

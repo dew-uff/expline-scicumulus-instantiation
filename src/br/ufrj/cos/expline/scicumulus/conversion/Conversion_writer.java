@@ -439,6 +439,12 @@ public class Conversion_writer implements IWriter{
 			}
 		}
 	}
+	
+	@Override
+	public void setDependency(String activityTag, String relationDependency,String relationUsed)
+	{
+		// TODO this method to insert the dependency correctly
+	}
 
 	private void insertBinary(String BinaryDirectory, String BinaryConceptualVersion, String BinaryExecutionVersion, String BinaryStarterVersion, String BinaryQueryVersion){
 		

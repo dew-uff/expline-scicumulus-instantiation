@@ -191,7 +191,11 @@ public class Conversion_reader {
 			Element activitySource = getActivity(SOURCE,source,rootChildrenActivity);
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
 			
+			String relationName = "IMod_"+activityTarget.getAttribute("value")+"_"+target;
+			System.out.println(relationName);
+			
 			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
+//			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"),relationName);
 		}
 				
 		/* ------FIM Dependency--------- */
