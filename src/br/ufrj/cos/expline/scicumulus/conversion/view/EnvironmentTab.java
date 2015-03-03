@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class EnviromentTab extends JPanel{
+public class EnvironmentTab extends JPanel{
 	
 	private JLabel lbClusterName;
 	private JTextField tfClusterName;	
@@ -21,7 +21,7 @@ public class EnviromentTab extends JPanel{
 
 	private GridBagConstraints constraints;
 	
-	public EnviromentTab()
+	public EnvironmentTab()
 	{
 		super();
 		

@@ -1,22 +1,20 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
-import br.ufrj.cos.expline.scicumulus.conversion.Conversion_writer;
+import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
@@ -28,7 +26,7 @@ public class MainWindow extends JDialog
 	
 	private DataBaseTab databaseTab;
 	private WorkspaceTab workspaceTab;
-	private EnviromentTab enviromentTab;
+	private EnvironmentTab enviromentTab;
 	private CredentialsTab credentialsTab;
 	private BinaryTab binaryTab;
 	private WorkflowTab workflowTab;	
@@ -63,18 +61,31 @@ public class MainWindow extends JDialog
 		
 		this.databaseTab 		= new DataBaseTab();
 		this.workspaceTab 		= new WorkspaceTab();
-		this.enviromentTab		= new EnviromentTab();
+		this.enviromentTab		= new EnvironmentTab();
 		this.credentialsTab 	= new CredentialsTab();
 		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
 		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
 		this.queryTab			= new QueryTab();
 		
+		JPanel panel = new JPanel();
+		ArrayList<String> inputPortsList = Conversion_reader.inputPortsList;
+		String without = "InPut Ports Without using: ";
+		for(String id:inputPortsList)
+		{
+			without += "Port("+id+") "; 
+		}
+		JLabel label = new JLabel(without);
+		panel.add(label);
+		panel.setVisible(true);
+		
+		jtp.addTab("Input Ports Info", panel);
+		
 		jtp.addTab("Database", this.databaseTab );
 		
 		jtp.addTab("Workspace", this.workspaceTab );
 		
-		jtp.addTab("Enviroment", this.enviromentTab);
+		jtp.addTab("Environment", this.enviromentTab);
 		
 		jtp.addTab("Credentials", this.credentialsTab );
 		

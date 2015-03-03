@@ -1,6 +1,8 @@
 package br.ufrj.cos.expline.scicumulus.conversion;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,10 +12,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
-
-import java.util.Map;
-
 public class Conversion_reader {
 	private final IWriter writer;
 	private Document document;
@@ -21,6 +19,7 @@ public class Conversion_reader {
 	private final String TARGET = "target";
 	private final File fileToRead;
 	private Map<String, String> properties;
+	public static ArrayList<String> inputPortsList;
 	
 	public Conversion_reader(File file, Map<String,String> properties)
 	{
@@ -34,6 +33,7 @@ public class Conversion_reader {
 		this.properties = properties;
 		this.fileToRead = file;
 		this.writer = writer;
+		inputPortsList = new ArrayList<>();
 		initConvertion();
 	}
 	
@@ -55,6 +55,7 @@ public class Conversion_reader {
 	
 	private void startReading(Document document)
 	{
+		inputPortsList.clear();
 		Element root = document.getDocumentElement();
 		
 		/*
@@ -110,11 +111,15 @@ public class Conversion_reader {
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
 				NodeList relationSchemaAttributeInput = null;;
-				for(int inputPortCount =0;inputPortCount < portInput.getLength();inputPortCount++)
+				for(int inputPortCount = 0;inputPortCount < portInput.getLength();inputPortCount++)
 				{
 					Element elemPortInput = (Element)portInput.item(inputPortCount);
 					
-					iModAct = "IMod_"+df+"_"+elemPortInput.getAttribute("id");
+					String id = elemPortInput.getAttribute("id");
+					
+					inputPortsList.add(id);
+					
+					iModAct = "IMod_"+df+"_"+id;
 					System.out.println(iModAct);
 					
 					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
@@ -188,6 +193,9 @@ public class Conversion_reader {
 			String source = auxElem.getAttribute(SOURCE);
 			String target = auxElem.getAttribute(TARGET);
 			
+			if(inputPortsList.contains(target))
+				inputPortsList.remove(target);
+			
 			Element activitySource = getActivity(SOURCE,source,rootChildrenActivity);
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
 			
@@ -199,6 +207,13 @@ public class Conversion_reader {
 		}
 				
 		/* ------FIM Dependency--------- */
+		
+		/* ------INICIO PErcorrimento -- */
+		for(String aux:inputPortsList)
+		{
+			System.out.println(aux);
+		}
+		/* ------Fim PErcorrimento ----- */
 		
 	}
 	
