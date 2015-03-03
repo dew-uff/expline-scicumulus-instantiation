@@ -194,8 +194,8 @@ public class Conversion_reader {
 			String relationName = "IMod_"+activityTarget.getAttribute("value")+"_"+target;
 			System.out.println(relationName);
 			
-			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
-//			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"),relationName);
+//			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
+			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"),relationName);
 		}
 				
 		/* ------FIM Dependency--------- */

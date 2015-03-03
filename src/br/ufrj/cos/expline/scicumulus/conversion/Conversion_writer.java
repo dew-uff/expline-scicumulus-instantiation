@@ -444,6 +444,42 @@ public class Conversion_writer implements IWriter{
 	public void setDependency(String activityTag, String relationDependency,String relationUsed)
 	{
 		// TODO this method to insert the dependency correctly
+		NodeList conceptualWorkflow = this.root.getElementsByTagName("conceptualWorkflow");
+		if(conceptualWorkflow.item(0).getNodeType() == Node.ELEMENT_NODE)
+		{
+			Element conceptualElement = (Element)conceptualWorkflow.item(0);
+			
+			NodeList activities = conceptualElement.getElementsByTagName("activity");
+			
+			for (int i = 0; i < activities.getLength(); i++) {
+				
+				if(activities.item(i).getNodeType() == Node.ELEMENT_NODE)
+				{
+					Element currentActivity = (Element)activities.item(i);
+					
+					if(currentActivity.getAttribute("tag").equals(activityTag)){
+						
+						NodeList relationList = currentActivity.getElementsByTagName("relation");
+						
+						for (int j = 0; j < relationList.getLength(); j++) {
+							
+							if(relationList.item(j).getNodeType() == Node.ELEMENT_NODE)
+							{
+								Element currentRelation = (Element) relationList.item(j);
+								if(currentRelation.getAttribute("reltype").equals("Input")){
+									if(currentRelation.getAttribute("name").equals(relationUsed))
+									{
+										Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
+										sciCumulusRelationDependency.setNodeValue(relationDependency);
+										currentRelation.setAttributeNode(sciCumulusRelationDependency);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void insertBinary(String BinaryDirectory, String BinaryConceptualVersion, String BinaryExecutionVersion, String BinaryStarterVersion, String BinaryQueryVersion){
