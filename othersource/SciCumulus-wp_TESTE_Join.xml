@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SciCumulus>
 	<conceptualWorkflow description="" tag="workflow-1">
-		<activity activation="asdas" description="" tag="first" type="">
-			<relation name="OMod_first_17" reltype="Output" />
-			<relation name="IMod_first_16" reltype="Input" />
-			<field decimalplaces="0" input="IMod_first_16" name=""
-				output="OMod_first_17" type="" />
+		<activity activation="dsfdsf" description="" tag="act1" type="">
+			<relation name="OMod_act1_3" reltype="Output" />
+			<relation name="IMod_act1_4" reltype="Input" />
+			<field decimalplaces="0" input="IMod_act1_4" name="ID" output="OMod_act1_3"
+				type="float" />
+			<field decimalplaces="0" input="IMod_act1_4" name="T1" type="float" />
+			<field decimalplaces="0" input="IMod_act1_4" name="T2" output="OMod_act1_3"
+				type="float" />
 		</activity>
-		<activity activation="asdasd" description="" tag="third"
-			type="MRQuery">
-			<relation name="OMod_third_20" reltype="Output" />
-			<relation dependency="first" name="IMod_third_19" reltype="Input" />
-			<field decimalplaces="0" input="IMod_third_19" name=""
-				output="OMod_third_20" type="" />
-			<relation dependency="second" name="IMod_third_21" reltype="Input" />
-			<field decimalplaces="0" input="IMod_third_21" name=""
-				output="OMod_third_20" type="" />
-		</activity>
-		<activity activation="asdasd" description="" tag="second"
-			type="">
-			<relation name="OMod_second_24" reltype="Output" />
-			<relation name="IMod_second_23" reltype="Input" />
-			<field decimalplaces="0" input="IMod_second_23" name=""
-				output="OMod_second_24" type="" />
+		<activity activation="dsfdsf" description="" tag="act2" type="">
+			<relation name="OMod_act2_6" reltype="Output" />
+			<relation dependency="act1" name="IMod_act2_7" reltype="Input" />
+			<field decimalplaces="0" input="IMod_act2_7" name="ID" output="OMod_act2_6"
+				type="float" />
+			<field decimalplaces="0" input="IMod_act2_7" name="T2" output="OMod_act2_6"
+				type="float" />
 		</activity>
 	</conceptualWorkflow>
-	<credentials access_key="sadas" secret_access_key="asdsa" />
+	<credentials access_key="dsfds" secret_access_key="fdsf" />
 	<environment cluster_name="vitor" type="CLOUD" verbose="false" />
-	<binary conceptual_version="asdas" directory="asdas"
-		execution_version="dsad" query_version="sadasd" starter_version="asd" />
-	<workspace bucket_name="sadsa" compressed_dir="sadsa"
-		compressed_workspace="asd" upload="asdsa" workflow_dir="dsad" />
-	<database Username="sadsa" name="sadsa" password="sadsa" path=""
-		port="asdas" server="" />
-	<query sql="asdsadsad" />
-	<executionWorkflow execmodel="DYN_FAF" expdir="sadsa"
+	<binary conceptual_version="dsf" directory="sdfdsf"
+		execution_version="dsfdsf" query_version="dsfds" starter_version="dsfdsf" />
+	<workspace bucket_name="dsf" compressed_dir="fdsf"
+		compressed_workspace="fds" upload="sdfds" workflow_dir="dsfds" />
+	<database Username="dsfds" name="fdsfd" password="fdsf" path=""
+		port="dsfds" server="" />
+	<query sql="sdfdsf" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="sdfds"
 		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
 		user_interaction="false">
-		<relation filename="dsad" name="sadsa" />
+		<relation filename="fdsf" name="sdfds" />
 	</executionWorkflow>
 </SciCumulus>

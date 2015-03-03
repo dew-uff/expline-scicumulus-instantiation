@@ -28,6 +28,7 @@ public class MainWindow extends JDialog
 	
 	private DataBaseTab databaseTab;
 	private WorkspaceTab workspaceTab;
+	private EnviromentTab enviromentTab;
 	private CredentialsTab credentialsTab;
 	private BinaryTab binaryTab;
 	private WorkflowTab workflowTab;	
@@ -62,6 +63,7 @@ public class MainWindow extends JDialog
 		
 		this.databaseTab 		= new DataBaseTab();
 		this.workspaceTab 		= new WorkspaceTab();
+		this.enviromentTab		= new EnviromentTab();
 		this.credentialsTab 	= new CredentialsTab();
 		this.binaryTab			= new BinaryTab();
 		this.workflowTab		= new WorkflowTab();
@@ -71,6 +73,8 @@ public class MainWindow extends JDialog
 		jtp.addTab("Database", this.databaseTab );
 		
 		jtp.addTab("Workspace", this.workspaceTab );
+		
+		jtp.addTab("Enviroment", this.enviromentTab);
 		
 		jtp.addTab("Credentials", this.credentialsTab );
 		
