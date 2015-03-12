@@ -237,18 +237,18 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private void insertEnvironment(){
+	private void insertEnvironment(String verbose, String type, String clusterName){
 
 		Element sciCumulusenvironment = this.scicumulusXML.createElement("environment");
 		
 		Attr sciCumulusEnvironmentverbose = this.scicumulusXML.createAttribute("verbose");
-		sciCumulusEnvironmentverbose.setNodeValue("false");
+		sciCumulusEnvironmentverbose.setNodeValue(verbose);
 		
 		Attr sciCumulusEnvironmenttype = this.scicumulusXML.createAttribute("type");
-		sciCumulusEnvironmenttype.setNodeValue("CLOUD");
+		sciCumulusEnvironmenttype.setNodeValue(type);
 		
 		Attr sciCumulusEnvironmentClusterName = this.scicumulusXML.createAttribute("cluster_name");
-		sciCumulusEnvironmentClusterName.setNodeValue("vitor");
+		sciCumulusEnvironmentClusterName.setNodeValue(clusterName);
 		
 		sciCumulusenvironment.setAttributeNode(sciCumulusEnvironmentverbose);
 		sciCumulusenvironment.setAttributeNode(sciCumulusEnvironmenttype);
@@ -661,7 +661,7 @@ public class Conversion_writer implements IWriter{
 		this.insertCredentials(properties.get("AccessKey"), properties.get("SecretAccessKey"));
 		
 		//defaul values. If it has to be set by the user, pass the properties.get() of attributes of the node
-		this.insertEnvironment();
+		this.insertEnvironment(properties.get("EnvironmentVerbose"),properties.get("EnvironmentType"),properties.get("EnvironmentClusterName"));
 		
 		this.insertBinary(properties.get("Directory"), properties.get("ConceptualVersion"), properties.get("ExecutionVersion"), properties.get("StarterVersion"), 
 				properties.get("QueryVersion"));

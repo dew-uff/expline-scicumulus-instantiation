@@ -146,6 +146,11 @@ public class MainWindow extends JDialog
 		properties.put("WorkspaceCompressedWorkspace", workspaceTab.getCompressedWorkspace());
 		properties.put("CompressedDir",workspaceTab.getCompressedDir());
 		
+		//Environment node
+		properties.put("EnvironmentClusterName", enviromentTab.getClusterName());
+		properties.put("EnvironmentType", enviromentTab.getType());
+		properties.put("EnvironmentVerbose", enviromentTab.getVerbose());
+		
 		//Credentials node
 		properties.put("AccessKey",credentialsTab.getAccessKey());
 		properties.put("SecretAccessKey",credentialsTab.getSecretAccessKey());

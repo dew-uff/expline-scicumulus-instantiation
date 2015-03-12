@@ -3,6 +3,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -29,45 +30,45 @@ public class EnvironmentTab extends JPanel{
 		
 		this.setVisible(true);
 		
-//		initLayout();
+		initLayout();
 	}
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
 
-		this.setLayout(null);
+//		this.setLayout(null);
 //		this.setLayout(layout);
 
 		
 		lbClusterName = new JLabel("Cluster Name: ");
-		lbClusterName.setBounds(10,10,95,15);
-		this.add(lbClusterName);
+//		lbClusterName.setBounds(10,10,95,15);
+//		this.add(lbClusterName);
 		
 		tfClusterName = new JTextField();
 		tfClusterName.setText("vitor");
-		tfClusterName.setEnabled(false);
-		tfClusterName.setBounds(lbClusterName.getWidth(), 10, 385, 20);
-		this.add(tfClusterName);
+//		tfClusterName.setEnabled(false);
+//		tfClusterName.setBounds(lbClusterName.getWidth(), 10, 385, 20);
+//		this.add(tfClusterName);
 		
 		lbType = new JLabel("Type: ");
-		lbType.setBounds(10,10+lbClusterName.getHeight()+lbClusterName.getY(),45,15);
-		this.add(lbType);
+//		lbType.setBounds(10,10+lbClusterName.getHeight()+lbClusterName.getY(),45,15);
+//		this.add(lbType);
 		
 		tfType = new JTextField();
 		tfType.setText("CLOUD");
-		tfType.setEnabled(false);
-		tfType.setBounds(lbType.getWidth(), lbType.getY(), 435, 20);
-		this.add(tfType);
+//		tfType.setEnabled(false);
+//		tfType.setBounds(lbType.getWidth(), lbType.getY(), 435, 20);
+//		this.add(tfType);
 		
 		lbVerbose = new JLabel("Verbose: ");
-		lbVerbose.setBounds(10,10+lbType.getHeight()+lbType.getY(),65,15);
-		this.add(lbVerbose);
+//		lbVerbose.setBounds(10,10+lbType.getHeight()+lbType.getY(),65,15);
+//		this.add(lbVerbose);
 		
 		tfVerbose = new JTextField();
 		tfVerbose.setText("false");
-		tfVerbose.setEnabled(false);
-		tfVerbose.setBounds(lbVerbose.getWidth(), lbVerbose.getY(), 415, 20);
-		this.add(tfVerbose);
+//		tfVerbose.setEnabled(false);
+//		tfVerbose.setBounds(lbVerbose.getWidth(), lbVerbose.getY(), 415, 20);
+//		this.add(tfVerbose);
 		
 		
 
@@ -75,13 +76,52 @@ public class EnvironmentTab extends JPanel{
 	
 	private void initLayout()
 	{
-
-		constraints.fill = GridBagConstraints.BOTH;
-//		addComponents(lbName, 0, 0, 2, 1);
+		GroupLayout layout = new GroupLayout(this);
 		
-		constraints.fill = GridBagConstraints.BOTH;
-//		addComponents(tfName, 0, 2, 3, 1);
-
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap(100,100)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(lbClusterName)
+								.addGap(15)
+								.addComponent(lbType)
+								.addGap(15)
+								.addComponent(lbVerbose)
+								.addGap(15)
+						)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(tfClusterName)
+								.addGap(15)
+								.addComponent(tfType)
+								.addGap(15)
+								.addComponent(tfVerbose)								
+						)
+						.addContainerGap(100,100)
+				)
+		);
+		
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbClusterName)
+								.addComponent(tfClusterName)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbType)
+								.addComponent(tfType)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbVerbose)
+								.addComponent(tfVerbose)
+						)
+						.addContainerGap()
+				)
+		);
+		
+		this.setLayout(layout);
 	}
 	
 	public boolean checkFilledOut()

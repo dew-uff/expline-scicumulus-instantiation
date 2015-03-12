@@ -2,6 +2,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.awt.GridLayout;
 
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,52 +27,113 @@ public class BinaryTab extends JPanel
 		initComponents();
 		
 		this.setVisible(true);
+		
+		initLayout();
+	}
+
+	private void initLayout() {
+		// TODO Auto-generated method stub
+GroupLayout layout = new GroupLayout(this);
+		
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap(100,100)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(lbDirectory)
+								.addComponent(lbConceptualVersion)
+								.addComponent(lbExecutionVersion)
+								.addComponent(lbStarterVersion)
+								.addComponent(lbQueryVersion)
+						)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(tfDirectory)
+								.addComponent(tfConceptualVersion)
+								.addComponent(tfExecutionVersion)
+								.addComponent(tfStarterVersion)
+								.addComponent(tfQueryVersion)
+						)
+						.addContainerGap(100,100)
+				)
+		);
+		
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbDirectory)
+								.addComponent(tfDirectory)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbConceptualVersion)
+								.addComponent(tfConceptualVersion)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbExecutionVersion)
+								.addComponent(tfExecutionVersion)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbStarterVersion)
+								.addComponent(tfStarterVersion)
+						)
+						.addContainerGap(15,15)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(lbQueryVersion)
+								.addComponent(tfQueryVersion)
+						)
+						.addContainerGap()
+				)
+		);
+		
+		this.setLayout(layout);
 	}
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
 //		this.setLayout(new GridLayout(5,2));
-		this.setLayout(null);
+//		this.setLayout(null);
 		
 		lbDirectory = new JLabel("Directory: ");
-		lbDirectory.setBounds(10,10,70,15);
-		this.add(lbDirectory);
+//		lbDirectory.setBounds(10,10,70,15);
+//		this.add(lbDirectory);
 		
 		tfDirectory = new JTextField();
-		tfDirectory.setBounds(lbDirectory.getWidth(), 10, 410, 20);
-		this.add(tfDirectory);
+//		tfDirectory.setBounds(lbDirectory.getWidth(), 10, 410, 20);
+//		this.add(tfDirectory);
 		
 		lbConceptualVersion = new JLabel("Conceptual Version: ");
-		lbConceptualVersion.setBounds(10,10+lbDirectory.getHeight()+lbDirectory.getY(),130,15);
-		this.add(lbConceptualVersion);
+//		lbConceptualVersion.setBounds(10,10+lbDirectory.getHeight()+lbDirectory.getY(),130,15);
+//		this.add(lbConceptualVersion);
 		
 		tfConceptualVersion = new JTextField();
-		tfConceptualVersion.setBounds(lbConceptualVersion.getWidth(), lbConceptualVersion.getY(), 350, 20);
-		this.add(tfConceptualVersion);
+//		tfConceptualVersion.setBounds(lbConceptualVersion.getWidth(), lbConceptualVersion.getY(), 350, 20);
+//		this.add(tfConceptualVersion);
 		
 		lbExecutionVersion = new JLabel("Execution Version: ");
-		lbExecutionVersion.setBounds(10,10+lbConceptualVersion.getHeight()+lbConceptualVersion.getY(),120,15);
-		this.add(lbExecutionVersion);
+//		lbExecutionVersion.setBounds(10,10+lbConceptualVersion.getHeight()+lbConceptualVersion.getY(),120,15);
+//		this.add(lbExecutionVersion);
 		
 		tfExecutionVersion = new JTextField();
-		tfExecutionVersion.setBounds(lbExecutionVersion.getWidth(), lbExecutionVersion.getY(), 360, 20);
-		this.add(tfExecutionVersion);
+//		tfExecutionVersion.setBounds(lbExecutionVersion.getWidth(), lbExecutionVersion.getY(), 360, 20);
+//		this.add(tfExecutionVersion);
 		
 		lbStarterVersion = new JLabel("Starter Version: ");
-		lbStarterVersion.setBounds(10,10+lbExecutionVersion.getHeight()+lbExecutionVersion.getY(),105,15);
-		this.add(lbStarterVersion);
+//		lbStarterVersion.setBounds(10,10+lbExecutionVersion.getHeight()+lbExecutionVersion.getY(),105,15);
+//		this.add(lbStarterVersion);
 		
 		tfStarterVersion = new JTextField();
-		tfStarterVersion.setBounds(lbStarterVersion.getWidth(), lbStarterVersion.getY(), 375, 20);
-		this.add(tfStarterVersion);
+//		tfStarterVersion.setBounds(lbStarterVersion.getWidth(), lbStarterVersion.getY(), 375, 20);
+//		this.add(tfStarterVersion);
 		
 		lbQueryVersion = new JLabel("Query Version: ");
-		lbQueryVersion.setBounds(10,10+lbStarterVersion.getHeight()+lbStarterVersion.getY(),100,15);
-		this.add(lbQueryVersion);
+//		lbQueryVersion.setBounds(10,10+lbStarterVersion.getHeight()+lbStarterVersion.getY(),100,15);
+//		this.add(lbQueryVersion);
 		
 		tfQueryVersion = new JTextField();
-		tfQueryVersion.setBounds(lbQueryVersion.getWidth(), lbQueryVersion.getY(), 380, 20);
-		this.add(tfQueryVersion);
+//		tfQueryVersion.setBounds(lbQueryVersion.getWidth(), lbQueryVersion.getY(), 380, 20);
+//		this.add(tfQueryVersion);
 		
 	}
 	
