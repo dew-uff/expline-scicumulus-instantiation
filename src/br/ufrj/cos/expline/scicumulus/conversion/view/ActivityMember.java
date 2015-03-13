@@ -90,7 +90,7 @@ public class ActivityMember extends JPanel
 		
 		tfActivation = new JTextField();
 		
-		Object argr[] = {"","Java","C/C++","Pascal"};
+		Object argr[] = {"","Java","C/C++","Pascal","Python","Fortran","C#"};
 		cbLanguage = new JComboBox(argr);
 		
 		btParameters = new JButton("Parameters");
