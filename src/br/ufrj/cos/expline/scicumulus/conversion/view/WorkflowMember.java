@@ -34,7 +34,7 @@ public class WorkflowMember extends JPanel
 		
 		
 		
-		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
+		title = BorderFactory.createTitledBorder(keyInTheMap);//Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
 		
 		initLayout();
@@ -94,6 +94,27 @@ public class WorkflowMember extends JPanel
 		
 		tfRelationFileName = new JTextField();
 		
+	}
+	
+	public boolean fieldIsEmpty()
+	{
+		if(tfExpDir.getText().equals(""))
+		{
+			System.out.println("Workflow");
+			return false;	
+		}
+		else if(tfRelationName.getText().equals(""))
+		{
+			System.out.println("Workflow");
+			return false;
+		}
+		else if(tfRelationFileName.getText().equals(""))
+		{
+			System.out.println("Workflow");
+			return false;
+		}
+							
+		return true;
 	}
 
 }

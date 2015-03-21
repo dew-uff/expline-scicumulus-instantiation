@@ -60,10 +60,10 @@ public class ActivityMember extends JPanel
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 								.addComponent(btParameters)
 						)
-						.addContainerGap(10,10)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-								.addComponent(cbLanguage)
-						)
+//						.addContainerGap(10,10)
+//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+//								.addComponent(cbLanguage)
+//						)
 						.addContainerGap(10,10)
 				)				
 		);
@@ -74,7 +74,7 @@ public class ActivityMember extends JPanel
 								.addComponent(lbActivation)
 								.addComponent(tfActivation)
 								.addComponent(btParameters)
-								.addComponent(cbLanguage)
+//								.addComponent(cbLanguage)
 						)
 				)
 		);
