@@ -64,7 +64,7 @@ public class MainWindow extends JDialog
 		this.enviromentTab		= new EnvironmentTab();
 		this.credentialsTab 	= new CredentialsTab();
 		this.binaryTab			= new BinaryTab();
-		this.workflowTab		= new WorkflowTab();
+		this.workflowTab		= new WorkflowTab(Util.getOnlyDors(this.properties));
 		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
 		this.queryTab			= new QueryTab();
 		

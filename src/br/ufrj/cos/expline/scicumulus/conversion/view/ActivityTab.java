@@ -1,13 +1,12 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -17,8 +16,6 @@ public class ActivityTab extends JPanel
 	private ArrayList<ActivityMember> activities;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
-	private GridBagLayout layout;
-	private GridBagConstraints constraints;
 	
 	public ActivityTab(Map<String,String> onlyActivation)
 	{
@@ -53,11 +50,8 @@ public class ActivityTab extends JPanel
 			activities.add(tempAM);
 		}
 		
-		layout = new GridBagLayout();
 		
 		this.setLayout(null);
-		
-		constraints = new GridBagConstraints();
 				
 	}
 	
@@ -69,21 +63,52 @@ public class ActivityTab extends JPanel
 	
 	private void initActivityMembersLayout() 
 	{
-		int x = 10;
-		int y = 10;
-		int height = 0;
+//		int x = 10;
+//		int y = 10;
+//		int height = 0;
+//		for(ActivityMember am:activities)
+//		{
+//			am.setLocation(x, y);
+//			
+//			panelScrolled.add(am);
+//			
+//			x = am.getX();
+//			y = am.getY() + am.getHeight() + 10;
+//			height+= (10+am.getHeight());
+//		}
+//		height += 10;
+//		panelScrolled.setPreferredSize(new Dimension(570,height));
+//		
+
+		GroupLayout layout = new GroupLayout(panelScrolled);
+		
+		ParallelGroup pg = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+		
+		SequentialGroup sg = layout.createSequentialGroup();
+		
 		for(ActivityMember am:activities)
 		{
-			am.setLocation(x, y);
+			pg.addGap(10);
+			pg.addComponent(am);
+			pg.addGap(10);
 			
-			panelScrolled.add(am);
-			
-			x = am.getX();
-			y = am.getY() + am.getHeight() + 10;
-			height+= (10+am.getHeight());
+			ParallelGroup temp = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+			temp.addComponent(am,50,50,50);
+			sg.addGroup(temp);
+			sg.addContainerGap(20, 20);
 		}
-		height += 10;
-		panelScrolled.setPreferredSize(new Dimension(570,height));
+		
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createSequentialGroup()
+						.addGroup(pg)
+				)
+		);
+		
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(sg)
+		);
+		
+		panelScrolled.setLayout(layout);
 		
 		jsp.revalidate();
 	}

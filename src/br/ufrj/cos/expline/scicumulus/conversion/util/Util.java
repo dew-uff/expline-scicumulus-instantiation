@@ -28,7 +28,31 @@ public class Util
 			int temp = p.indexOf("_");
 			if(temp != -1)
 			{
-				onlyActivities.put(p, properties.get(p));
+				String sbstr = p.substring(0,temp);
+				if(sbstr.equalsIgnoreCase("ACTIVITY"))
+				{
+					onlyActivities.put(p, properties.get(p));
+				}
+			}
+		}
+		
+		return onlyActivities;
+	}
+	
+	public static Map<String,String> getOnlyDors(Map<String,String> properties)
+	{
+		Map<String,String> onlyActivities = new HashMap<>();
+		
+		for(String p:properties.keySet())
+		{
+			int temp = p.indexOf("_");
+			if(temp != -1 )
+			{
+				String str = p.substring(0,temp);
+				if(str.equalsIgnoreCase("EMPTYDOORS"))
+				{
+					onlyActivities.put(p, properties.get(p));
+				}
 			}
 		}
 		

@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -117,10 +119,12 @@ public class Conversion_reader {
 					
 					String id = elemPortInput.getAttribute("id");
 					
-					inputPortsList.add(id);
+					
 					
 					iModAct = "IMod_"+df+"_"+id;
 					System.out.println(iModAct);
+					
+					inputPortsList.add(iModAct);
 					
 					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
 					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
@@ -193,8 +197,24 @@ public class Conversion_reader {
 			String source = auxElem.getAttribute(SOURCE);
 			String target = auxElem.getAttribute(TARGET);
 			
-			if(inputPortsList.contains(target))
-				inputPortsList.remove(target);
+//			if(inputPortsList.contains(target))
+//				inputPortsList.remove(target);
+			
+			ArrayList<String> etmep = new ArrayList<>();
+			
+			for(String str:inputPortsList)
+			{
+				if(Util.getId(str).equals(target))
+				{
+					etmep.add(str);
+					//inputPortsList.remove(str);
+				}
+			}
+			
+			for(String str:etmep)
+			{
+				inputPortsList.remove(str);
+			}
 			
 			Element activitySource = getActivity(SOURCE,source,rootChildrenActivity);
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
@@ -212,6 +232,7 @@ public class Conversion_reader {
 		for(String aux:inputPortsList)
 		{
 			System.out.println(aux);
+			this.properties.put("EMPTYDOORS_"+aux, "");
 		}
 		/* ------Fim PErcorrimento ----- */
 		

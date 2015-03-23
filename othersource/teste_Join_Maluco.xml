@@ -1,0 +1,64 @@
+<AbstractWorkflow>
+	<Activity id="2" value="act1">
+		<Ports>
+			<InputPorts>
+				<Port id="3">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="4">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity id="6" value="act4">
+		<Ports>
+			<InputPorts>
+				<Port id="7">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="8">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity id="12" value="act2">
+		<Ports>
+			<InputPorts>
+				<Port id="13">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="14">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity algebraicOperator="MRQuery" id="15" value="act3join">
+		<Ports>
+			<InputPorts>
+				<Port id="16">
+					<RelationSchema as="relationSchema" />
+				</Port>
+				<Port id="18">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="17">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Edge id="19" source="4" target="16" />
+	<Edge id="20" source="14" target="18" />
+	<Edge id="21" source="17" target="7" />
+</AbstractWorkflow>
