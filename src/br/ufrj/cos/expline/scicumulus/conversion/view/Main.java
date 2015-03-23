@@ -10,8 +10,8 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		File read = new File("othersource/Join.xml");
-		File writer = new File("othersource/concrete.xml");
+		File read = new File("othersource/Join_test.xml");
+		File writer = new File("othersource/Joit_test_scicumulus.xml");
 		
 		Instantiator instantiator = new ScicumulusInstantiator();
 		instantiator.instantiate(null, read, writer);
