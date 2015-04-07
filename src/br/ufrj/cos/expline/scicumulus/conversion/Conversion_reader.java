@@ -76,13 +76,13 @@ public class Conversion_reader {
 				properties.put("activity_"+value, "-");
 				writer.insertActivity(value, algebraicOperator);
 				
-				String df = auxElem.getAttribute("value");
+				String elemValue = auxElem.getAttribute("value");
 				
 				NodeList ports = auxElem.getElementsByTagName("Ports");
 				Element elemPorts = (Element)ports.item(0);
 								
 				/* -----------INICIO OUTPUT--------- */
-				String oModAct = "OMod_"+df;
+				String oModAct = "OMod_"+elemValue;
 				System.out.println(oModAct);
 				NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 				Element elemOutputPorts = (Element)outputPorts.item(0);
@@ -107,7 +107,7 @@ public class Conversion_reader {
 				/* -----------FIM OUTPUT--------- */
 				
 				/* -----------INICIO INPUT--------- */
-				String iModAct = "IMod"+df;
+				String iModAct = "IMod_"+elemValue;
 				System.out.println(iModAct);
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
@@ -120,8 +120,10 @@ public class Conversion_reader {
 					
 					String id = elemPortInput.getAttribute("id");
 					
-					iModAct = id+"_"+"IMod_"+df;
-//					iModAct = "IMod_"+df+"_"+id;
+					properties.put("rel_"+iModAct, "");
+					
+					iModAct = id+"_"+"IMod_"+elemValue;
+//					iModAct = "IMod_"+elemValue+"_"+id;
 					System.out.println(iModAct);
 					
 					inputPortsList.add(iModAct);
@@ -175,10 +177,10 @@ public class Conversion_reader {
 				/* ------------Relation---------- */
 //				char[] tempVector = auxElem.getAttribute("value").toCharArray();
 //				char charAux = tempVector[0];
-//				String df = new Character(charAux).toString();
-//				df = df.toUpperCase();
-//				tempVector[0] = df.charAt(0);
-//				df = new String(tempVector);
+//				String elemValue = new Character(charAux).toString();
+//				elemValue = elemValue.toUpperCase();
+//				tempVector[0] = elemValue.charAt(0);
+//				elemValue = new String(tempVector);
 				/* --------- Fim Relation ------- */
 			}	
 		}

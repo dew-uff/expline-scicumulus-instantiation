@@ -1,6 +1,8 @@
 package br.ufrj.cos.expline.scicumulus.conversion.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Util 
@@ -95,6 +97,48 @@ public class Util
 		String id = temp.substring(temp.indexOf("_")+1);
 		
 		return iMod;
+	}
+	
+	public static String getRelName(String relNameRaw)
+	{
+		String temp = null;
+		
+		int pos = relNameRaw.indexOf("_");
+		
+		if(pos > 0)
+		{
+			temp = relNameRaw.substring(0,pos);
+			
+			if(temp.equalsIgnoreCase("rel"))
+			{
+				temp = relNameRaw.substring(pos+1);
+			}else
+				temp = null;
+			
+		}
+		return temp;
+	}
+	
+	public static List<String> getListOfRelNameByActivity(Map<String,String> properties,String act)
+	{
+		List<String> list = new ArrayList<>();
+		
+		for(String temp : properties.keySet())
+		{
+			String relName = getRelName(temp);
+			String activityTag;
+			if( relName != null)
+			{
+				activityTag = Util.getActivityTag(relName);
+				if(act.equalsIgnoreCase(activityTag))
+				{
+					System.out.println(relName);
+					list.add(relName);
+				}
+			}
+		}
+		
+		return list;
 	}
 	
 }

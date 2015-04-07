@@ -3,6 +3,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.GroupLayout;
@@ -19,6 +20,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 @SuppressWarnings("serial")
 public class ParametersWindow extends JFrame
 {
@@ -33,7 +36,7 @@ public class ParametersWindow extends JFrame
 	
 	private JScrollPane scrollPane;
 	
-	private static JTable tableTemp;
+	private JTable tableTemp;
 	
 	private String title;
 	public ParametersWindow(String title)
@@ -52,6 +55,24 @@ public class ParametersWindow extends JFrame
 		
 		initLayout();
 	}
+	
+	public ParametersWindow(String title, Object[] params)
+	{
+		this.setSize(300, 200);
+		this.setLocationRelativeTo(null);
+		this.title = title;
+		
+		initComponents();
+		
+		this.setResizable(false);
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		this.setVisible(true);
+		
+		initLayout();
+	}
+	
 	private void initLayout() {
 		// TODO Auto-generated method stub
 		GroupLayout gl = new GroupLayout(mainPanel);
@@ -68,6 +89,7 @@ public class ParametersWindow extends JFrame
 							.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 								.addComponent(addButton)
 //							)
+								.addGap(5)
 //							.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 								.addComponent(removeButton)
 							)
@@ -77,6 +99,7 @@ public class ParametersWindow extends JFrame
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 							.addComponent(cancelButton)
 						)
+						.addGap(5)
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 							.addComponent(okButton)
 						)
@@ -93,6 +116,7 @@ public class ParametersWindow extends JFrame
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(addButton)
 						)
+						.addGap(5)
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(removeButton)
 						)
@@ -100,6 +124,7 @@ public class ParametersWindow extends JFrame
 			)
 			.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(cancelButton)
+					.addGap(5)
 					.addComponent(okButton)
 			)
 	    );
@@ -122,19 +147,25 @@ public class ParametersWindow extends JFrame
 		table = new JTable(dataModel);
 		table.setSize(200, 100);
 		
-		TableColumn columnComboBox = table.getColumnModel().getColumn(1);
-		
-		Object[] obj = {"1","2","3"};
-		
-		JComboBox cbBox = new JComboBox(obj);
-		
-		columnComboBox.setCellEditor(new DefaultCellEditor(cbBox));
+//		TableColumn columnComboBox = table.getColumnModel().getColumn(1);
+//		
+//		Object[] obj = {"1","2","3"};
+//		
+//		JComboBox cbBox = new JComboBox(obj);
+//		
+//		columnComboBox.setCellEditor(new DefaultCellEditor(cbBox));
 		
 		tableTemp = new JTable();
 	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
 	    model.addColumn("Param Name");
 	    model.addColumn("Rel Name");       // Este são os valores do combobox
-	    String[] values = new String[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
+	    
+	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
+	    
+	    List<String> listOfRelName = Util.getListOfRelNameByActivity(MainWindow.getProperties(),Util.getActivityTag(title));
+	    
+	    values = listOfRelName.toArray();
+	    
 	    TableColumn col = tableTemp.getColumnModel().getColumn(1);
 	    col.setCellEditor(new MyComboBoxEditor(values));        
 	    col.setCellRenderer(new MyComboBoxRenderer(values));
@@ -158,7 +189,7 @@ public class ParametersWindow extends JFrame
 		 */
 
 		@SuppressWarnings("unchecked")
-		public MyComboBoxRenderer(String[] items) {
+		public MyComboBoxRenderer(Object[] items) {
             super(items);
         }   
        
@@ -180,12 +211,12 @@ public class ParametersWindow extends JFrame
 	public class MyComboBoxEditor extends DefaultCellEditor {
     	
         @SuppressWarnings({ "unchecked", "rawtypes" })
-		public MyComboBoxEditor(String[] items) {
+		public MyComboBoxEditor(Object[] items) {
             super(new JComboBox(items));
         }
     }
     
-    public static JTable getTable()
+    public JTable getTable()
     {
     	return tableTemp;
     }

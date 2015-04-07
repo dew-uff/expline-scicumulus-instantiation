@@ -20,7 +20,7 @@ import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class MainWindow extends JDialog 
 {
-	private Map<String,String> properties;
+	private static Map<String,String> properties;
 	private ClassesController classesController;
 	private ButtonListener bl;
 	
@@ -33,6 +33,8 @@ public class MainWindow extends JDialog
 	private ActivityTab activityTab;
 	private QueryTab queryTab;
 	
+	public static Frame frame = null;
+	
 	public MainWindow(Frame owner, Map<String,String> properties, ClassesController classesController)
 	{
 		super(owner);
@@ -40,6 +42,8 @@ public class MainWindow extends JDialog
 		this.classesController = classesController;
 		
 		this.properties = properties;
+		
+		frame = owner;
 		
 		this.setSize(600, 300);
 		this.setLocationRelativeTo(null);
@@ -102,10 +106,7 @@ public class MainWindow extends JDialog
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.setVisible(true);
-		
-		
-		
-		
+				
 	}
 	
 	public ClassesController getClassesController()
@@ -113,9 +114,9 @@ public class MainWindow extends JDialog
 		return this.classesController;
 	}
 	
-	public Map<String,String> getProperties()
+	public static Map<String,String> getProperties()
 	{
-		return this.properties;
+		return properties;
 	}
 	
 	public boolean hasEmptyField()
