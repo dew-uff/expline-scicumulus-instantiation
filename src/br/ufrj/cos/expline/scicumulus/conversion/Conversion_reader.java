@@ -89,7 +89,8 @@ public class Conversion_reader {
 				
 				NodeList portOutput = elemOutputPorts.getElementsByTagName("Port");
 				Element elemPortOutput = (Element)portOutput.item(0);
-				oModAct = oModAct+"_"+elemPortOutput.getAttribute("id");
+				oModAct = elemPortOutput.getAttribute("id")+"_"+oModAct;
+//				oModAct = oModAct+"_"+elemPortOutput.getAttribute("id");
 				
 				NodeList relationSchemaOutput = elemPortOutput.getElementsByTagName("RelationSchema");
 				Element elemRelationSchemaOutput = (Element)relationSchemaOutput.item(0);
@@ -119,9 +120,8 @@ public class Conversion_reader {
 					
 					String id = elemPortInput.getAttribute("id");
 					
-					
-					
-					iModAct = "IMod_"+df+"_"+id;
+					iModAct = id+"_"+"IMod_"+df;
+//					iModAct = "IMod_"+df+"_"+id;
 					System.out.println(iModAct);
 					
 					inputPortsList.add(iModAct);
@@ -204,6 +204,8 @@ public class Conversion_reader {
 			
 			for(String str:inputPortsList)
 			{
+				System.out.println("________________");
+				System.out.println(str);
 				if(Util.getId(str).equals(target))
 				{
 					etmep.add(str);
@@ -219,7 +221,7 @@ public class Conversion_reader {
 			Element activitySource = getActivity(SOURCE,source,rootChildrenActivity);
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
 			
-			String relationName = "IMod_"+activityTarget.getAttribute("value")+"_"+target;
+			String relationName = target+"_"+"IMod_"+activityTarget.getAttribute("value");
 			System.out.println(relationName);
 			
 //			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));

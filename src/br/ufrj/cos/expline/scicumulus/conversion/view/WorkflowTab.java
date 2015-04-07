@@ -133,14 +133,14 @@ public class WorkflowTab extends JPanel
 	public boolean checkFilledOut()
 	{
 			
-		for(WorkflowMember am:workflows)
-		{
-			if(am.fieldIsEmpty())
-			{
-				System.out.println("Activity");
-				return false;
-			}
-		}
+//		for(WorkflowMember am:workflows)
+//		{
+//			if(am.fieldIsEmpty())
+//			{
+//				System.out.println("Workflow");
+//				return false;
+//			}
+//		}
 		return true;
 	}
 	

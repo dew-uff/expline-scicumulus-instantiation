@@ -1,10 +1,12 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -94,6 +96,10 @@ public class ActivityMember extends JPanel
 		cbLanguage = new JComboBox(argr);
 		
 		btParameters = new JButton("Parameters");
+		
+		ParametersListener pl = new ParametersListener();
+		
+		btParameters.addActionListener(pl);
 //		tfActivation.setBounds(lbActivation.getX()+lbActivation.getWidth(), lbActivation.getY(), 385, 20);
 //		this.add(tfActivation);
 	}
@@ -117,5 +123,16 @@ public class ActivityMember extends JPanel
 	public void setActivation(String act)
 	{
 		this.parameters = act;
+	}
+	
+	private class ParametersListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			new ParametersWindow(keyInTheMap);
+		}
+		
 	}
 }

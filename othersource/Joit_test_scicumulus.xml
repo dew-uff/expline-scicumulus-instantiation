@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SciCumulus>
+	<conceptualWorkflow description="" tag="workflow-1">
+		<activity activation="sdf" description="" tag="primeira"
+			type="">
+			<relation name="OMod_primeira_4" reltype="Output" />
+			<relation name="IMod_primeira_3" reltype="Input" />
+			<field decimalplaces="0" input="IMod_primeira_3" name="ID"
+				output="OMod_primeira_4" type="int" />
+		</activity>
+		<activity activation="sdfds" description="" tag="segunda"
+			type="MRQuery">
+			<relation name="OMod_segunda_7" reltype="Output" />
+			<relation dependency="primeira" name="IMod_segunda_6"
+				reltype="Input" />
+			<field decimalplaces="0" input="IMod_segunda_6" name="ID"
+				output="OMod_segunda_7" type="int" />
+			<relation name="IMod_segunda_8" reltype="Input" />
+			<field decimalplaces="0" input="IMod_segunda_8" name="ID"
+				output="OMod_segunda_7" type="int" />
+		</activity>
+		<activity activation="sdf" description="" tag="terceira"
+			type="">
+			<relation name="OMod_terceira_11" reltype="Output" />
+			<relation dependency="segunda" name="IMod_terceira_10"
+				reltype="Input" />
+			<field decimalplaces="0" input="IMod_terceira_10" name="ID"
+				output="OMod_terceira_11" type="int" />
+		</activity>
+		<activity activation="sdf" description="" tag="quarta&#10;"
+			type="MRQuery">
+			<relation name="OMod_quarta&#10;_14" reltype="Output" />
+			<relation dependency="terceira" name="IMod_quarta&#10;_13"
+				reltype="Input" />
+			<field decimalplaces="0" input="IMod_quarta&#10;_13" name="ID"
+				output="OMod_quarta&#10;_14" type="int" />
+			<relation name="IMod_quarta&#10;_15" reltype="Input" />
+			<field decimalplaces="0" input="IMod_quarta&#10;_15" name="ID"
+				output="OMod_quarta&#10;_14" type="int" />
+		</activity>
+	</conceptualWorkflow>
+	<credentials access_key="sdfds" secret_access_key="sdfds" />
+	<environment cluster_name="vitor" type="CLOUD" verbose="false" />
+	<binary conceptual_version="sdf" directory="sdf"
+		execution_version="sdf" query_version="fds" starter_version="dsfds" />
+	<workspace bucket_name="fsd" compressed_dir="asd"
+		compressed_workspace="fds" upload="asd" workflow_dir="asd" />
+	<database Username="asdsa" name="asdsa" password="asdfds"
+		path="" port="asdf" server="" />
+	<query sql="sdfdsf" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="sdfsd"
+		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
+		user_interaction="false">
+		<relation filename="fdsf" name="fsd" />
+	</executionWorkflow>
+</SciCumulus>

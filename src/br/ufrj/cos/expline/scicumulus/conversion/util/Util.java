@@ -94,6 +94,7 @@ public class Util
 		
 		String id = temp.substring(temp.indexOf("_")+1);
 		
-		return id;
+		return iMod;
 	}
+	
 }
