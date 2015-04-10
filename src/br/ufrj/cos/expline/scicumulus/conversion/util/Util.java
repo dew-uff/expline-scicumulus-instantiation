@@ -88,15 +88,43 @@ public class Util
 	
 	public static String getId(String aux)
 	{
-		String iMod = aux.substring(0,aux.indexOf("_"));
-		
-		String temp = aux.substring(aux.indexOf("_")+1);
-		
-		String value = temp.substring(0,temp.indexOf("_"));
-		
-		String id = temp.substring(temp.indexOf("_")+1);
-		
+		String iMod = "";
+		if(aux.indexOf("_") > 0)
+		{
+			iMod = aux.substring(0,aux.indexOf("_"));
+			
+			String temp = aux.substring(aux.indexOf("_")+1);
+			if(temp.indexOf("_") > 0)
+			{
+				String value = temp.substring(0,temp.indexOf("_"));
+				
+				String id = temp.substring(temp.indexOf("_")+1);
+			}
+		}			
 		return iMod;
+	}
+	
+	public static String getLastActName(String value)
+	{
+		String temp ;
+		
+		int pos = value.indexOf("_");
+		
+		if(pos < 0)
+		{
+			temp = null;
+		}else{	
+			temp = value;
+			while(pos > 0)
+			{
+				temp = temp.substring(pos+1);
+				
+				pos = temp.indexOf("_");
+			}
+		}
+		
+		
+		return temp;
 	}
 	
 	public static String getRelName(String relNameRaw)
@@ -125,15 +153,24 @@ public class Util
 		
 		for(String temp : properties.keySet())
 		{
-			String relName = getRelName(temp);
-			String activityTag;
-			if( relName != null)
+			//System.out.println("----AQUII----"+temp);
+			if(getId(temp).equalsIgnoreCase("rel"))
 			{
-				activityTag = Util.getActivityTag(relName);
-				if(act.equalsIgnoreCase(activityTag))
+				String relName = getRelName(temp);
+				System.out.println("----AQUII----"+relName);
+				String activityTag;
+				if( relName != null)
 				{
-					System.out.println(relName);
-					list.add(relName);
+					String secondRel = getLastActName(relName);
+					if(secondRel != null)
+					{
+						System.out.println("--SECOND->"+secondRel);
+						if(act.equalsIgnoreCase(secondRel))
+						{
+							System.out.println(relName);
+							list.add(relName);
+						}
+					}
 				}
 			}
 		}

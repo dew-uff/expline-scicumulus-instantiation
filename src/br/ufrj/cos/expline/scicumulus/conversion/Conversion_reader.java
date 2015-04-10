@@ -120,12 +120,13 @@ public class Conversion_reader {
 					
 					String id = elemPortInput.getAttribute("id");
 					
-					properties.put("rel_"+iModAct, "");
+					
 					
 					iModAct = id+"_"+"IMod_"+elemValue;
 //					iModAct = "IMod_"+elemValue+"_"+id;
 					System.out.println(iModAct);
-					
+					properties.put("rel_"+iModAct, "");
+					System.out.println("----LSOSOS----"+iModAct);
 					inputPortsList.add(iModAct);
 					
 					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");

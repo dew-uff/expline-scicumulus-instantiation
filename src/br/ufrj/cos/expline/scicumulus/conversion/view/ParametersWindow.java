@@ -39,28 +39,61 @@ public class ParametersWindow extends JFrame
 	private JTable tableTemp;
 	
 	private String title;
-	public ParametersWindow(String title)
+	
+	private ActivityMember activityMember;
+	
+	private MainWindow mw;
+	
+	public ParametersWindow(String title, ActivityMember member)
 	{
-		this.setSize(300, 200);
-		this.setLocationRelativeTo(null);
-		this.title = title;
-		
-		initComponents();
-		
-		this.setResizable(false);
-		
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-		this.setVisible(true);
-		
-		initLayout();
+		initClass(title, member);
+//		this.setSize(300, 200);
+//		this.setLocationRelativeTo(null);
+//		this.title = title;
+//		
+//		this.activityMember = member;
+//		this.mw = (MainWindow) SwingUtilities.getWindowAncestor(activityMember);
+//		
+//		initComponents();
+//		
+//		this.setResizable(false);
+//		
+//		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//		
+//		this.setVisible(true);
+//		
+//		initLayout();
 	}
 	
-	public ParametersWindow(String title, Object[] params)
+	public ParametersWindow(String title, ActivityMember member, Object[] params)
+	{
+		initClass(title, member);
+//		this.setSize(300, 200);
+//		this.setLocationRelativeTo(null);
+//		this.title = title;
+//		
+//		this.activityMember = member;
+//		this.mw = (MainWindow) SwingUtilities.getWindowAncestor(activityMember);
+//		
+//		initComponents();
+//		
+//		this.setResizable(false);
+//		
+//		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//		
+//		this.setVisible(true);
+//		
+//		initLayout();
+	}
+	
+	private void initClass(String title, ActivityMember member)
 	{
 		this.setSize(300, 200);
 		this.setLocationRelativeTo(null);
 		this.title = title;
+		
+		this.activityMember = member;
+		this.mw = (MainWindow) SwingUtilities.getWindowAncestor(activityMember);
 		
 		initComponents();
 		
@@ -162,7 +195,7 @@ public class ParametersWindow extends JFrame
 	    
 	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
 	    
-	    List<String> listOfRelName = Util.getListOfRelNameByActivity(MainWindow.getProperties(),Util.getActivityTag(title));
+	    List<String> listOfRelName = Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
 	    
 	    values = listOfRelName.toArray();
 	    

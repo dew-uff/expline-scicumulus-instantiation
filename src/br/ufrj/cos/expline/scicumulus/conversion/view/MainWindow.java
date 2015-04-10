@@ -20,7 +20,7 @@ import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class MainWindow extends JDialog 
 {
-	private static Map<String,String> properties;
+	private Map<String,String> properties;
 	private ClassesController classesController;
 	private ButtonListener bl;
 	
@@ -33,7 +33,7 @@ public class MainWindow extends JDialog
 	private ActivityTab activityTab;
 	private QueryTab queryTab;
 	
-	public static Frame frame = null;
+	public Frame frame;
 	
 	public MainWindow(Frame owner, Map<String,String> properties, ClassesController classesController)
 	{
@@ -43,7 +43,7 @@ public class MainWindow extends JDialog
 		
 		this.properties = properties;
 		
-		frame = owner;
+		this.frame = owner;
 		
 		this.setSize(600, 300);
 		this.setLocationRelativeTo(null);
@@ -114,7 +114,7 @@ public class MainWindow extends JDialog
 		return this.classesController;
 	}
 	
-	public static Map<String,String> getProperties()
+	public Map<String,String> getProperties()
 	{
 		return properties;
 	}
