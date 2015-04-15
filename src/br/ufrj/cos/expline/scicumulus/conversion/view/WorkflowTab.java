@@ -7,8 +7,11 @@ import java.util.Map;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 public class WorkflowTab extends JPanel 
 {
@@ -17,7 +20,9 @@ public class WorkflowTab extends JPanel
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
 	
-		
+	private JLabel lbExpDir;
+	private JTextField tfExpDir;
+	
 	public WorkflowTab(Map<String,String> onlyActivation)
 	{
 		super();
@@ -77,6 +82,27 @@ public class WorkflowTab extends JPanel
 		
 		SequentialGroup sg = layout.createSequentialGroup();
 		
+		JSeparator separator = new JSeparator();
+		
+		ParallelGroup ppldk = layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+									.addGroup(layout.createSequentialGroup()
+											.addGap(10)
+											.addComponent(lbExpDir)
+											.addComponent(tfExpDir)
+											.addGap(5)
+									);
+		pg.addGap(10);
+		pg.addGroup(ppldk);
+//		pg.addComponent(lbExpDir).addComponent(tfExpDir); 
+		pg.addGap(10);
+		
+		sg.addGap(10);
+		sg.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+								.addComponent(lbExpDir)
+								.addComponent(tfExpDir));
+		sg.addGap(10);
+		
+		
 		for(WorkflowMember am:workflows)
 		{
 			pg.addGap(10);
@@ -119,6 +145,10 @@ public class WorkflowTab extends JPanel
 		
 		this.add(jsp);
 		
+		lbExpDir = new JLabel("Exp Dir: ");
+		
+		tfExpDir = new JTextField();
+		
 		for(String p:onlyActivation.keySet())
 		{
 			WorkflowMember tempAM = new WorkflowMember(p);
@@ -133,14 +163,14 @@ public class WorkflowTab extends JPanel
 	public boolean checkFilledOut()
 	{
 			
-//		for(WorkflowMember am:workflows)
-//		{
-//			if(am.fieldIsEmpty())
-//			{
+		for(WorkflowMember am:workflows)
+		{
+			if(am.fieldIsEmpty())
+			{
 //				System.out.println("Workflow");
-//				return false;
-//			}
-//		}
+				return false;
+			}
+		}
 		return true;
 	}
 	

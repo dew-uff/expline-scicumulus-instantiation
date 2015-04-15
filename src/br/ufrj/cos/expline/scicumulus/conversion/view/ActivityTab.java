@@ -10,19 +10,36 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+
 public class ActivityTab extends JPanel 
 {
 	private Map<String,String> onlyActivation;
 	private ArrayList<ActivityMember> activities;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
+	private HashMap<String,HashMap<String,String>> activityMap;
 	
 	public ActivityTab(Map<String,String> onlyActivation)
 	{
 		super();
 		
 		this.onlyActivation = onlyActivation;
-
+		
+		this.activityMap = Conversion_reader.getActivityMap();
+		System.out.println("------ "+activityMap.size());
+		for(String p : activityMap.keySet())
+		{
+			System.out.println(p);
+			HashMap<String,String> temp = activityMap.get(p);
+			System.out.println("sdas"+temp.size());
+			for(String pw : temp.keySet())
+			{
+				System.out.println(pw);
+			}
+		}
+		
 		initComponents();
 		initActivityMembersLayout();
 		
@@ -46,7 +63,7 @@ public class ActivityTab extends JPanel
 		
 		for(String p:onlyActivation.keySet())
 		{
-			ActivityMember tempAM = new ActivityMember(p);
+			ActivityMember tempAM = new ActivityMember( p, this.activityMap.get(Util.getActivityTag(p)) );
 			activities.add(tempAM);
 		}
 		

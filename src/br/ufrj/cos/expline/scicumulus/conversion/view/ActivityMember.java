@@ -2,6 +2,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -10,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
@@ -26,7 +26,13 @@ public class ActivityMember extends JPanel
 	
 	private String parameters;
 	
-	public ActivityMember(String key)
+	private ParametersWindow parameterWindow;
+	
+	private String paramStringValue;
+	
+	private HashMap<String,String> itensForComboBox;
+	
+	public ActivityMember(String key, HashMap<String,String> itensForComboBox)
 	{
 		super();
 //		this.setLayout(null);
@@ -37,7 +43,9 @@ public class ActivityMember extends JPanel
 		
 		this.keyInTheMap = key;
 		
+		this.itensForComboBox = itensForComboBox;
 		
+		//System.out.println("--------- "+this.itensForComboBox.size());
 		
 		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
@@ -103,6 +111,10 @@ public class ActivityMember extends JPanel
 		btParameters.addActionListener(pl);
 //		tfActivation.setBounds(lbActivation.getX()+lbActivation.getWidth(), lbActivation.getY(), 385, 20);
 //		this.add(tfActivation);
+		
+		parameterWindow = null;
+		
+		paramStringValue = "";
 	}
 	
 	public String getBorderTitle()
@@ -126,6 +138,11 @@ public class ActivityMember extends JPanel
 		this.parameters = act;
 	}
 	
+	public void setparamStringValue(String value)
+	{
+		this.paramStringValue = value;
+	}
+	
 	private class ParametersListener implements ActionListener
 	{
 
@@ -136,8 +153,11 @@ public class ActivityMember extends JPanel
 			ActivityMember member = (ActivityMember) button.getParent();
 			
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
+			if(parameters == null)
+			{
+				parameterWindow = new ParametersWindow(keyInTheMap,member);
+			}
 			
-			new ParametersWindow(keyInTheMap,member);
 		}
 		
 	}

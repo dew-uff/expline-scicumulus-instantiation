@@ -83,7 +83,7 @@ public class MainWindow extends JDialog
 		panel.add(label);
 		panel.setVisible(true);
 		
-		jtp.addTab("Input Ports Info", panel);
+		//jtp.addTab("Input Ports Info", panel);
 		
 		jtp.addTab("Database", this.databaseTab );
 		

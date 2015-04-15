@@ -14,9 +14,7 @@ public class WorkflowMember extends JPanel
 	
 	private TitledBorder title;
 	private String keyInTheMap;
-	
-	private JLabel lbExpDir;
-	private JTextField tfExpDir;	
+		
 	private JLabel lbRelationName;
 	private JTextField tfRelationName;
 	private JLabel lbRelationFileName;
@@ -28,13 +26,13 @@ public class WorkflowMember extends JPanel
 		
 		initComponent();
 		
-		this.setBounds(0, 0, 560, 50);
+		this.setBounds(0, 0, 560, 40);
 		
 		this.keyInTheMap = key;
 		
 		
 		
-		title = BorderFactory.createTitledBorder(keyInTheMap);//Util.getActivityTag(keyInTheMap));
+		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
 		
 		initLayout();
@@ -48,13 +46,13 @@ public class WorkflowMember extends JPanel
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addGroup(layout.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addComponent(lbExpDir)
+//								.addComponent(lbExpDir)
 								.addComponent(lbRelationName)
 								.addComponent(lbRelationFileName)
 						)
 						.addContainerGap(10,10)
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(tfExpDir)
+//								.addComponent(tfExpDir)
 								.addComponent(tfRelationName)
 								.addComponent(tfRelationFileName)
 						)
@@ -63,10 +61,10 @@ public class WorkflowMember extends JPanel
 		
 		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addGroup(layout.createSequentialGroup()
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(lbExpDir)
-								.addComponent(tfExpDir)
-						)
+//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+//								.addComponent(lbExpDir)
+//								.addComponent(tfExpDir)
+//						)
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(lbRelationName)
 								.addComponent(tfRelationName)
@@ -82,9 +80,9 @@ public class WorkflowMember extends JPanel
 	}
 
 	private void initComponent() {
-		lbExpDir = new JLabel("Exp Dir: ");
-		
-		tfExpDir = new JTextField();
+//		lbExpDir = new JLabel("Exp Dir: ");
+//		
+//		tfExpDir = new JTextField();
 		
 		lbRelationName = new JLabel("Relation Name: ");
 		
@@ -98,23 +96,28 @@ public class WorkflowMember extends JPanel
 	
 	public boolean fieldIsEmpty()
 	{
-		if(tfExpDir.getText().equals(""))
+//		if(tfExpDir.getText().equals(""))
+//		{
+////			System.out.println("Workflow");
+//			return false;	
+//		}else
+		 if(tfRelationName.getText().equals(""))
 		{
-			System.out.println("Workflow");
-			return false;	
-		}
-		else if(tfRelationName.getText().equals(""))
-		{
-			System.out.println("Workflow");
+//			System.out.println("Workflow");
 			return false;
 		}
 		else if(tfRelationFileName.getText().equals(""))
 		{
-			System.out.println("Workflow");
+//			System.out.println("Workflow");
 			return false;
 		}
 							
 		return true;
+	}
+	
+	public String getTitleofWorkflow()
+	{
+		return this.keyInTheMap;
 	}
 
 }

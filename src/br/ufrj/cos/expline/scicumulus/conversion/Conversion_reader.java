@@ -2,17 +2,18 @@ package br.ufrj.cos.expline.scicumulus.conversion;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class Conversion_reader {
 	private final IWriter writer;
@@ -22,6 +23,7 @@ public class Conversion_reader {
 	private final File fileToRead;
 	private Map<String, String> properties;
 	public static ArrayList<String> inputPortsList;
+	private static HashMap<String,HashMap<String,String>> activityMap;
 	
 	public Conversion_reader(File file, Map<String,String> properties)
 	{
@@ -36,6 +38,7 @@ public class Conversion_reader {
 		this.fileToRead = file;
 		this.writer = writer;
 		inputPortsList = new ArrayList<>();
+		activityMap = new HashMap<String,HashMap<String,String>>();
 		initConvertion();
 	}
 	
@@ -111,6 +114,7 @@ public class Conversion_reader {
 				System.out.println(iModAct);
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
+				HashMap<String,String> temp = new HashMap<>();
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
 				NodeList relationSchemaAttributeInput = null;;
@@ -120,13 +124,11 @@ public class Conversion_reader {
 					
 					String id = elemPortInput.getAttribute("id");
 					
-					
-					
 					iModAct = id+"_"+"IMod_"+elemValue;
 //					iModAct = "IMod_"+elemValue+"_"+id;
 					System.out.println(iModAct);
 					properties.put("rel_"+iModAct, "");
-					System.out.println("----LSOSOS----"+iModAct);
+					
 					inputPortsList.add(iModAct);
 					
 					NodeList relationSchemaInput = elemPortInput.getElementsByTagName("RelationSchema");
@@ -150,6 +152,10 @@ public class Conversion_reader {
 							if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
 							{
 								Element elemAux = (Element)relationSchemaAttributeInput.item(j);
+								
+								temp.put( elemAux.getAttribute("name"), iModAct); //Insert in the activityMap
+								System.out.println("coloca no temp "+elemAux.getAttribute("name"));
+								
 								if(relationSchemaAttributeOutput == null)
 								{
 									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
@@ -170,7 +176,7 @@ public class Conversion_reader {
 						writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
 					}
 					/* -------- FIM colocar Field---- */
-					
+					activityMap.put(auxElem.getAttribute("value"), temp);
 				}
 				/* -----------FIM INPUT--------- */
 				
@@ -241,6 +247,11 @@ public class Conversion_reader {
 		}
 		/* ------Fim PErcorrimento ----- */
 		
+	}
+	
+	public static HashMap<String,HashMap<String,String>> getActivityMap()
+	{
+		return activityMap;
 	}
 	
 	private void printNodeList(NodeList nodList)

@@ -157,17 +157,17 @@ public class Util
 			if(getId(temp).equalsIgnoreCase("rel"))
 			{
 				String relName = getRelName(temp);
-				System.out.println("----AQUII----"+relName);
+//				System.out.println("----AQUII----"+relName);
 				String activityTag;
 				if( relName != null)
 				{
 					String secondRel = getLastActName(relName);
 					if(secondRel != null)
 					{
-						System.out.println("--SECOND->"+secondRel);
+//						System.out.println("--SECOND->"+secondRel);
 						if(act.equalsIgnoreCase(secondRel))
 						{
-							System.out.println(relName);
+//							System.out.println(relName);
 							list.add(relName);
 						}
 					}
