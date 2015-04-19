@@ -1,6 +1,7 @@
 package br.ufrj.cos.expline.scicumulus.conversion;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -15,7 +16,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -633,6 +633,12 @@ public class Conversion_writer implements IWriter{
 		}
 		
 		
+	}
+	
+	public void insertWorkflowInformation(HashMap<String,HashMap<String,String>> workflowMap)
+	{
+		//TODO we have to make this insert method
+		System.out.println("Metodo de inserçção de Workflow information não inserido");
 	}
 	
 	private void insertSpecificActivation(String activityTag, String activation){

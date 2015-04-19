@@ -28,17 +28,17 @@ public class ActivityTab extends JPanel
 		this.onlyActivation = onlyActivation;
 		
 		this.activityMap = Conversion_reader.getActivityMap();
-		System.out.println("------ "+activityMap.size());
-		for(String p : activityMap.keySet())
-		{
-			System.out.println(p);
-			HashMap<String,String> temp = activityMap.get(p);
-			System.out.println("sdas"+temp.size());
-			for(String pw : temp.keySet())
-			{
-				System.out.println(pw);
-			}
-		}
+//		System.out.println("------ "+activityMap.size());
+//		for(String p : activityMap.keySet())
+//		{
+//			System.out.println(p);
+//			HashMap<String,String> temp = activityMap.get(p);
+//			System.out.println("sdas"+temp.size());
+//			for(String pw : temp.keySet())
+//			{
+//				System.out.println(pw);
+//			}
+//		}
 		
 		initComponents();
 		initActivityMembersLayout();

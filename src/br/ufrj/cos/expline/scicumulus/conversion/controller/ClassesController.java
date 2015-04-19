@@ -83,10 +83,11 @@ public class ClassesController
 //		writer.saveDocumentToDisk();
 	}
 	
-	public void finishXML(Map<String,String> propertiesDone)
+	public void finishXML(Map<String,String> propertiesDone,HashMap<String,HashMap<String,String>> workflowMap)
 	{
 		writer.insertAllActivations(Util.getOnlyActivities(propertiesDone));
 		writer.insertAllUserInformation(propertiesDone);
+		writer.insertWorkflowInformation(workflowMap);
 		writer.saveDocumentToDisk();
 	}
 	

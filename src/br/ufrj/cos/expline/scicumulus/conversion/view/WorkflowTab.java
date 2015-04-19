@@ -162,7 +162,11 @@ public class WorkflowTab extends JPanel
 	
 	public boolean checkFilledOut()
 	{
-			
+		if(tfExpDir.getText().equals(""))
+		{
+//			System.out.println("Entrou Aqui");
+			return false;
+		}
 		for(WorkflowMember am:workflows)
 		{
 			if(am.fieldIsEmpty())
@@ -189,14 +193,15 @@ public class WorkflowTab extends JPanel
 		return null;//tfRelationFileName.getText();
 	}
 	
-	public Map<String,String> getMapOnlyWorkflowsDone()
+	public HashMap<String,HashMap<String,String>> getMapOnlyWorkflowsDone()
 	{
 		//TODO
-		Map<String,String> map = new HashMap<>();
+		HashMap<String,HashMap<String,String>> map = new HashMap<>();
 		
 		for(WorkflowMember am:workflows)
 		{
-//			map.put(am.getBorderTitle(), am.getActivation());
+			HashMap<String,String> tempMap = am.getMapContainsRels();
+			map.put(am.getKeyInTheMap(), tempMap);
 		}
 		
 		return map;

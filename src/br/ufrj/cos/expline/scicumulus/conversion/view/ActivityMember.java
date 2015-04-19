@@ -45,7 +45,7 @@ public class ActivityMember extends JPanel
 		
 		this.itensForComboBox = itensForComboBox;
 		
-		//System.out.println("--------- "+this.itensForComboBox.size());
+//		System.out.println("--------- "+this.itensForComboBox.size());
 		
 		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
@@ -136,11 +136,17 @@ public class ActivityMember extends JPanel
 	public void setActivation(String act)
 	{
 		this.parameters = act;
+		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
 	}
 	
 	public void setparamStringValue(String value)
 	{
 		this.paramStringValue = value;
+	}
+	
+	public HashMap<String,String> getParameters()
+	{
+		return itensForComboBox;
 	}
 	
 	private class ParametersListener implements ActionListener
@@ -153,10 +159,9 @@ public class ActivityMember extends JPanel
 			ActivityMember member = (ActivityMember) button.getParent();
 			
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
-			if(parameters == null)
-			{
-				parameterWindow = new ParametersWindow(keyInTheMap,member);
-			}
+			
+			parameterWindow = new ParametersWindow(keyInTheMap,member,member.getParameters());
+			
 			
 		}
 		

@@ -154,7 +154,7 @@ public class Conversion_reader {
 								Element elemAux = (Element)relationSchemaAttributeInput.item(j);
 								
 								temp.put( elemAux.getAttribute("name"), iModAct); //Insert in the activityMap
-								System.out.println("coloca no temp "+elemAux.getAttribute("name"));
+//								System.out.println("coloca no temp "+elemAux.getAttribute("name"));
 								
 								if(relationSchemaAttributeOutput == null)
 								{

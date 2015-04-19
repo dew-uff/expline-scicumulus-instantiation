@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.GroupLayout;
@@ -15,13 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 @SuppressWarnings("serial")
@@ -46,16 +45,23 @@ public class ParametersWindow extends JFrame
 	
 	private MainWindow mw;
 	
-	
+	private HashMap<String,String> parameters;
 	
 	public ParametersWindow(String title, ActivityMember member)
 	{
+		parameters = null;
+		initClass(title, member);
+	}
+	
+	public ParametersWindow(String title,ActivityMember member,HashMap<String,String> parameters)
+	{
+		this.parameters = parameters;
 		initClass(title, member);
 	}
 	
 	private void initClass(String title, ActivityMember member)
 	{
-		this.setSize(300, 200);
+		this.setSize(500, 300);
 		this.setLocationRelativeTo(null);
 		this.title = title;
 		
@@ -163,8 +169,12 @@ public class ParametersWindow extends JFrame
 	    col.setCellEditor(new MyComboBoxEditor(values));        
 	    col.setCellRenderer(new MyComboBoxRenderer(values));
 	    
-	    
-	    values = new Object[]{"item1", "item2", "item3"};
+//	    listOfRelName.clear();
+//	    for (String p : parameters.keySet()) {
+//			listOfRelName.add(parameters.get(p));
+//		}
+//	    values = new Object[]{"item1", "item2", "item3"};
+	    values = parameters.keySet().toArray();
 	    
 	    TableColumn col1 = tableTemp.getColumnModel().getColumn(2);
 	    col1.setCellEditor(new MyComboBoxEditor(values));        
@@ -182,6 +192,11 @@ public class ParametersWindow extends JFrame
 	    
 //	    DefaultTableModel modeltemp = (DefaultTableModel) table.getModel();
 	    
+	}
+	
+	public void setActivation(String activation)
+	{
+		this.activityMember.setActivation(activation);
 	}
 	
 	@SuppressWarnings({ "serial", "rawtypes" })
@@ -286,6 +301,26 @@ public class ParametersWindow extends JFrame
 			ParametersWindow frame = (ParametersWindow)SwingUtilities.getWindowAncestor(b);
 			
 //			String value = getOneParamString();
+			JTable table = frame.getTable();
+			
+			int rowsNumber = table.getRowCount();
+			
+			DefaultTableModel model = (DefaultTableModel)table.getModel();
+			Vector dataVector = model.getDataVector();
+			String params = "";
+			for (Object object : dataVector) {
+//				System.out.println(object.toString());
+				Vector temp = (Vector)object;
+				String param = (String)temp.get(0);
+				String relType = (String)temp.get(1);
+				String field = (String)temp.get(2);
+					
+				params += param + "=%=" +field+"% ";
+			}
+			
+//			System.out.println("------>  "+params);
+			
+			frame.setActivation(params);
 			
 			frame.dispose();
 		}

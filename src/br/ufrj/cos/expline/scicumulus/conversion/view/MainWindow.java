@@ -119,6 +119,11 @@ public class MainWindow extends JDialog
 		return properties;
 	}
 	
+	public WorkflowTab getWorkflowTab()
+	{
+		return this.workflowTab;
+	}
+	
 	public boolean hasEmptyField()
 	{
 		return !(databaseTab.checkFilledOut() &&
@@ -202,7 +207,7 @@ public class MainWindow extends JDialog
 			}else
 			{
 				
-				cc.finishXML(mainFrame.fillOutTheMap());
+				cc.finishXML(mainFrame.fillOutTheMap(),mainFrame.getWorkflowTab().getMapOnlyWorkflowsDone());
 				mainFrame.dispose();
 			}
 						

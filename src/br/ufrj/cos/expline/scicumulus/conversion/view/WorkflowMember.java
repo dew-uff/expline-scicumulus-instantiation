@@ -1,5 +1,7 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
+import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
@@ -94,6 +96,11 @@ public class WorkflowMember extends JPanel
 		
 	}
 	
+	public String getKeyInTheMap()
+	{
+		return keyInTheMap;
+	}
+	
 	public boolean fieldIsEmpty()
 	{
 //		if(tfExpDir.getText().equals(""))
@@ -101,18 +108,26 @@ public class WorkflowMember extends JPanel
 ////			System.out.println("Workflow");
 //			return false;	
 //		}else
-		 if(tfRelationName.getText().equals(""))
+		if(tfRelationName.getText().equals(""))
 		{
 //			System.out.println("Workflow");
-			return false;
+			return true;
 		}
 		else if(tfRelationFileName.getText().equals(""))
 		{
 //			System.out.println("Workflow");
-			return false;
+			return true;
 		}
 							
-		return true;
+		return false;
+	}
+	
+	public HashMap<String,String> getMapContainsRels()
+	{
+		HashMap<String,String> temp = new HashMap<>();
+		temp.put(tfRelationName.getText(), tfRelationFileName.getText());
+		
+		return temp;
 	}
 	
 	public String getTitleofWorkflow()
