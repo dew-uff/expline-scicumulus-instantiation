@@ -55,6 +55,7 @@ public class ParametersWindow extends JFrame
 	
 	public ParametersWindow(String title,ActivityMember member,HashMap<String,String> parameters)
 	{
+		
 		this.parameters = parameters;
 		initClass(title, member);
 	}

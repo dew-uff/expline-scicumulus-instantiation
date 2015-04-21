@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
@@ -160,7 +161,7 @@ public class ActivityMember extends JPanel
 			
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
 			
-			parameterWindow = new ParametersWindow(keyInTheMap,member,member.getParameters());
+			parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
 			
 			
 		}
