@@ -2,7 +2,6 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.io.File;
 
-import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
 import br.ufrj.cos.expline.scicumulus.conversion.mainInterface.Instantiator;
 import br.ufrj.cos.expline.scicumulus.conversion.mainInterface.ScicumulusInstantiator;
 
