@@ -639,6 +639,16 @@ public class Conversion_writer implements IWriter{
 	{
 		//TODO we have to make this insert method
 		System.out.println("Metodo de inserçção de Workflow information não inserido");
+//		this.insertsciCumulusExecutionWorkflowRelation(properties.get("WorkflowRelationName"), properties.get("WorkflowRelationFilename"));
+		for(String act:workflowMap.keySet())
+		{
+			HashMap<String,String> temp = workflowMap.get(act);
+			for(String relname:temp.keySet())
+			{
+				String fileName = temp.get(relname);
+				this.insertsciCumulusExecutionWorkflowRelation(relname/*properties.get("WorkflowRelationName")*/, fileName /*properties.get("WorkflowRelationFilename")*/);
+			}
+		}
 	}
 	
 	private void insertSpecificActivation(String activityTag, String activation){
@@ -680,7 +690,7 @@ public class Conversion_writer implements IWriter{
 		
 		this.insertExecutionWorkflow(properties.get("WorkflowExpdir"));
 		
-		this.insertsciCumulusExecutionWorkflowRelation(properties.get("WorkflowRelationName"), properties.get("WorkflowRelationFilename"));
+//		this.insertsciCumulusExecutionWorkflowRelation(properties.get("WorkflowRelationName"), properties.get("WorkflowRelationFilename"));
 	}
 
 }

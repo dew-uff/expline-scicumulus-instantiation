@@ -169,9 +169,10 @@ public class MainWindow extends JDialog
 		properties.put("QueryVersion",binaryTab.getQueryVersion());
 		
 		//Executionworkflow node
+//		System.out.println("workflow info");
 		properties.put("WorkflowExpdir",workflowTab.getExpDir());
-		properties.put("WorkflowRelationName",workflowTab.getRelationName());
-		properties.put("WorkflowRelationFilename",workflowTab.getRelationFileName());
+//		properties.put("WorkflowRelationName",workflowTab.getRelationName());
+//		properties.put("WorkflowRelationFilename",workflowTab.getRelationFileName());
 		
 		//query Node
 		properties.put("QuerySQL",queryTab.getSql());
@@ -206,7 +207,7 @@ public class MainWindow extends JDialog
 				JOptionPane.showMessageDialog(null, "Has Empty Field", "Error", JOptionPane.ERROR_MESSAGE);
 			}else
 			{
-				
+//				System.out.println("entrou pra fazer o que tem que ser feito");
 				cc.finishXML(mainFrame.fillOutTheMap(),mainFrame.getWorkflowTab().getMapOnlyWorkflowsDone());
 				mainFrame.dispose();
 			}

@@ -131,13 +131,13 @@ public class ActivityMember extends JPanel
 	public String getActivation()
 	{
 		// TODO
-		return tfActivation.getText();
+		return tfActivation.getText() + " " + this.parameters;
 	}
 	
 	public void setActivation(String act)
 	{
 		this.parameters = act;
-		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
+//		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
 	}
 	
 	public void setparamStringValue(String value)

@@ -180,7 +180,8 @@ public class WorkflowTab extends JPanel
 	
 	public String getExpDir()
 	{
-		return null;//tfExpDir.getText();
+//		System.out.println("HERREEE ---- "+tfExpDir);
+		return tfExpDir.getText();
 	}
 	
 	public String getRelationName()
