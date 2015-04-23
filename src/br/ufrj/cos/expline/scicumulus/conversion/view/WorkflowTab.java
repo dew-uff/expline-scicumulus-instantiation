@@ -86,8 +86,9 @@ public class WorkflowTab extends JPanel
 		
 		ParallelGroup ppldk = layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 									.addGroup(layout.createSequentialGroup()
-											.addGap(10)
+											.addGap(69)
 											.addComponent(lbExpDir)
+											.addGap(10)
 											.addComponent(tfExpDir)
 											.addGap(5)
 									);
@@ -110,9 +111,9 @@ public class WorkflowTab extends JPanel
 			pg.addGap(10);
 			
 			ParallelGroup temp = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
-			temp.addComponent(am,80,80,80);
+			temp.addComponent(am,50,50,50);
 			sg.addGroup(temp);
-			sg.addContainerGap(20, 20);
+			sg.addContainerGap(10, 10);
 		}
 		
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)

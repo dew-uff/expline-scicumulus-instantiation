@@ -45,7 +45,7 @@ public class EnvironmentTab extends JPanel{
 //		this.add(lbClusterName);
 		
 		tfClusterName = new JTextField();
-		tfClusterName.setText("vitor");
+//		tfClusterName.setText("vitor");
 //		tfClusterName.setEnabled(false);
 //		tfClusterName.setBounds(lbClusterName.getWidth(), 10, 385, 20);
 //		this.add(tfClusterName);

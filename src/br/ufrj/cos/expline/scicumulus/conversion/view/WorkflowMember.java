@@ -28,13 +28,13 @@ public class WorkflowMember extends JPanel
 		
 		initComponent();
 		
-		this.setBounds(0, 0, 560, 40);
+		this.setBounds(0, 0, 560, 20);
 		
 		this.keyInTheMap = key;
 		
 		
 		
-		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
+		title = BorderFactory.createTitledBorder("Relation_"+Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
 		
 		initLayout();
@@ -49,13 +49,13 @@ public class WorkflowMember extends JPanel
 				.addGroup(layout.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 //								.addComponent(lbExpDir)
-								.addComponent(lbRelationName)
+//								.addComponent(lbRelationName)
 								.addComponent(lbRelationFileName)
 						)
 						.addContainerGap(10,10)
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 //								.addComponent(tfExpDir)
-								.addComponent(tfRelationName)
+//								.addComponent(tfRelationName)
 								.addComponent(tfRelationFileName)
 						)
 				)
@@ -67,10 +67,10 @@ public class WorkflowMember extends JPanel
 //								.addComponent(lbExpDir)
 //								.addComponent(tfExpDir)
 //						)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(lbRelationName)
-								.addComponent(tfRelationName)
-						)
+//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+//								.addComponent(lbRelationName)
+//								.addComponent(tfRelationName)
+//						)
 						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(lbRelationFileName)
 								.addComponent(tfRelationFileName)
@@ -90,7 +90,7 @@ public class WorkflowMember extends JPanel
 		
 		tfRelationName = new JTextField();
 		
-		lbRelationFileName = new JLabel("Relation File Name: ");
+		lbRelationFileName = new JLabel("File Name: ");
 		
 		tfRelationFileName = new JTextField();
 		
@@ -108,12 +108,13 @@ public class WorkflowMember extends JPanel
 ////			System.out.println("Workflow");
 //			return false;	
 //		}else
-		if(tfRelationName.getText().equals(""))
-		{
+//		if(tfRelationName.getText().equals(""))
+//		{
 //			System.out.println("Workflow");
-			return true;
-		}
-		else if(tfRelationFileName.getText().equals(""))
+//			return true;
+//		}
+//		else 
+		if(tfRelationFileName.getText().equals(""))
 		{
 //			System.out.println("Workflow");
 			return true;
@@ -125,7 +126,7 @@ public class WorkflowMember extends JPanel
 	public HashMap<String,String> getMapContainsRels()
 	{
 		HashMap<String,String> temp = new HashMap<>();
-		temp.put(tfRelationName.getText(), tfRelationFileName.getText());
+		temp.put(Util.getActivityTag(keyInTheMap), tfRelationFileName.getText());
 		
 		return temp;
 	}

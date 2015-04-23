@@ -94,21 +94,21 @@ public class ParametersWindow extends JFrame
 		    			)
 						.addGroup(gl.createSequentialGroup()
 							.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-								.addComponent(addButton)
+								.addComponent(addButton,100,100,100)
 //							)
 								.addGap(5)
 //							.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-								.addComponent(removeButton)
+								.addComponent(removeButton,100,100,100)
 							)
 						)
 					)
 					.addGroup(gl.createSequentialGroup()
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-							.addComponent(cancelButton)
+							.addComponent(cancelButton,100,100,100)
 						)
 						.addGap(5)
 						.addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-							.addComponent(okButton)
+							.addComponent(okButton,100,100,100)
 						)
 						.addGap(50)
 					)
@@ -156,8 +156,8 @@ public class ParametersWindow extends JFrame
 		tableTemp.setRowHeight(20);
 		
 	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
-	    model.addColumn("Param Name");
-	    model.addColumn("Rel Name"); 
+	    model.addColumn("Parameter Name");
+	    model.addColumn("Relation"); 
 	    model.addColumn("Field");// Este são os valores do combobox
 	    
 	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
