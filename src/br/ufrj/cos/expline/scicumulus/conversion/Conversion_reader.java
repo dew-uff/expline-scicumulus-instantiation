@@ -106,7 +106,10 @@ public class Conversion_reader {
 					
 					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
 				}
-				writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
+				if(relationSchemaAttributeOutput != null)
+				{
+					writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
+				}
 				/* -----------FIM OUTPUT--------- */
 				
 				/* -----------INICIO INPUT--------- */
@@ -142,8 +145,10 @@ public class Conversion_reader {
 						
 						relationSchemaAttributeInput = elemArrayInput.getChildNodes();
 					}
-					writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
-					
+					if(relationSchemaAttributeInput != null)
+					{
+						writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
+					}
 					/* --------- Colocar Field ------ */
 					if(relationSchemaAttributeInput != null)
 					{
@@ -158,7 +163,7 @@ public class Conversion_reader {
 								
 								if(relationSchemaAttributeOutput == null)
 								{
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, oModAct, auxElem.getAttribute("value"));
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 								}else
 								{
 									if(hasInNodeList(relationSchemaAttributeOutput, elemAux))

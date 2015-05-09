@@ -32,13 +32,23 @@ public class WorkflowMember extends JPanel
 		
 		this.keyInTheMap = key;
 		
+		String actName = Util.getActivityTag(keyInTheMap);
 		
+		String strTitle = getProperlyTitle(actName);
 		
-		title = BorderFactory.createTitledBorder("Relation_"+Util.getActivityTag(keyInTheMap));
+		title = BorderFactory.createTitledBorder(strTitle);//"Relation_"+Util.getActivityTag(keyInTheMap));
 		this.setBorder(title);
 		
 		initLayout();
 		
+	}
+
+	private String getProperlyTitle(String keyInTheMap2) {
+		String id = Util.getId(keyInTheMap2);
+		String actName = Util.getLastActName(keyInTheMap2);
+		
+		String properlyTitle = "ACTIVITY "+actName+" ->  INPUT PORT "+ id+"  -> RELATION";
+		return properlyTitle;
 	}
 
 	private void initLayout() {
