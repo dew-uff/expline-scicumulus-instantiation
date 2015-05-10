@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
@@ -46,6 +47,8 @@ public class ParametersWindow extends JFrame
 	private MainWindow mw;
 	
 	private HashMap<String,String> parameters;
+	
+	private Map<String,String> properlyMap;
 	
 	public ParametersWindow(String title, ActivityMember member)
 	{
@@ -165,6 +168,9 @@ public class ParametersWindow extends JFrame
 	    List<String> listOfRelName = Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
 	    
 	    values = listOfRelName.toArray();
+	    this.properlyMap = getProperlyMap(listOfRelName);
+	    
+	    values = this.properlyMap.keySet().toArray();
 	    
 	    TableColumn col = tableTemp.getColumnModel().getColumn(1);
 	    col.setCellEditor(new MyComboBoxEditor(values));        
@@ -193,6 +199,23 @@ public class ParametersWindow extends JFrame
 	    
 //	    DefaultTableModel modeltemp = (DefaultTableModel) table.getModel();
 	    
+	}
+	
+	public Map<String,String> getProperlyMap(List<String> lista)
+	{
+		lista.sort(null);
+		int id =1;
+		
+		HashMap<String,String> properlyMap = new HashMap<>();
+		
+		for(String temp : lista)
+		{
+			properlyMap.put("Porta "+id++, temp);
+		}
+		
+		//System.out.println(properlyMap.toString());
+		
+		return properlyMap;
 	}
 	
 	public void setActivation(String activation)
@@ -250,9 +273,11 @@ public class ParametersWindow extends JFrame
 			ParametersWindow frame = (ParametersWindow)SwingUtilities.getWindowAncestor(b);
 			
 			JTable tbModel = frame.getTable();
-			
-			DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
-			model.addRow(new Object[]{""});
+			if(tbModel.getRowCount() < frame.getProperlyMapPorta().size())
+			{
+				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
+				model.addRow(new Object[]{""});
+			}
 		}
     	
     }
@@ -290,6 +315,11 @@ public class ParametersWindow extends JFrame
     	
     }
     
+    public  Map<String,String> getProperlyMapPorta()
+    {
+    	return this.properlyMap;
+    }
+    
     
     
     private class OkListener implements ActionListener
@@ -314,7 +344,9 @@ public class ParametersWindow extends JFrame
 				Vector temp = (Vector)object;
 				String param = (String)temp.get(0);
 				String relType = (String)temp.get(1);
+				relType = frame.getProperlyMapPorta().get(relType);
 				String field = (String)temp.get(2);
+				
 					
 				params += param + "=%=" +field+"% ";
 			}
