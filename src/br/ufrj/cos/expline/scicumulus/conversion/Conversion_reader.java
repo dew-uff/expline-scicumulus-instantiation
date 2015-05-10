@@ -86,7 +86,7 @@ public class Conversion_reader {
 								
 				/* -----------INICIO OUTPUT--------- */
 				String oModAct = "OMod_"+elemValue;
-				System.out.println(oModAct);
+//				System.out.println(oModAct);
 				NodeList outputPorts = elemPorts.getElementsByTagName("OutputPorts");
 				Element elemOutputPorts = (Element)outputPorts.item(0);
 				
@@ -114,13 +114,13 @@ public class Conversion_reader {
 				
 				/* -----------INICIO INPUT--------- */
 				String iModAct = "IMod_"+elemValue;
-				System.out.println(iModAct);
+//				System.out.println(iModAct);
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
 				HashMap<String,String> temp = new HashMap<>();
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
-				NodeList relationSchemaAttributeInput = null;;
+				NodeList relationSchemaAttributeInput = null;
 				for(int inputPortCount = 0;inputPortCount < portInput.getLength();inputPortCount++)
 				{
 					Element elemPortInput = (Element)portInput.item(inputPortCount);
@@ -129,7 +129,7 @@ public class Conversion_reader {
 					
 					iModAct = id+"_"+"IMod_"+elemValue;
 //					iModAct = "IMod_"+elemValue+"_"+id;
-					System.out.println(iModAct);
+//					System.out.println(iModAct);
 					properties.put("rel_"+iModAct, "");
 					
 					inputPortsList.add(iModAct);
@@ -144,7 +144,9 @@ public class Conversion_reader {
 						Element elemArrayInput = (Element)arrayInput.item(0);
 						
 						relationSchemaAttributeInput = elemArrayInput.getChildNodes();
+						
 					}
+					
 					if(relationSchemaAttributeInput != null)
 					{
 						writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
@@ -163,7 +165,7 @@ public class Conversion_reader {
 								
 								if(relationSchemaAttributeOutput == null)
 								{
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+									//writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 								}else
 								{
 									if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
@@ -172,13 +174,14 @@ public class Conversion_reader {
 									}
 									else
 									{
+										System.out.println("entrou !!");
 										writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 									}
 								}
 							}
 						}
 					}else{
-						writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
+//						writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
 					}
 					/* -------- FIM colocar Field---- */
 					activityMap.put(auxElem.getAttribute("value"), temp);
@@ -218,8 +221,8 @@ public class Conversion_reader {
 			
 			for(String str:inputPortsList)
 			{
-				System.out.println("________________");
-				System.out.println(str);
+//				System.out.println("________________");
+//				System.out.println(str);
 				if(Util.getId(str).equals(target))
 				{
 					etmep.add(str);
@@ -236,7 +239,7 @@ public class Conversion_reader {
 			Element activityTarget = getActivity(TARGET,target,rootChildrenActivity);
 			
 			String relationName = target+"_"+"IMod_"+activityTarget.getAttribute("value");
-			System.out.println(relationName);
+//			System.out.println(relationName);
 			
 //			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"));
 			writer.setDependency(activityTarget.getAttribute("value"), activitySource.getAttribute("value"),relationName);
@@ -247,7 +250,7 @@ public class Conversion_reader {
 		/* ------INICIO PErcorrimento -- */
 		for(String aux:inputPortsList)
 		{
-			System.out.println(aux);
+//			System.out.println(aux);
 			this.properties.put("EMPTYDOORS_"+aux, "");
 		}
 		/* ------Fim PErcorrimento ----- */
