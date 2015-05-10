@@ -16,16 +16,18 @@ public class WorkflowMember extends JPanel
 	
 	private TitledBorder title;
 	private String keyInTheMap;
+	
+	private int id;
 		
 	private JLabel lbRelationName;
 	private JTextField tfRelationName;
 	private JLabel lbRelationFileName;
 	private JTextField tfRelationFileName;
 	
-	public WorkflowMember(String key)
+	public WorkflowMember(String key,int id)
 	{
 		super();
-		
+		this.id = id;
 		initComponent();
 		
 		this.setBounds(0, 0, 560, 20);
@@ -47,7 +49,7 @@ public class WorkflowMember extends JPanel
 		String id = Util.getId(keyInTheMap2);
 		String actName = Util.getLastActName(keyInTheMap2);
 		
-		String properlyTitle = "ACTIVITY "+actName+" ->  INPUT PORT "+ id+"  -> RELATION";
+		String properlyTitle = "ACTIVITY "+actName+" ->  INPUT PORT "+ this.id+"  -> RELATION";
 		return properlyTitle;
 	}
 

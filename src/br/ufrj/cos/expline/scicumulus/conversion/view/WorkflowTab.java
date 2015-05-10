@@ -23,12 +23,16 @@ public class WorkflowTab extends JPanel
 	private JLabel lbExpDir;
 	private JTextField tfExpDir;
 	
+	private int id;
+	
 	public WorkflowTab(Map<String,String> onlyActivation)
 	{
 		super();
-		
+		this.id = 1;
 		this.onlyActivation = onlyActivation;
 		initComponents();
+		
+		
 		
 //		this.setVisible(true);
 		
@@ -37,45 +41,7 @@ public class WorkflowTab extends JPanel
 
 	private void initLayout() {
 		// TODO Auto-generated method stub
-//		GroupLayout layout = new GroupLayout(this);
-//		
-//		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-//				.addGroup(layout.createSequentialGroup()
-//						.addContainerGap(100,100)
-//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-//								.addComponent(lbExpDir)
-//								.addComponent(lbRelationName)
-//								.addComponent(lbRelationFileName)
-//						)
-//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//								.addComponent(tfExpDir)
-//								.addComponent(tfRelationName)
-//								.addComponent(tfRelationFileName)
-//						)
-//						.addContainerGap(100,100)
-//				)
-//		);
-//		
-//		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-//				.addGroup(layout.createSequentialGroup()
-//						.addContainerGap()
-//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-//								.addComponent(lbExpDir)
-//								.addComponent(tfExpDir)
-//						)
-//						.addContainerGap(15,15)
-//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-//								.addComponent(lbRelationName)
-//								.addComponent(tfRelationName)
-//						)
-//						.addContainerGap(15,15)
-//						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-//								.addComponent(lbRelationFileName)
-//								.addComponent(tfRelationFileName)
-//						)
-//						.addContainerGap()
-//				)
-//		);
+
 		GroupLayout layout = new GroupLayout(panelScrolled);
 		
 		ParallelGroup pg = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
@@ -152,8 +118,9 @@ public class WorkflowTab extends JPanel
 		
 		for(String p:onlyActivation.keySet())
 		{
-			WorkflowMember tempAM = new WorkflowMember(p);
+			WorkflowMember tempAM = new WorkflowMember(p,this.id);
 			workflows.add(tempAM);
+			this.id++;
 		}
 		
 		
