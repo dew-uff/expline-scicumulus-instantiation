@@ -44,6 +44,8 @@ public class ActivityMember extends JPanel
 		
 		this.keyInTheMap = key;
 		
+		this.parameters = "";
+		
 		this.itensForComboBox = itensForComboBox;
 		
 //		System.out.println("--------- "+this.itensForComboBox.size());
@@ -136,6 +138,7 @@ public class ActivityMember extends JPanel
 	
 	public void setActivation(String act)
 	{
+		
 		this.parameters = act;
 //		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
 	}
