@@ -46,6 +46,7 @@ public class ActivityMember extends JPanel
 		
 		this.itensForComboBox = itensForComboBox;
 		
+		
 //		System.out.println("--------- "+this.itensForComboBox.size());
 		
 		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
@@ -90,6 +91,15 @@ public class ActivityMember extends JPanel
 						)
 				)
 		);
+		
+		if(this.getParameters().size() > 0)
+		{
+			btParameters.setEnabled(true);
+		}
+		else
+		{
+			btParameters.setEnabled(false);
+		}
 		
 		this.setLayout(layout);
 	}
@@ -160,10 +170,10 @@ public class ActivityMember extends JPanel
 			ActivityMember member = (ActivityMember) button.getParent();
 			
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
-			if(member.getParameters().size() > 0)
-			{
+//			if(member.getParameters().size() > 0)
+//			{
 				parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
-			}
+//			}
 			
 		}
 		
