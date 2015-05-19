@@ -160,9 +160,10 @@ public class ActivityMember extends JPanel
 			ActivityMember member = (ActivityMember) button.getParent();
 			
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
-			
-			parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
-			
+			if(member.getParameters().size() > 0)
+			{
+				parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
+			}
 			
 		}
 		
