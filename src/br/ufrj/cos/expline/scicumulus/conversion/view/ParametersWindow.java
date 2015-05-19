@@ -3,6 +3,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,14 +162,17 @@ public class ParametersWindow extends JFrame
 	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
 	    model.addColumn("Parameter Name");
 	    model.addColumn("Relation"); 
-	    model.addColumn("Field");// Este são os valores do combobox
+	    model.addColumn("Field");// Este sï¿½o os valores do combobox
 	    
-	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
+	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visï¿½vel
 	    
 	    List<String> listOfRelName = Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
 	    
-	    values = listOfRelName.toArray();
-	    this.properlyMap = getProperlyMap(listOfRelName);
+//	    values = listOfRelName.toArray();
+	    if(listOfRelName.size() > 0)
+	    {
+	    	this.properlyMap = getProperlyMap(listOfRelName);
+	    }
 	    
 	    values = this.properlyMap.keySet().toArray();
 	    
@@ -203,7 +207,7 @@ public class ParametersWindow extends JFrame
 	
 	public Map<String,String> getProperlyMap(List<String> lista)
 	{
-		lista.sort(null);
+		Collections.sort(lista);
 		int id =1;
 		
 		HashMap<String,String> properlyMap = new HashMap<>();
