@@ -369,7 +369,15 @@ public class ParametersWindow extends JFrame
 			ParametersWindow frame = (ParametersWindow)SwingUtilities.getWindowAncestor(b);
 			
 			JTable tbModel = frame.getTable();
-			if(tbModel.getRowCount() < ( frame.getProperlyMapPorta().size() * frame.getParameters().size() ) )
+			
+			int rowsLimit = 0;
+			for(String key:frame.getProperlyMapPorta().keySet())
+			{
+				String rightGate = frame.getProperlyMapPorta().get(key);
+				rowsLimit += frame.getParameters().get(rightGate).size();
+			}
+			
+			if(tbModel.getRowCount() < rowsLimit/*( frame.getProperlyMapPorta().size() * frame.getParameters().size() )*/ )
 			{
 				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
 				model.addRow(new Object[]{""});

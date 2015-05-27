@@ -1,1 +1,62 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><SciCumulus><conceptualWorkflow description="" tag="workflow-1"><activity activation="sdfsdfsdfsdf ID=%=ID% " description="" tag="primeira" type=""><relation name="4_OMod_primeira" reltype="Output"/><relation name="3_IMod_primeira" reltype="Input"/><field decimalplaces="0" input="3_IMod_primeira" name="ID" output="4_OMod_primeira" type="int"/></activity><activity activation="sdfsfsdf ID=%=ID% ID=%=ID% " description="" tag="segunda" type="MRQuery"><relation name="7_OMod_segunda" reltype="Output"/><relation dependency="primeira" name="6_IMod_segunda" reltype="Input"/><field decimalplaces="0" input="6_IMod_segunda" name="ID" output="7_OMod_segunda" type="int"/><relation name="8_IMod_segunda" reltype="Input"/><field decimalplaces="0" input="8_IMod_segunda" name="ID" output="7_OMod_segunda" type="int"/></activity><activity activation="dsfdsf =%=ID% " description="" tag="terceira" type=""><relation name="11_OMod_terceira" reltype="Output"/><relation dependency="segunda" name="10_IMod_terceira" reltype="Input"/><field decimalplaces="0" input="10_IMod_terceira" name="ID" output="11_OMod_terceira" type="int"/></activity><activity activation="sdfdsf ID=%=ID% ID=%=ID% " description="" tag="quarta&#10;" type="MRQuery"><relation name="14_OMod_quarta&#10;" reltype="Output"/><relation dependency="terceira" name="13_IMod_quarta&#10;" reltype="Input"/><field decimalplaces="0" input="13_IMod_quarta&#10;" name="ID" output="14_OMod_quarta&#10;" type="int"/><relation name="15_IMod_quarta&#10;" reltype="Input"/><field decimalplaces="0" input="15_IMod_quarta&#10;" name="ID" output="14_OMod_quarta&#10;" type="int"/></activity></conceptualWorkflow><credentials access_key="sdfdsd" secret_access_key="sdfdsf"/><environment cluster_name="fsdfds" type="CLOUD" verbose="false"/><binary conceptual_version="jhjkhj" directory="sdfsdfsf" execution_version="khjhjkh" query_version="jkhjkhjkhkj" starter_version="kjhjkh"/><workspace bucket_name="ghjghjg" compressed_dir="hjgjh" compressed_workspace="hjgjhg" upload="hhghj" workflow_dir="hjghjg"/><database Username="jjhkjhjk" name="dsdsf" password="hjkhk" path="" port="hkjhkj" server=""/><query sql="dsfdsfds"/><executionWorkflow execmodel="DYN_FAF" expdir="jkhjkhjhjk" max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1" user_interaction="false"><relation filename="jhjkhjkhjkh" name="8_IMod_segunda"/><relation filename="jkhjkhkjh" name="15_IMod_quarta&#10;"/><relation filename="jkhjkhjk" name="3_IMod_primeira"/></executionWorkflow></SciCumulus>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SciCumulus>
+	<conceptualWorkflow description="" tag="workflow-1">
+		<activity activation="m,n,mnm,nm, ID=%=ID% T2=%=T2% "
+			description="" tag="primeira" type="">
+			<relation name="4_OMod_primeira" reltype="Output" />
+			<relation name="3_IMod_primeira" reltype="Input" />
+			<field decimalplaces="0" input="3_IMod_primeira" name="ID"
+				output="4_OMod_primeira" type="int" />
+			<field decimalplaces="0" input="3_IMod_primeira" name="T2"
+				output="4_OMod_primeira" type="int" />
+		</activity>
+		<activity activation="jlkjkjkll ID=%=ID% T2=%=T2% ID=%=ID% T2=%=T2% "
+			description="" tag="segunda" type="MRQuery">
+			<relation name="7_OMod_segunda" reltype="Output" />
+			<relation dependency="primeira" name="6_IMod_segunda"
+				reltype="Input" />
+			<field decimalplaces="0" input="6_IMod_segunda" name="ID"
+				output="7_OMod_segunda" type="int" />
+			<field decimalplaces="0" input="6_IMod_segunda" name="T2" type="int" />
+			<relation name="8_IMod_segunda" reltype="Input" />
+			<field decimalplaces="0" input="8_IMod_segunda" name="ID"
+				output="7_OMod_segunda" type="int" />
+			<field decimalplaces="0" input="8_IMod_segunda" name="T2" type="int" />
+		</activity>
+		<activity activation="jkljklj ID=%=ID% " description=""
+			tag="terceira" type="">
+			<relation name="11_OMod_terceira" reltype="Output" />
+			<relation dependency="segunda" name="10_IMod_terceira"
+				reltype="Input" />
+			<field decimalplaces="0" input="10_IMod_terceira" name="ID"
+				output="11_OMod_terceira" type="int" />
+		</activity>
+		<activity activation="knnm,n ID=%=ID% ID=%=ID% " description=""
+			tag="quarta&#10;" type="MRQuery">
+			<relation name="14_OMod_quarta&#10;" reltype="Output" />
+			<relation dependency="terceira" name="13_IMod_quarta&#10;"
+				reltype="Input" />
+			<field decimalplaces="0" input="13_IMod_quarta&#10;" name="ID"
+				output="14_OMod_quarta&#10;" type="int" />
+			<relation name="15_IMod_quarta&#10;" reltype="Input" />
+			<field decimalplaces="0" input="15_IMod_quarta&#10;" name="ID"
+				output="14_OMod_quarta&#10;" type="int" />
+		</activity>
+	</conceptualWorkflow>
+	<credentials access_key="kljkljlk" secret_access_key="jlkjkl" />
+	<environment cluster_name="kljkljkl" type="CLOUD" verbose="false" />
+	<binary conceptual_version="kljlkjkl" directory="kljlkjkljlk"
+		execution_version="jkljklj" query_version="jkljlk" starter_version="kljkljkl" />
+	<workspace bucket_name="jkljlkj" compressed_dir="jlk"
+		compressed_workspace="kljkljkl" upload="njkljlk" workflow_dir="kljklj" />
+	<database Username="jkljkl" name="jkjlk" password="jkljl"
+		path="" port="kj" server="" />
+	<query sql="oopnml" />
+	<executionWorkflow execmodel="DYN_FAF"
+		expdir="ioiopipoopIOKLJljkljklj" max_failure="5" redundancy="true"
+		reliability="0.9" tag="workflow-1" user_interaction="false">
+		<relation filename="kljkljklJKLJLKJ" name="8_IMod_segunda" />
+		<relation filename="KLJlkjkljlkjlkjlk" name="15_IMod_quarta&#10;" />
+		<relation filename="oiopipopo" name="3_IMod_primeira" />
+	</executionWorkflow>
+</SciCumulus>

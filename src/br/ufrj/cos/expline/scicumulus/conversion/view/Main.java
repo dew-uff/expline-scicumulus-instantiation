@@ -10,7 +10,7 @@ public class Main
 	public static void main(String[] args)
 	{
 //		File read = new File("othersource/AbstractWorkflow-ScicumulusExample.xml");
-		File read = new File("othersource/Join_test2.xml");
+		File read = new File("othersource/Join.xml");
 		File writer = new File("othersource/concrete_teste_Join_Maluco.xml");
 		
 		Instantiator instantiator = new ScicumulusInstantiator();
