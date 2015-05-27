@@ -3,6 +3,8 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -31,9 +33,11 @@ public class ActivityMember extends JPanel
 	
 	private String paramStringValue;
 	
-	private HashMap<String,String> itensForComboBox;
+	private HashMap<String,List<String>> itensForComboBox;
 	
-	public ActivityMember(String key, HashMap<String,String> itensForComboBox)
+	private Vector dataVector = null;
+	
+	public ActivityMember(String key, HashMap<String,List<String>> itensForComboBox)
 	{
 		super();
 //		this.setLayout(null);
@@ -45,6 +49,7 @@ public class ActivityMember extends JPanel
 		this.keyInTheMap = key;
 		
 		this.itensForComboBox = itensForComboBox;
+		System.out.println("itensForComboBox: "+key+"\n"+itensForComboBox+"\n");
 		
 		
 //		System.out.println("--------- "+this.itensForComboBox.size());
@@ -144,9 +149,29 @@ public class ActivityMember extends JPanel
 		return tfActivation.getText() + " " + this.parameters;
 	}
 	
-	public void setActivation(String act)
+	public void setActivation(Vector act)
 	{
-		this.parameters = act;
+		
+		dataVector = act;
+		
+		if(dataVector != null)
+		{
+			String params = "";
+			for (Object object : dataVector) {
+	//			System.out.println(object.toString());
+				Vector temp = (Vector)object;
+				
+				String param = (String)temp.get(0);
+				String relType = (String)temp.get(1);
+				relType = parameterWindow.getProperlyMapPorta().get(relType);
+				
+				String field = (String)temp.get(2);
+				
+					
+				params += param + "=%=" +field+"% ";
+			}
+			this.parameters = params;
+		}
 //		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
 	}
 	
@@ -155,7 +180,7 @@ public class ActivityMember extends JPanel
 		this.paramStringValue = value;
 	}
 	
-	public HashMap<String,String> getParameters()
+	public HashMap<String,List<String>> getParameters()
 	{
 		return itensForComboBox;
 	}
@@ -172,7 +197,14 @@ public class ActivityMember extends JPanel
 //			MainWindow mw = (MainWindow) SwingUtilities.getWindowAncestor(member);
 //			if(member.getParameters().size() > 0)
 //			{
-				parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
+				if(dataVector != null)
+				{
+					parameterWindow = new ParametersWindow(keyInTheMap,member,member.getParameters(),dataVector);
+				}
+				else
+				{
+					parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
+				}
 //			}
 			
 		}

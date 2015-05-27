@@ -1,0 +1,107 @@
+<AbstractWorkflow>
+	<Activity id="2" value="primeira">
+		<Ports>
+			<InputPorts>
+				<Port id="3">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+							<RelationSchemaAttribute name="T2" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="4">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+							<RelationSchemaAttribute name="T2" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity algebraicOperator="MRQuery" id="5" value="segunda">
+		<Ports>
+			<InputPorts>
+				<Port id="6">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+							<RelationSchemaAttribute name="T2" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+				<Port id="8">
+					<RelationSchema as="relationSchema" >
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+							<RelationSchemaAttribute name="T2" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="7">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity id="9" value="terceira">
+		<Ports>
+			<InputPorts>
+				<Port id="10">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="11">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Activity algebraicOperator="MRQuery" id="12" value="quarta&#10;">
+		<Ports>
+			<InputPorts>
+				<Port id="13">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+				<Port id="15">
+					<RelationSchema as="relationSchema" />
+				</Port>
+			</InputPorts>
+			<OutputPorts>
+				<Port id="14">
+					<RelationSchema as="relationSchema">
+						<Array as="attributes">
+							<RelationSchemaAttribute name="ID" type="int" />
+						</Array>
+					</RelationSchema>
+				</Port>
+			</OutputPorts>
+		</Ports>
+	</Activity>
+	<Edge id="18" source="4" target="6" />
+	<Edge id="19" source="7" target="10" />
+	<Edge id="20" source="11" target="13" />
+</AbstractWorkflow>
