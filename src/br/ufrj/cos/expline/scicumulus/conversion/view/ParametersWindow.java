@@ -1,13 +1,14 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
@@ -16,10 +17,13 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -182,9 +186,9 @@ public class ParametersWindow extends JFrame
 		
 		
 		
-		String[] columnsNames = {"Parameter Name","Relation","Field"};
+//		String[] columnsNames = {"Parameter Name","Relation","Field"};
 		
-		DefaultTableModel model = new InstantiationTableModel(columnsNames,0);
+//		DefaultTableModel model = new InstantiationTableModel(columnsNames,0);
 		
 //		model.addTableModelListener(new TableModelListener() {
 //			
@@ -208,14 +212,14 @@ public class ParametersWindow extends JFrame
 //			}
 //		});
 		
-		tableTemp = new JTable(model);
+		tableTemp = new JTable();
 		tableTemp.setRowHeight(20);
 		
-//	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
+	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
 	    
-//		model.addColumn("Parameter Name");
-//	    model.addColumn("Relation"); 
-//	    model.addColumn("Field");// Este s�o os valores do combobox
+		model.addColumn("Parameter Name");
+	    model.addColumn("Relation"); 
+	    model.addColumn("Field");// Este s�o os valores do combobox
 	    
 	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna vis�vel
 	    
@@ -232,7 +236,7 @@ public class ParametersWindow extends JFrame
 	    TableColumn relationColumn = tableTemp.getColumnModel().getColumn(1);
 	    JComboBox relation = new JComboBox(values);
 //	    relation.addItemListener(new relationComboBoxItemListener());
-	    relationColumn.setCellEditor(new DefaultCellEditor( relation ) );
+	    relationColumn.setCellEditor(new DefaultCellEditor( relation ));
 //	    relationColumn.setCellRenderer(cellRenderer);
 	    relationColumn.setCellRenderer(new MyComboBoxRenderer(values));
 	    
@@ -322,16 +326,20 @@ public class ParametersWindow extends JFrame
 					String rightChoice = fakeProperlyMap.get(relation);
 					List<String> pp = window.getParameters().get(rightChoice);
 					DefaultComboBoxModel tr = new DefaultComboBoxModel();
-					for(String h:pp)
+					if(pp != null)
 					{
-						tr.addElement(h);
+						for(String h:pp)
+						{
+							tr.addElement(h);
+						}
+						
+						this.setModel(tr);
 					}
-					this.setModel(tr);
 				}
 			}
 			
         	if (isSelected) {
-        		setForeground(table.getSelectionForeground());
+        		setForeground(table.getForeground());//table.getSelectionForeground());
 	            super.setBackground(table.getSelectionBackground());
 	        } else {
 	        	setForeground(table.getForeground());
@@ -377,11 +385,14 @@ public class ParametersWindow extends JFrame
 				rowsLimit += frame.getParameters().get(rightGate).size();
 			}
 			
-			if(tbModel.getRowCount() < rowsLimit/*( frame.getProperlyMapPorta().size() * frame.getParameters().size() )*/ )
-			{
+//			if(tbModel.getRowCount() < rowsLimit/*( frame.getProperlyMapPorta().size() * frame.getParameters().size() )*/ )
+//			{
 				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
-				model.addRow(new Object[]{""});
-			}
+				model.addRow(new Object[]{"param"});
+				
+//				tbModel.setValueAt("relation", i-1 , 1);
+//				tbModel.setValueAt("field", i-1, 2);
+//			}
 		}
     	
     }
@@ -402,6 +413,18 @@ public class ParametersWindow extends JFrame
 			{
 				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
 				model.removeRow(pos);
+				if(tbModel.getRowCount() > 0)
+				{
+					if(pos >= tbModel.getRowCount())
+					{
+						tbModel.setRowSelectionInterval(pos-1, pos-1);
+					}
+					else
+					{
+						tbModel.setRowSelectionInterval(pos, pos);
+					}
+					
+				}
 			}
 		}
     }
@@ -462,16 +485,47 @@ public class ParametersWindow extends JFrame
 			
 			if(dataVector.size() > 0)
 			{
-				frame.setActivation(dataVector);
+				if(dataVectorIsFilledOut(dataVector))
+				{
+					System.out.println("aqui");
+					frame.setActivation(dataVector);
+					frame.dispose();
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Please, fill out the blank fields.");
+				}
 			}
 			else
 			{
+				System.out.println("ali");
 				frame.setActivation(null);
+				frame.dispose();
 			}
-			
-			
-			
-			frame.dispose();
+						
+		}
+
+		private boolean dataVectorIsFilledOut(Vector dataVector) {
+			// TODO Auto-generated method stub
+			String params = "";
+			for (Object object : dataVector) {
+	//			System.out.println(object.toString());
+				Vector temp = (Vector)object;
+				System.out.println("--------\n"+temp.toString());
+				String param = (String)temp.get(0);
+				String relType = (String)temp.get(1);
+				relType = getProperlyMapPorta().get(relType);
+				
+				String field = (String)temp.get(2);
+				
+				if(param.equals("") || relType == null || field == null)
+				{
+					return false;
+				}
+				
+			}
+			return true;
 		}
     	
     }

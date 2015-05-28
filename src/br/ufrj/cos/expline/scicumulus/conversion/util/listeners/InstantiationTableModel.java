@@ -17,4 +17,12 @@ public class InstantiationTableModel extends DefaultTableModel {
 		// TODO Auto-generated method stub
 		super.setValueAt(aValue, row, column);
 	}
+	
+	@Override
+	public void fireTableCellUpdated(int row, int column) {
+		// TODO Auto-generated method stub
+		
+		super.fireTableCellUpdated(row, column);
+		
+	}
 }

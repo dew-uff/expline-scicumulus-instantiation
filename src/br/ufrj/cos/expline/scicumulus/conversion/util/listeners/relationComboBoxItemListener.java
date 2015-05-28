@@ -10,8 +10,8 @@ public class relationComboBoxItemListener implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
-//		JComboBox cb = (JComboBox)e.getSource();
-//		System.out.println(cb);
+		JComboBox cb = (JComboBox)e.getSource();
+		cb.setSelectedIndex(0);
 	}
 
 }

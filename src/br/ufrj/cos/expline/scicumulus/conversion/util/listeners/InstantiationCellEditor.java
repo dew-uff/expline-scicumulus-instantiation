@@ -46,27 +46,16 @@ public class InstantiationCellEditor extends DefaultCellEditor {
 				System.out.println(parametersMap.toString());
 				
 				List<String> listOfFields = parametersMap.get(rightChoice);
-				
-				for(String key:listOfFields)
+				if(listOfFields != null)
 				{
-					this.model.addElement(key);
-				}
-				
-//				for(String key : keySet)
-//				{
-//					if( ((String)parametersMap.get(key)).equals(rightChoice) )
-//					{
-////						fieldsList.add(key);
-//						this.model.addElement(key);
-//					}
-//				}
-				
-				
+					for(String key:listOfFields)
+					{
+						this.model.addElement(key);
+					}
+				}			
 			}
 		}
 		
 		return super.getTableCellEditorComponent(table, value, isSelected, row, column);
-	}   
-	
-	
+	}
 }
