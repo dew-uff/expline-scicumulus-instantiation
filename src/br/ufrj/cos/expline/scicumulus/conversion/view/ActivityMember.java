@@ -146,7 +146,10 @@ public class ActivityMember extends JPanel
 	public String getActivation()
 	{
 		// TODO
-		return tfActivation.getText() + " " + this.parameters;
+		if(this.parameters != null)
+			return tfActivation.getText() + " " + this.parameters;
+		else
+			return tfActivation.getText();
 	}
 	
 	public void setActivation(Vector act)

@@ -168,7 +168,7 @@ public class Conversion_reader {
 								
 								if(relationSchemaAttributeOutput == null)
 								{
-									//writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 								}else
 								{
 									if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
