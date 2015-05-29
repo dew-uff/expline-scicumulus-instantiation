@@ -175,43 +175,7 @@ public class ParametersWindow extends JFrame
 		this.setTitle(this.title);	
 		
 		mainPanel = new JPanel();
-		
-//		dataModel = new AbstractTableModel() 
-//		{
-//		      public int getColumnCount() { return 2; }
-//		      public int getRowCount() { return 10;}
-//		      public Object getValueAt(int row, int col) { return new Integer(row*col); }
-//		};
-		
-		
-		
-		
-//		String[] columnsNames = {"Parameter Name","Relation","Field"};
-		
-//		DefaultTableModel model = new InstantiationTableModel(columnsNames,0);
-		
-//		model.addTableModelListener(new TableModelListener() {
-//			
-//			@Override
-//			public void tableChanged(TableModelEvent e) {
-//				// TODO Auto-generated method stub
-//				int column = e.getColumn();
-//				int row = e.getLastRow();
-//				
-//				if(column == 1)
-//				{
-//					TableModel model = (TableModel)e.getSource();
-//					
-//					String choice = (String)model.getValueAt(e.getLastRow(), column);
-//					Object[] values = {"2"};
-//					JComboBox op = new JComboBox(values);
-//					
-//					model.setValueAt(op, row, 2);
-//					System.out.println(choice+"  ");
-//				}
-//			}
-//		});
-		
+	
 		tableTemp = new JTable();
 		tableTemp.setRowHeight(20);
 		
@@ -236,7 +200,7 @@ public class ParametersWindow extends JFrame
 	    TableColumn relationColumn = tableTemp.getColumnModel().getColumn(1);
 	    JComboBox relation = new JComboBox(values);
 //	    relation.addItemListener(new relationComboBoxItemListener());
-	    relationColumn.setCellEditor(new DefaultCellEditor( relation ));
+	    relationColumn.setCellEditor( new InstantiationCellEditor() );//new DefaultCellEditor( relation ));
 //	    relationColumn.setCellRenderer(cellRenderer);
 	    relationColumn.setCellRenderer(new MyComboBoxRenderer(values));
 	    

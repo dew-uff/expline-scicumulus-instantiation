@@ -33,26 +33,46 @@ public class InstantiationCellEditor extends DefaultCellEditor {
 		
 		if(column == 2)
 		{
-			String choice = (String)table.getValueAt(row, 1);
-			if(choice != null)
+			this.model.removeAllElements();
+			String choice = (String)table.getValueAt(row,column-1);
+			System.out.println(choice);
+			if(choice != null )
 			{
-				this.model.removeAllElements();
-				Map<String,String> fakeProperlyMap = window.getFakeProperlyMap();
-				System.out.println(fakeProperlyMap.toString());
-				
-				String rightChoice = fakeProperlyMap.get(choice);
-				Map<String,List<String>> parametersMap = window.getParameters();
-				
-				System.out.println(parametersMap.toString());
-				
-				List<String> listOfFields = parametersMap.get(rightChoice);
-				if(listOfFields != null)
+				if(choice.length() > 0)
 				{
-					for(String key:listOfFields)
+					
+					Map<String,String> fakeProperlyMap = window.getFakeProperlyMap();
+					System.out.println(fakeProperlyMap.toString());
+					
+					String rightChoice = fakeProperlyMap.get(choice);
+					Map<String,List<String>> parametersMap = window.getParameters();
+					
+					System.out.println(parametersMap.toString());
+					
+					List<String> listOfFields = parametersMap.get(rightChoice);
+					if(listOfFields != null)
+					{
+						for(String key:listOfFields)
+						{
+							this.model.addElement(key);
+						}
+					}
+				}
+			}
+		}
+		else if( column == 1)
+		{
+			this.model.removeAllElements();
+			Map<String,String> fakeProperlyMap = window.getFakeProperlyMap();
+			if(fakeProperlyMap != null)
+			{
+				if( fakeProperlyMap.size() > 0 )
+				{
+					for(String key:fakeProperlyMap.keySet())
 					{
 						this.model.addElement(key);
 					}
-				}			
+				}
 			}
 		}
 		
