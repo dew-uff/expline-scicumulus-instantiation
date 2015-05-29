@@ -107,10 +107,10 @@ public class Conversion_reader {
 					
 					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
 				}
-				if(relationSchemaAttributeOutput != null)
-				{
+//				if(relationSchemaAttributeOutput != null)
+//				{
 					writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
-				}
+//				}
 				/* -----------FIM OUTPUT--------- */
 				
 				/* -----------INICIO INPUT--------- */
@@ -148,10 +148,10 @@ public class Conversion_reader {
 						
 					}
 					
-					if(relationSchemaAttributeInput != null)
-					{
+//					if(relationSchemaAttributeInput != null)
+//					{
 						writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
-					}
+//					}
 					/* --------- Colocar Field ------ */
 					if(relationSchemaAttributeInput != null)
 					{
