@@ -139,6 +139,7 @@ public class Conversion_reader {
 					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
 					
 					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
+					System.out.println(arrayInput.getLength() + "----->" + iModAct);
 				
 					if(arrayInput.getLength() > 0)
 					{
@@ -153,15 +154,18 @@ public class Conversion_reader {
 						writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
 //					}
 					/* --------- Colocar Field ------ */
-					if(relationSchemaAttributeInput != null)
+					if(arrayInput.getLength() > 0) //relationSchemaAttributeInput != null)
 					{
+						System.out.println("entrou "+iModAct);
 						List<String> listOfFields = new ArrayList<>();
+//						System.out.println(relationSchemaAttributeInput.getLength() + " length--->"+  iModAct);
 						for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
 						{
+//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
 							if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
 							{
 								Element elemAux = (Element)relationSchemaAttributeInput.item(j);
-								
+//								System.out.println(elemAux);
 //								temp.put( elemAux.getAttribute("name"), iModAct); //Insert in the activityMap
 								listOfFields.add(elemAux.getAttribute("name"));
 //								System.out.println("coloca no temp "+elemAux.getAttribute("name"));

@@ -69,7 +69,7 @@ public class ParametersWindow extends JFrame
 	{
 		
 		this.parameters = parameters;
-		System.out.println("\n"+parameters.toString()+"\n");
+//		System.out.println("\n"+parameters.toString()+"\n");
 		initClass(title, member);
 	}
 	
@@ -241,7 +241,7 @@ public class ParametersWindow extends JFrame
 		int id =1;
 		
 		HashMap<String,String> properlyMap = new HashMap<>();
-		System.out.println(lista.size());
+//		System.out.println(lista.size());
 		
 		for(String temp : lista)
 		{
@@ -451,7 +451,7 @@ public class ParametersWindow extends JFrame
 			{
 				if(dataVectorIsFilledOut(dataVector))
 				{
-					System.out.println("aqui");
+//					System.out.println("aqui");
 					frame.setActivation(dataVector);
 					frame.dispose();
 					
@@ -463,7 +463,7 @@ public class ParametersWindow extends JFrame
 			}
 			else
 			{
-				System.out.println("ali");
+//				System.out.println("ali");
 				frame.setActivation(null);
 				frame.dispose();
 			}
@@ -476,7 +476,7 @@ public class ParametersWindow extends JFrame
 			for (Object object : dataVector) {
 	//			System.out.println(object.toString());
 				Vector temp = (Vector)object;
-				System.out.println("--------\n"+temp.toString());
+//				System.out.println("--------\n"+temp.toString());
 				String param = (String)temp.get(0);
 				String relType = (String)temp.get(1);
 				relType = getProperlyMapPorta().get(relType);

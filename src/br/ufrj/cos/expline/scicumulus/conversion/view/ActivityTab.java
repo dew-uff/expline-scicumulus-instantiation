@@ -137,7 +137,7 @@ public class ActivityTab extends JPanel
 		{
 			if(am.fieldIsEmpty())
 			{
-				System.out.println("Activity");
+//				System.out.println("Activity");
 				return false;
 			}
 		}

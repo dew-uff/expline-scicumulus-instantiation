@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SciCumulus>
 	<conceptualWorkflow description="" tag="workflow-1">
-		<activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%"
-			description="" tag="act1" type="Map">
+		<activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%" description="" tag="act1" type="Map">
 			<relation name="IModAct1" reltype="Input" />
 			<relation name="OModAct1" reltype="Output" />
-			<field decimalplaces="0" input="IModAct1" name="ID" output="OModAct1"
-				type="float" />
+			<field decimalplaces="0" input="IModAct1" name="ID" output="OModAct1" type="float" />
 			<field decimalplaces="0" input="IModAct1" name="T1" type="float" />
-			<field decimalplaces="0" input="IModAct1" name="T2" output="OModAct1"
-				type="float" />
+			<field decimalplaces="0" input="IModAct1" name="T2" output="OModAct1" type="float" />
 		</activity>
-		<activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%"
-			description="" tag="act2" type="Map">
+		<activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%" description="" tag="act2" type="Map">
 			<relation dependency="act1" name="IModAct2" reltype="Input" />
 			<relation name="OModAct2" reltype="Output" />
-			<field decimalplaces="0" input="IModAct2" name="ID" output="OModAct2"
-				type="float" />
-			<field decimalplaces="0" input="IModAct2" name="T2" output="OModAct2"
-				type="float" />
+			<field decimalplaces="0" input="IModAct2" name="ID" output="OModAct2" type="float" />
+			<field decimalplaces="0" input="IModAct2" name="T2" output="OModAct2" type="float" />
 		</activity>
 	</conceptualWorkflow>
 	<credentials access_key="chave de acesso"

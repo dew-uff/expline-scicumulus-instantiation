@@ -49,7 +49,7 @@ public class ActivityMember extends JPanel
 		this.keyInTheMap = key;
 		
 		this.itensForComboBox = itensForComboBox;
-		System.out.println("itensForComboBox: "+key+"\n"+itensForComboBox+"\n");
+//		System.out.println("itensForComboBox: "+key+"\n"+itensForComboBox+"\n");
 		
 		
 //		System.out.println("--------- "+this.itensForComboBox.size());
