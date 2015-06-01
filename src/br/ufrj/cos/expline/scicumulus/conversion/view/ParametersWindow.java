@@ -245,8 +245,12 @@ public class ParametersWindow extends JFrame
 		
 		for(String temp : lista)
 		{
-			properlyMap.put("Port "+ id, temp);
-			id++;
+			if(getParameters().containsKey(temp))
+			{
+				properlyMap.put("Port "+ id, temp);
+				id++;
+			}
+			
 		}
 		
 		//System.out.println(properlyMap.toString());
@@ -342,12 +346,12 @@ public class ParametersWindow extends JFrame
 			
 			JTable tbModel = frame.getTable();
 			
-			int rowsLimit = 0;
-			for(String key:frame.getProperlyMapPorta().keySet())
-			{
-				String rightGate = frame.getProperlyMapPorta().get(key);
-				rowsLimit += frame.getParameters().get(rightGate).size();
-			}
+//			int rowsLimit = 0;
+//			for(String key:frame.getProperlyMapPorta().keySet())
+//			{
+//				String rightGate = frame.getProperlyMapPorta().get(key);
+//				rowsLimit += frame.getParameters().get(rightGate).size();
+//			}
 			
 //			if(tbModel.getRowCount() < rowsLimit/*( frame.getProperlyMapPorta().size() * frame.getParameters().size() )*/ )
 //			{
