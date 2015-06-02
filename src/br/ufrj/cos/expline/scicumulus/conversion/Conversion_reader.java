@@ -190,7 +190,19 @@ public class Conversion_reader {
 							}
 						}
 					}else{
-//						writer.insertField("", "", iModAct, oModAct, auxElem.getAttribute("value"));
+						if(relationSchemaAttributeOutput != null)
+						{
+							for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
+							{
+	//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
+								if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
+								{
+									Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
+								}
+							}
+						}
+						
 					}
 					/* -------- FIM colocar Field---- */
 					activityMap.put(auxElem.getAttribute("value"), temp);

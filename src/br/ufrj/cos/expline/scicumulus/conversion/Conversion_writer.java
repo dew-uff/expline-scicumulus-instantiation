@@ -176,10 +176,6 @@ public class Conversion_writer implements IWriter{
 			}
 
 		}
-		
-		
-		
-		
 	}
 	
 	public void insertOutputRelation(String name, String activityTag) {
@@ -205,38 +201,104 @@ public class Conversion_writer implements IWriter{
 	@Override
 	public void insertField(String name, String type, String input, String output, String activityTag) {
 
-		
-		Element sciCumulusField = this.scicumulusXML.createElement("field");
-		
-		Attr sciCumulusFieldName = this.scicumulusXML.createAttribute("name");
-		sciCumulusFieldName.setValue(name);
-		
-		Attr sciCumulusFieldType = this.scicumulusXML.createAttribute("type");
-		sciCumulusFieldType.setNodeValue(type);
-		
-		Attr sciCumulusFieldInput = this.scicumulusXML.createAttribute("input");
-		sciCumulusFieldInput.setNodeValue(input);
-		
-		if (output != null) {
-			Attr sciCumulusFieldOutput = this.scicumulusXML.createAttribute("output");
-			sciCumulusFieldOutput.setNodeValue(output);
-			sciCumulusField.setAttributeNode(sciCumulusFieldOutput);
+		if(input != null)
+		{
+			Element sciCumulusField = this.scicumulusXML.createElement("field");
+			
+			Attr sciCumulusFieldName = this.scicumulusXML.createAttribute("name");
+			sciCumulusFieldName.setValue(name);
+			
+			Attr sciCumulusFieldType = this.scicumulusXML.createAttribute("type");
+			sciCumulusFieldType.setNodeValue(type);
+			
+			
+			Attr sciCumulusFieldInput = this.scicumulusXML.createAttribute("input");
+			sciCumulusFieldInput.setNodeValue(input);
+			
+			
+			if (output != null) {
+				Attr sciCumulusFieldOutput = this.scicumulusXML.createAttribute("output");
+				sciCumulusFieldOutput.setNodeValue(output);
+				sciCumulusField.setAttributeNode(sciCumulusFieldOutput);
+			}
+			
+			Attr sciCumulusFieldDecimalplaces = this.scicumulusXML.createAttribute("decimalplaces");
+			sciCumulusFieldDecimalplaces.setNodeValue("0");
+			
+			
+			sciCumulusField.setAttributeNode(sciCumulusFieldName);
+			sciCumulusField.setAttributeNode(sciCumulusFieldType);
+			sciCumulusField.setAttributeNode(sciCumulusFieldInput);
+			sciCumulusField.setAttributeNode(sciCumulusFieldDecimalplaces);
+			
+			appendActivityChild(sciCumulusField, activityTag);
 		}
-		
-		Attr sciCumulusFieldDecimalplaces = this.scicumulusXML.createAttribute("decimalplaces");
-		sciCumulusFieldDecimalplaces.setNodeValue("0");
-		
-		
-		sciCumulusField.setAttributeNode(sciCumulusFieldName);
-		sciCumulusField.setAttributeNode(sciCumulusFieldType);
-		sciCumulusField.setAttributeNode(sciCumulusFieldInput);
-		sciCumulusField.setAttributeNode(sciCumulusFieldDecimalplaces);
-		
-		appendActivityChild(sciCumulusField, activityTag);
-		
+		else
+		{
+			if(!alreadyHaveThisField(output,name,activityTag))
+			{
+				//TODO have to create this mathod
+				Element sciCumulusField = this.scicumulusXML.createElement("field");
+				
+				Attr sciCumulusFieldName = this.scicumulusXML.createAttribute("name");
+				sciCumulusFieldName.setValue(name);
+				
+				Attr sciCumulusFieldType = this.scicumulusXML.createAttribute("type");
+				sciCumulusFieldType.setNodeValue(type);
+				
+				
+//				Attr sciCumulusFieldInput = this.scicumulusXML.createAttribute("input");
+//				sciCumulusFieldInput.setNodeValue(input);
+				
+				
+				if (output != null) {
+					Attr sciCumulusFieldOutput = this.scicumulusXML.createAttribute("output");
+					sciCumulusFieldOutput.setNodeValue(output);
+					sciCumulusField.setAttributeNode(sciCumulusFieldOutput);
+				}
+				
+				Attr sciCumulusFieldDecimalplaces = this.scicumulusXML.createAttribute("decimalplaces");
+				sciCumulusFieldDecimalplaces.setNodeValue("0");
+				
+				
+				sciCumulusField.setAttributeNode(sciCumulusFieldName);
+				sciCumulusField.setAttributeNode(sciCumulusFieldType);
+				sciCumulusField.setAttributeNode(sciCumulusFieldDecimalplaces);
+				
+				appendActivityChild(sciCumulusField, activityTag);
+			}
+		}
 		
 	}
 	
+	private boolean alreadyHaveThisField(String output, String name,String activity) {
+		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
+		
+		Element currentChild = (Element)sciCumulusChildren.item(0);
+		
+		NodeList conceptualWorkflowChildren = currentChild.getElementsByTagName("activity");
+		
+		for (int i = 0; i < conceptualWorkflowChildren.getLength(); i++) {
+			
+			Element currentActivity = (Element)conceptualWorkflowChildren.item(i);
+			String currentActivityTag = currentActivity.getAttribute("tag");
+			
+			if (currentActivityTag.equals(activity)) 
+			{
+				NodeList fieldNodeList = currentActivity.getElementsByTagName("field");
+				for (int j = 0; j < fieldNodeList.getLength(); j++) 
+				{
+					Element field = (Element)fieldNodeList.item(j);
+					if(field.getAttribute("name").equals(name)  && field.getAttribute("output").equals(output))
+						return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+
 	private void insertEnvironment(String verbose, String type, String clusterName){
 
 		Element sciCumulusenvironment = this.scicumulusXML.createElement("environment");
