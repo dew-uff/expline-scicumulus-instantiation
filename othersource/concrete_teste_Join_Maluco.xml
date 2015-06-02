@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><SciCumulus><conceptualWorkflow description="" tag="workflow-1"><activity activation="asdsadsad param=%=T1% param=%=ID% " description="" tag="act" type="MRQuery"><relation name="4_OMod_act" reltype="Output"/><relation name="3_IMod_act" reltype="Input"/><field decimalplaces="0" input="3_IMod_act" name="ID" type="int"/><field decimalplaces="0" name="T2" output="4_OMod_act" type="int"/><relation name="5_IMod_act" reltype="Input"/><field decimalplaces="0" input="5_IMod_act" name="T1" type="int"/></activity></conceptualWorkflow><credentials access_key="sadsad" secret_access_key="sadsad"/><environment cluster_name="adsadsad" type="CLOUD" verbose="false"/><binary conceptual_version="sadsa" directory="sadsad" execution_version="dsad" query_version="asdasd" starter_version="asdsad"/><workspace bucket_name="asdas" compressed_dir="asdadsad" compressed_workspace="sdasd" upload="sadsad" workflow_dir="dasda"/><database Username="sadsadsa" name="dasd" password="dsad" path="" port="sadsa" server=""/><query sql="asdsadsad"/><executionWorkflow execmodel="DYN_FAF" expdir="asdsad" max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1" user_interaction="false"><relation filename="sadsadas" name="5_IMod_act"/><relation filename="dsadsada" name="3_IMod_act"/></executionWorkflow></SciCumulus>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SciCumulus>
+	<conceptualWorkflow description="" tag="workflow-1">
+		<activity activation="asdsadsad param=%=T1% param=%=ID% "
+			description="" tag="act" type="MRQuery">
+			<relation name="4_OMod_act" reltype="Output" />
+			<relation name="3_IMod_act" reltype="Input" />
+			<field decimalplaces="0" input="3_IMod_act" name="ID" type="int" />
+			<field decimalplaces="0" name="T2" output="4_OMod_act" type="int" />
+			<relation name="5_IMod_act" reltype="Input" />
+			<field decimalplaces="0" input="5_IMod_act" name="T1" type="int" />
+		</activity>
+	</conceptualWorkflow>
+	<credentials access_key="sadsad" secret_access_key="sadsad" />
+	<environment cluster_name="adsadsad" type="CLOUD" verbose="false" />
+	<binary conceptual_version="sadsa" directory="sadsad"
+		execution_version="dsad" query_version="asdasd" starter_version="asdsad" />
+	<workspace bucket_name="asdas" compressed_dir="asdadsad"
+		compressed_workspace="sdasd" upload="sadsad" workflow_dir="dasda" />
+	<database Username="sadsadsa" name="dasd" password="dsad"
+		path="" port="sadsa" server="" />
+	<query sql="asdsadsad" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="asdsad"
+		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
+		user_interaction="false">
+		<relation filename="sadsadas" name="5_IMod_act" />
+		<relation filename="dsadsada" name="3_IMod_act" />
+	</executionWorkflow>
+</SciCumulus>

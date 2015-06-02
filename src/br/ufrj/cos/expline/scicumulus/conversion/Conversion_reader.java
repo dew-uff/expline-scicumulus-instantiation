@@ -139,7 +139,7 @@ public class Conversion_reader {
 					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
 					
 					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
-					System.out.println(arrayInput.getLength() + "----->" + iModAct);
+//					System.out.println(arrayInput.getLength() + "----->" + iModAct);
 				
 					if(arrayInput.getLength() > 0)
 					{

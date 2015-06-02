@@ -35,19 +35,19 @@ public class InstantiationCellEditor extends DefaultCellEditor {
 		{
 			this.model.removeAllElements();
 			String choice = (String)table.getValueAt(row,column-1);
-			System.out.println(choice);
+//			System.out.println(choice);
 			if(choice != null )
 			{
 				if(choice.length() > 0)
 				{
 					
 					Map<String,String> fakeProperlyMap = window.getFakeProperlyMap();
-					System.out.println(fakeProperlyMap.toString());
+//					System.out.println(fakeProperlyMap.toString());
 					
 					String rightChoice = fakeProperlyMap.get(choice);
 					Map<String,List<String>> parametersMap = window.getParameters();
 					
-					System.out.println(parametersMap.toString());
+//					System.out.println(parametersMap.toString());
 					
 					List<String> listOfFields = parametersMap.get(rightChoice);
 					if(listOfFields != null)
