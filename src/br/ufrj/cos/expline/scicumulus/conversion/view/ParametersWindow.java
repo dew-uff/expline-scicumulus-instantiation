@@ -3,26 +3,35 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+import br.ufrj.cos.expline.scicumulus.conversion.util.listeners.InstantiationCellEditor;
+import br.ufrj.cos.expline.scicumulus.conversion.util.listeners.InstantiationTableModel;
 
 @SuppressWarnings("serial")
 public class ParametersWindow extends JFrame
@@ -46,7 +55,7 @@ public class ParametersWindow extends JFrame
 	
 	private MainWindow mw;
 	
-	private HashMap<String,String> parameters;
+	private HashMap<String,List<String>> parameters;
 	
 	private Map<String,String> properlyMap;
 	
@@ -56,13 +65,32 @@ public class ParametersWindow extends JFrame
 		initClass(title, member);
 	}
 	
-	public ParametersWindow(String title,ActivityMember member,HashMap<String,String> parameters)
+	public ParametersWindow(String title,ActivityMember member,HashMap<String,List<String>> parameters)
 	{
 		
 		this.parameters = parameters;
+//		System.out.println("\n"+parameters.toString()+"\n");
 		initClass(title, member);
 	}
 	
+	public ParametersWindow(String keyInTheMap, ActivityMember member,HashMap<String, List<String>> parameters2, Vector dataVector) {
+		// TODO Auto-generated constructor stub
+		this(keyInTheMap,member,parameters2);
+		
+		carregTabela(dataVector);
+	}
+
+	private void carregTabela(Vector dataVector) {
+		// TODO Auto-generated method stub
+		DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();
+		for(Object row:dataVector)
+		{
+			Vector infos = (Vector)row;
+			Object[] rowInfo = {infos.get(0),infos.get(1),infos.get(2)};
+			model.addRow(rowInfo);
+		}
+	}
+
 	private void initClass(String title, ActivityMember member)
 	{
 		this.setSize(500, 300);
@@ -147,34 +175,34 @@ public class ParametersWindow extends JFrame
 		this.setTitle(this.title);	
 		
 		mainPanel = new JPanel();
-		
-//		dataModel = new AbstractTableModel() 
-//		{
-//		      public int getColumnCount() { return 2; }
-//		      public int getRowCount() { return 10;}
-//		      public Object getValueAt(int row, int col) { return new Integer(row*col); }
-//		};
-		
+	
 		tableTemp = new JTable();
 		tableTemp.setRowHeight(20);
 		
 	    DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();        // Adiciona algumas colunas
-	    model.addColumn("Parameter Name");
-	    model.addColumn("Relation"); 
-	    model.addColumn("Field");// Este são os valores do combobox
 	    
-	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visível
+		model.addColumn("Parameter Name");
+	    model.addColumn("Relation"); 
+	    model.addColumn("Field");// Este sï¿½o os valores do combobox
+	    
+	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna visï¿½vel
 	    
 	    List<String> listOfRelName = Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
 	    
-	    values = listOfRelName.toArray();
-	    this.properlyMap = getProperlyMap(listOfRelName);
+//	    values = listOfRelName.toArray();
+	    if(listOfRelName.size() > 0)
+	    {
+	    	this.properlyMap = getProperlyMap(listOfRelName);
+	    }
 	    
 	    values = this.properlyMap.keySet().toArray();
 	    
-	    TableColumn col = tableTemp.getColumnModel().getColumn(1);
-	    col.setCellEditor(new MyComboBoxEditor(values));        
-	    col.setCellRenderer(new MyComboBoxRenderer(values));
+	    TableColumn relationColumn = tableTemp.getColumnModel().getColumn(1);
+	    JComboBox relation = new JComboBox(values);
+//	    relation.addItemListener(new relationComboBoxItemListener());
+	    relationColumn.setCellEditor( new InstantiationCellEditor() );//new DefaultCellEditor( relation ));
+//	    relationColumn.setCellRenderer(cellRenderer);
+	    relationColumn.setCellRenderer(new MyComboBoxRenderer(values));
 	    
 //	    listOfRelName.clear();
 //	    for (String p : parameters.keySet()) {
@@ -183,9 +211,10 @@ public class ParametersWindow extends JFrame
 //	    values = new Object[]{"item1", "item2", "item3"};
 	    values = parameters.keySet().toArray();
 	    
-	    TableColumn col1 = tableTemp.getColumnModel().getColumn(2);
-	    col1.setCellEditor(new MyComboBoxEditor(values));        
-	    col1.setCellRenderer(new MyComboBoxRenderer(values));
+	    TableColumn fieldColumn = tableTemp.getColumnModel().getColumn(2);
+//	    fieldColumn.setCellEditor(new DefaultCellEditor( new JComboBox(values) ) );
+	    fieldColumn.setCellEditor(new InstantiationCellEditor() );
+	    fieldColumn.setCellRenderer(new MyComboBoxRenderer(values));
 	    
 	    addButton = new JButton("Add");
 	    addButton.addActionListener(new AddListener());
@@ -201,16 +230,23 @@ public class ParametersWindow extends JFrame
 	    
 	}
 	
+	public Map<String,String> getFakeProperlyMap()
+	{
+		return this.properlyMap;
+	}
+	
 	public Map<String,String> getProperlyMap(List<String> lista)
 	{
-		lista.sort(null);
+		Collections.sort(lista);
 		int id =1;
 		
 		HashMap<String,String> properlyMap = new HashMap<>();
+//		System.out.println(lista.size());
 		
 		for(String temp : lista)
 		{
-			properlyMap.put("Porta "+id++, temp);
+			properlyMap.put("Port "+ id, temp);
+			id++;
 		}
 		
 		//System.out.println(properlyMap.toString());
@@ -218,11 +254,17 @@ public class ParametersWindow extends JFrame
 		return properlyMap;
 	}
 	
-	public void setActivation(String activation)
+	public void setActivation(Vector activation)
 	{
 		this.activityMember.setActivation(activation);
-	}
+	} 
 	
+	public HashMap<String, List<String>> getParameters() {
+		return parameters;
+	}
+
+
+
 	@SuppressWarnings({ "serial", "rawtypes" })
 	public class MyComboBoxRenderer extends JComboBox implements TableCellRenderer {
         /**
@@ -235,19 +277,44 @@ public class ParametersWindow extends JFrame
         }   
        
 		@Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {            
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) { 
+			ParametersWindow window = (ParametersWindow)SwingUtilities.getWindowAncestor(table);
+			
+			if(column == 2)
+			{
+				String relation = (String)table.getValueAt(row, 1);
+				if(relation != null)
+				{
+					Map<String,String> fakeProperlyMap = window.getFakeProperlyMap();
+					
+					String rightChoice = fakeProperlyMap.get(relation);
+					List<String> pp = window.getParameters().get(rightChoice);
+					DefaultComboBoxModel tr = new DefaultComboBoxModel();
+					if(pp != null)
+					{
+						for(String h:pp)
+						{
+							tr.addElement(h);
+						}
+						
+						this.setModel(tr);
+					}
+				}
+			}
+			
         	if (isSelected) {
-                setForeground(table.getSelectionForeground());
-               super.setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(table.getBackground());
-            }                
+        		setForeground(table.getForeground());//table.getSelectionForeground());
+	            super.setBackground(table.getSelectionBackground());
+	        } else {
+	        	setForeground(table.getForeground());
+	            setBackground(table.getBackground());
+	        }                
+	       
         	setSelectedItem(value);
             return this;
         }
-    }   
-    
+    }      
+	
     @SuppressWarnings("serial")
 	public class MyComboBoxEditor extends DefaultCellEditor {
     	
@@ -255,6 +322,7 @@ public class ParametersWindow extends JFrame
 		public MyComboBoxEditor(Object[] items) {
             super(new JComboBox(items));
         }
+        
     }
     
     public JTable getTable()
@@ -273,11 +341,22 @@ public class ParametersWindow extends JFrame
 			ParametersWindow frame = (ParametersWindow)SwingUtilities.getWindowAncestor(b);
 			
 			JTable tbModel = frame.getTable();
-			if(tbModel.getRowCount() < frame.getProperlyMapPorta().size())
+			
+			int rowsLimit = 0;
+			for(String key:frame.getProperlyMapPorta().keySet())
 			{
-				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
-				model.addRow(new Object[]{""});
+				String rightGate = frame.getProperlyMapPorta().get(key);
+				rowsLimit += frame.getParameters().get(rightGate).size();
 			}
+			
+//			if(tbModel.getRowCount() < rowsLimit/*( frame.getProperlyMapPorta().size() * frame.getParameters().size() )*/ )
+//			{
+				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
+				model.addRow(new Object[]{"param"});
+				
+//				tbModel.setValueAt("relation", i-1 , 1);
+//				tbModel.setValueAt("field", i-1, 2);
+//			}
 		}
     	
     }
@@ -298,6 +377,18 @@ public class ParametersWindow extends JFrame
 			{
 				DefaultTableModel model = (DefaultTableModel)tbModel.getModel();
 				model.removeRow(pos);
+				if(tbModel.getRowCount() > 0)
+				{
+					if(pos >= tbModel.getRowCount())
+					{
+						tbModel.setRowSelectionInterval(pos-1, pos-1);
+					}
+					else
+					{
+						tbModel.setRowSelectionInterval(pos, pos);
+					}
+					
+				}
 			}
 		}
     }
@@ -338,24 +429,67 @@ public class ParametersWindow extends JFrame
 			
 			DefaultTableModel model = (DefaultTableModel)table.getModel();
 			Vector dataVector = model.getDataVector();
-			String params = "";
-			for (Object object : dataVector) {
-//				System.out.println(object.toString());
-				Vector temp = (Vector)object;
-				String param = (String)temp.get(0);
-				String relType = (String)temp.get(1);
-				relType = frame.getProperlyMapPorta().get(relType);
-				String field = (String)temp.get(2);
-				
-					
-				params += param + "=%=" +field+"% ";
-			}
+			
+//			String params = "";
+//			for (Object object : dataVector) {
+////				System.out.println(object.toString());
+//				Vector temp = (Vector)object;
+//				
+//				String param = (String)temp.get(0);
+//				String relType = (String)temp.get(1);
+//				relType = frame.getProperlyMapPorta().get(relType);
+//				
+//				String field = (String)temp.get(2);
+//				
+//					
+//				params += param + "=%=" +field+"% ";
+//			}
 			
 //			System.out.println("------>  "+params);
 			
-			frame.setActivation(params);
-			
-			frame.dispose();
+			if(dataVector.size() > 0)
+			{
+				if(dataVectorIsFilledOut(dataVector))
+				{
+//					System.out.println("aqui");
+					frame.setActivation(dataVector);
+					frame.dispose();
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Please, fill out the blank fields.");
+				}
+			}
+			else
+			{
+//				System.out.println("ali");
+				frame.setActivation(null);
+				frame.dispose();
+			}
+						
+		}
+
+		private boolean dataVectorIsFilledOut(Vector dataVector) {
+			// TODO Auto-generated method stub
+			String params = "";
+			for (Object object : dataVector) {
+	//			System.out.println(object.toString());
+				Vector temp = (Vector)object;
+//				System.out.println("--------\n"+temp.toString());
+				String param = (String)temp.get(0);
+				String relType = (String)temp.get(1);
+				relType = getProperlyMapPorta().get(relType);
+				
+				String field = (String)temp.get(2);
+				
+				if(param.equals("") || relType == null || field == null)
+				{
+					return false;
+				}
+				
+			}
+			return true;
 		}
     	
     }

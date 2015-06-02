@@ -2,6 +2,7 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.GroupLayout;
@@ -19,7 +20,7 @@ public class ActivityTab extends JPanel
 	private ArrayList<ActivityMember> activities;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
-	private HashMap<String,HashMap<String,String>> activityMap;
+	private HashMap<String,HashMap<String,List<String>>> activityMap;
 	
 	public ActivityTab(Map<String,String> onlyActivation)
 	{
@@ -136,7 +137,7 @@ public class ActivityTab extends JPanel
 		{
 			if(am.fieldIsEmpty())
 			{
-				System.out.println("Activity");
+//				System.out.println("Activity");
 				return false;
 			}
 		}

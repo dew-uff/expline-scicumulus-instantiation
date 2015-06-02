@@ -3,6 +3,7 @@ package br.ufrj.cos.expline.scicumulus.conversion;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,7 +24,7 @@ public class Conversion_reader {
 	private final File fileToRead;
 	private Map<String, String> properties;
 	public static ArrayList<String> inputPortsList;
-	private static HashMap<String,HashMap<String,String>> activityMap;
+	private static HashMap<String,HashMap<String,List<String>>> activityMap;
 	
 	public Conversion_reader(File file, Map<String,String> properties)
 	{
@@ -38,7 +39,7 @@ public class Conversion_reader {
 		this.fileToRead = file;
 		this.writer = writer;
 		inputPortsList = new ArrayList<>();
-		activityMap = new HashMap<String,HashMap<String,String>>();
+		activityMap = new HashMap<String,HashMap<String,List<String>>>();
 		initConvertion();
 	}
 	
@@ -106,10 +107,10 @@ public class Conversion_reader {
 					
 					relationSchemaAttributeOutput = elemArrayOutput.getChildNodes();
 				}
-				if(relationSchemaAttributeOutput != null)
-				{
+//				if(relationSchemaAttributeOutput != null)
+//				{
 					writer.insertOutputRelation(oModAct, auxElem.getAttribute("value"));
-				}
+//				}
 				/* -----------FIM OUTPUT--------- */
 				
 				/* -----------INICIO INPUT--------- */
@@ -117,7 +118,7 @@ public class Conversion_reader {
 //				System.out.println(iModAct);
 				NodeList inputPorts = elemPorts.getElementsByTagName("InputPorts");
 				Element elemInputPorts = (Element)inputPorts.item(0);
-				HashMap<String,String> temp = new HashMap<>();
+				HashMap<String,List<String>> temp = new HashMap<>();
 				
 				NodeList portInput = elemInputPorts.getElementsByTagName("Port");
 				NodeList relationSchemaAttributeInput = null;
@@ -138,6 +139,7 @@ public class Conversion_reader {
 					Element elemRelationSchemaInput = (Element)relationSchemaInput.item(0);
 					
 					NodeList arrayInput = elemRelationSchemaInput.getElementsByTagName("Array");
+					System.out.println(arrayInput.getLength() + "----->" + iModAct);
 				
 					if(arrayInput.getLength() > 0)
 					{
@@ -147,25 +149,30 @@ public class Conversion_reader {
 						
 					}
 					
-					if(relationSchemaAttributeInput != null)
-					{
+//					if(relationSchemaAttributeInput != null)
+//					{
 						writer.insertInputRelation(iModAct, null, auxElem.getAttribute("value"));
-					}
+//					}
 					/* --------- Colocar Field ------ */
-					if(relationSchemaAttributeInput != null)
+					if(arrayInput.getLength() > 0) //relationSchemaAttributeInput != null)
 					{
+						System.out.println("entrou "+iModAct);
+						List<String> listOfFields = new ArrayList<>();
+//						System.out.println(relationSchemaAttributeInput.getLength() + " length--->"+  iModAct);
 						for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
 						{
+//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
 							if(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE)
 							{
 								Element elemAux = (Element)relationSchemaAttributeInput.item(j);
-								
-								temp.put( elemAux.getAttribute("name"), iModAct); //Insert in the activityMap
+//								System.out.println(elemAux);
+//								temp.put( elemAux.getAttribute("name"), iModAct); //Insert in the activityMap
+								listOfFields.add(elemAux.getAttribute("name"));
 //								System.out.println("coloca no temp "+elemAux.getAttribute("name"));
 								
 								if(relationSchemaAttributeOutput == null)
 								{
-									//writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 								}else
 								{
 									if(hasInNodeList(relationSchemaAttributeOutput, elemAux))
@@ -174,10 +181,12 @@ public class Conversion_reader {
 									}
 									else
 									{
-										System.out.println("entrou !!");
+//										System.out.println("entrou !!");
 										writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), iModAct, null, auxElem.getAttribute("value"));
 									}
 								}
+								
+								temp.put(iModAct, listOfFields);
 							}
 						}
 					}else{
@@ -257,7 +266,7 @@ public class Conversion_reader {
 		
 	}
 	
-	public static HashMap<String,HashMap<String,String>> getActivityMap()
+	public static HashMap<String,HashMap<String,List<String>>> getActivityMap()
 	{
 		return activityMap;
 	}

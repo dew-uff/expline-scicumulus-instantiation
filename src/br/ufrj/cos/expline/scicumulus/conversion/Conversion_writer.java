@@ -638,7 +638,7 @@ public class Conversion_writer implements IWriter{
 	public void insertWorkflowInformation(HashMap<String,HashMap<String,String>> workflowMap)
 	{
 		//TODO we have to make this insert method
-		System.out.println("Metodo de inserçção de Workflow information não inserido");
+//		System.out.println("Metodo de inserï¿½ï¿½ï¿½o de Workflow information nï¿½o inserido");
 //		this.insertsciCumulusExecutionWorkflowRelation(properties.get("WorkflowRelationName"), properties.get("WorkflowRelationFilename"));
 		for(String act:workflowMap.keySet())
 		{
