@@ -156,7 +156,7 @@ public class Conversion_reader {
 					/* --------- Colocar Field ------ */
 					if(arrayInput.getLength() > 0) //relationSchemaAttributeInput != null)
 					{
-						System.out.println("entrou "+iModAct);
+//						System.out.println("entrou "+iModAct);
 						List<String> listOfFields = new ArrayList<>();
 //						System.out.println(relationSchemaAttributeInput.getLength() + " length--->"+  iModAct);
 						for(int j = 0; j < relationSchemaAttributeInput.getLength(); j++)
@@ -187,6 +187,18 @@ public class Conversion_reader {
 								}
 								
 								temp.put(iModAct, listOfFields);
+							}
+						}
+						if(relationSchemaAttributeOutput != null)
+						{
+							for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
+							{
+	//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
+								if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
+								{
+									Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
+									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
+								}
 							}
 						}
 					}else{
@@ -278,6 +290,19 @@ public class Conversion_reader {
 		
 	}
 	
+	private boolean hasOutputField(NodeList relationSchemaAttributeOutput) {
+		
+		for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
+		{
+//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
+			if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static HashMap<String,HashMap<String,List<String>>> getActivityMap()
 	{
 		return activityMap;

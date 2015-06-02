@@ -14,7 +14,7 @@
 				<Port id="4">
 					<RelationSchema as="relationSchema">
 						<Array as="attributes">
-							<RelationSchemaAttribute name="ID" type="float" />
+							<RelationSchemaAttribute name="T2" type="int" />
 						</Array>
 					</RelationSchema>
 				</Port>
