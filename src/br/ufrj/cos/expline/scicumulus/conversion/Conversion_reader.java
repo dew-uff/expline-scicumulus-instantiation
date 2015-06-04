@@ -189,39 +189,42 @@ public class Conversion_reader {
 								temp.put(iModAct, listOfFields);
 							}
 						}
-						if(relationSchemaAttributeOutput != null)
-						{
-							for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
-							{
-	//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
-								if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
-								{
-									Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
-								}
-							}
-						}
-					}else{
-						if(relationSchemaAttributeOutput != null)
-						{
-							for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
-							{
-	//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
-								if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
-								{
-									Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
-									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
-								}
-							}
-						}
-						
 					}
+//					else
+//					{
+//						if(relationSchemaAttributeOutput != null)
+//						{
+//							for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
+//							{
+//	//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
+//								if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
+//								{
+//									Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
+//									writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
+//								}
+//							}
+//						}
+//						
+//					}
 					/* -------- FIM colocar Field---- */
 					activityMap.put(auxElem.getAttribute("value"), temp);
 				}
 				/* -----------FIM INPUT--------- */
 				
-				
+				/* ---------- OUTPUT VERIFICATION ----------*/
+				if(relationSchemaAttributeOutput != null)
+				{
+					for(int j = 0; j < relationSchemaAttributeOutput.getLength(); j++)
+					{
+//							System.out.println(relationSchemaAttributeInput.item(j).getNodeType() == Node.ELEMENT_NODE?relationSchemaAttributeInput.item(j):"");
+						if(relationSchemaAttributeOutput.item(j).getNodeType() == Node.ELEMENT_NODE)
+						{
+							Element elemAux = (Element)relationSchemaAttributeOutput.item(j);
+							writer.insertField(elemAux.getAttribute("name"), elemAux.getAttribute("type"), null, oModAct, auxElem.getAttribute("value"));
+						}
+					}
+				}
+				/* ----------FIM OUTPUT VERIFICATION ----------*/
 				/* ------------Relation---------- */
 //				char[] tempVector = auxElem.getAttribute("value").toCharArray();
 //				char charAux = tempVector[0];
@@ -328,16 +331,18 @@ public class Conversion_reader {
 	private boolean hasInNodeList(NodeList list, Element elem)
 	{
 		String nameAux = elem.getAttribute("name");
+		String typeAux = elem.getAttribute("type");
 		for(int i = 0; i < list.getLength();i++)
 		{
 			if(list.item(i).getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element elemTemp = (Element)list.item(i);
 				String nameElem = elemTemp.getAttribute("name");
+				String type = elemTemp.getAttribute("type");
 				
 				//System.out.println(nameAux + "-->" + nameElem);
 				
-				if(nameAux.equals(nameElem))
+				if(nameAux.equals(nameElem) && typeAux.equals(type))
 				{
 					return true;
 				}

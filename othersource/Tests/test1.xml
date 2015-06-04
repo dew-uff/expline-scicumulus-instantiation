@@ -1,0 +1,1 @@
+<AbstractWorkflow><Activity id="2" value="act1"><Ports><InputPorts><Port id="3"><RelationSchema as="relationSchema"/></Port></InputPorts><OutputPorts><Port id="4"><RelationSchema as="relationSchema"/></Port></OutputPorts></Ports></Activity></AbstractWorkflow>

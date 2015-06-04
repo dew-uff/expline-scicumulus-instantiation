@@ -235,7 +235,7 @@ public class Conversion_writer implements IWriter{
 		}
 		else
 		{
-			if(!alreadyHaveThisField(output,name,activityTag))
+			if(!alreadyHaveThisField(output,name,activityTag,type))
 			{
 				//TODO have to create this mathod
 				Element sciCumulusField = this.scicumulusXML.createElement("field");
@@ -271,7 +271,7 @@ public class Conversion_writer implements IWriter{
 		
 	}
 	
-	private boolean alreadyHaveThisField(String output, String name,String activity) {
+	private boolean alreadyHaveThisField(String output, String name,String activity,String type) {
 		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
 		
 		Element currentChild = (Element)sciCumulusChildren.item(0);
@@ -289,7 +289,7 @@ public class Conversion_writer implements IWriter{
 				for (int j = 0; j < fieldNodeList.getLength(); j++) 
 				{
 					Element field = (Element)fieldNodeList.item(j);
-					if(field.getAttribute("name").equals(name)  && field.getAttribute("output").equals(output))
+					if(field.getAttribute("name").equals(name)  && field.getAttribute("output").equals(output) && field.getAttribute("type").equals(type))
 						return true;
 				}
 			}
