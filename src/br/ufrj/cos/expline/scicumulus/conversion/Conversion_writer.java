@@ -330,7 +330,7 @@ public class Conversion_writer implements IWriter{
 		Element sciCumulusQuery = this.scicumulusXML.createElement("query");
 		
 		Attr sciCumulusQuerySQL = this.scicumulusXML.createAttribute("sql");
-		System.out.print("sql: ");
+//		System.out.print("sql: ");
 		sciCumulusQuerySQL.setNodeValue(SQL);
 		
 		sciCumulusQuery.setAttributeNode(sciCumulusQuerySQL);
