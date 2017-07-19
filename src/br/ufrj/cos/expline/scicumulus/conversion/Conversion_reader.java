@@ -8,6 +8,11 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,11 +64,14 @@ public class Conversion_reader {
 		
 	}
 	
-	private void startReading(Document document)
+	private void startReading(Document document) throws XPathExpressionException
 	{
 		inputPortsList.clear();
 		Element root = document.getDocumentElement();
-		
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xPath = xpathFactory.newXPath();
+		XPathExpression xPathExpression = xPath.compile ("//Activity");
+		NodeList dsa = (NodeList) xPathExpression.evaluate(document, XPathConstants.NODESET);
 		/*
 		 * Catching Activities 
 		 */

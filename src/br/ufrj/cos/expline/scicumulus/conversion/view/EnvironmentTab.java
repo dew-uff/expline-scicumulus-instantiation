@@ -1,30 +1,34 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Environment;
+
 public class EnvironmentTab extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbClusterName;
 	private JTextField tfClusterName;	
 	private JLabel lbType;
 	private JTextField tfType;
 	private JLabel lbVerbose;
 	private JTextField tfVerbose;
+//	private GridBagLayout layout;
+//	private GridBagConstraints constraints;
 	
+	private Environment environ;
 	
-	private GridBagLayout layout;
-
-	private GridBagConstraints constraints;
-	
-	public EnvironmentTab()
+	public EnvironmentTab(Environment envi)
 	{
 		super();
+		
+		this.environ = envi;
 		
 		initComponents();
 		
@@ -159,5 +163,11 @@ public class EnvironmentTab extends JPanel{
 	public String getVerbose()
 	{
 		return tfVerbose.getText();
+	}
+
+	public void fillOut() {
+		this.environ.setClusterName(getClusterName());
+		this.environ.setType(getType());
+		this.environ.setVerbose(getVerbose());
 	}
 }

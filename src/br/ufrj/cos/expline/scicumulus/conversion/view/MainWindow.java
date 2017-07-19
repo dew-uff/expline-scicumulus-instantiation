@@ -3,7 +3,8 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -14,14 +15,19 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
-import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
-import br.ufrj.cos.expline.scicumulus.conversion.controller.ClassesController;
-import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
+import br.ufrj.cos.expline.scicumulus.conversion.engine.ScicumulusWriter;
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.ScicumulusDocument;
 
 public class MainWindow extends JDialog 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Map<String,String> properties;
-	private ClassesController classesController;
+	private ScicumulusDocument sciDoc;
+	
 	private ButtonListener bl;
 	
 	private DataBaseTab databaseTab;
@@ -32,16 +38,16 @@ public class MainWindow extends JDialog
 	private WorkflowTab workflowTab;	
 	private ActivityTab activityTab;
 	private QueryTab queryTab;
+	private File outputFile;
 	
 	public Frame frame;
 	
-	public MainWindow(Frame owner, Map<String,String> properties, ClassesController classesController)
+	public MainWindow(Frame owner, ScicumulusDocument sciDoc, File outputFile)
 	{
 		super(owner);
-		
-		this.classesController = classesController;
-		
-		this.properties = properties;
+		this.outputFile = outputFile;
+		this.properties = new HashMap<>();
+		this.sciDoc = sciDoc;
 		
 		this.frame = owner;
 		
@@ -63,22 +69,19 @@ public class MainWindow extends JDialog
 		finishButton.setBounds(this.getWidth() - 10 - 100,jtp.getHeight()+((diff /6)),100,25);
 		this.add(finishButton);
 		
-		this.databaseTab 		= new DataBaseTab();
-		this.workspaceTab 		= new WorkspaceTab();
-		this.enviromentTab		= new EnvironmentTab();
-		this.credentialsTab 	= new CredentialsTab();
-		this.binaryTab			= new BinaryTab();
-		this.workflowTab		= new WorkflowTab(Util.getOnlyDors(this.properties));
-		this.activityTab		= new ActivityTab(Util.getOnlyActivities(this.properties));
-		this.queryTab			= new QueryTab();
+		this.databaseTab 		= new DataBaseTab(this.sciDoc.getDatabase());
+		this.workspaceTab 		= new WorkspaceTab(this.sciDoc.getWorkspace());
+		this.enviromentTab		= new EnvironmentTab(this.sciDoc.getEnviron());
+		this.credentialsTab 	= new CredentialsTab(this.sciDoc.getCred());
+		this.binaryTab			= new BinaryTab(this.sciDoc.getBinary());
+		this.workflowTab		= new WorkflowTab(this.sciDoc.getExecWorkflow());
+		this.activityTab		= new ActivityTab(this.sciDoc.getConceptualWorkflow());
+		this.queryTab			= new QueryTab(this.sciDoc.getQuery());
 		
 		JPanel panel = new JPanel();
-		ArrayList<String> inputPortsList = Conversion_reader.inputPortsList;
+		
 		String without = "InPut Ports Without using: ";
-		for(String id:inputPortsList)
-		{
-			without += "Port("+id+") "; 
-		}
+		
 		JLabel label = new JLabel(without);
 		panel.add(label);
 		panel.setVisible(true);
@@ -109,11 +112,6 @@ public class MainWindow extends JDialog
 				
 	}
 	
-	public ClassesController getClassesController()
-	{
-		return this.classesController;
-	}
-	
 	public Map<String,String> getProperties()
 	{
 		return properties;
@@ -130,63 +128,76 @@ public class MainWindow extends JDialog
 			   workspaceTab.checkFilledOut() &&
 			   credentialsTab.checkFilledOut() &&
 			   binaryTab.checkFilledOut() &&
-			   workflowTab.checkFilledOut() &&
-			   queryTab.checkFilledOut() &&
-			   activityTab.checkFilledOut());
+			   queryTab.checkFilledOut()
+			   && workflowTab.checkFilledOut() 
+			   && activityTab.checkFilledOut()
+				);
 	}
 	
-	public Map<String,String> fillOutTheMap()
-	{
-		//Database node
-		properties.put("DatabaseName", databaseTab.getName());
-		properties.put("DatabaseUsername", databaseTab.getUserName());
-		properties.put("DatabasePassword",databaseTab.getPassword());
-		properties.put("DatabasePort", databaseTab.getPort());
-		properties.put("DatabaseServer", databaseTab.getServer());
-		properties.put("DatabasePath", databaseTab.getPath());
-		
-		//Workspace node
-		properties.put("WorkspaceUpload", workspaceTab.getUpload());
-		properties.put("WorkspaceBucketName", workspaceTab.getBucketName());
-		properties.put("WorkspaceWorkflowDir", workspaceTab.getWorkflowDir());
-		properties.put("WorkspaceCompressedWorkspace", workspaceTab.getCompressedWorkspace());
-		properties.put("CompressedDir",workspaceTab.getCompressedDir());
-		
-		//Environment node
-		properties.put("EnvironmentClusterName", enviromentTab.getClusterName());
-		properties.put("EnvironmentType", enviromentTab.getType());
-		properties.put("EnvironmentVerbose", enviromentTab.getVerbose());
-		
-		//Credentials node
-		properties.put("AccessKey",credentialsTab.getAccessKey());
-		properties.put("SecretAccessKey",credentialsTab.getSecretAccessKey());
-		
-		//Binary node
-		properties.put("Directory",binaryTab.getDirectory());
-		properties.put("ConceptualVersion",binaryTab.getConceptualVersion());
-		properties.put("ExecutionVersion",binaryTab.getExecutionVersion());
-		properties.put("StarterVersion",binaryTab.getStarterVersion());
-		properties.put("QueryVersion",binaryTab.getQueryVersion());
-		
-		//Executionworkflow node
-//		System.out.println("workflow info");
-		properties.put("WorkflowExpdir",workflowTab.getExpDir());
-//		properties.put("WorkflowRelationName",workflowTab.getRelationName());
-//		properties.put("WorkflowRelationFilename",workflowTab.getRelationFileName());
-		
-		//query Node
-		properties.put("QuerySQL",queryTab.getSql());
-		
-//		select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;
-		
-		//loopParaPreencherActivity
-		Map<String,String> activities = activityTab.getMapOnlyActivitiesDone();
-		for(String key: activities.keySet())
-		{
-			properties.put(key, activities.get(key));
-		}
-		
-		return properties;
+//	public Map<String,String> fillOutTheMap()
+//	{
+//		//Database node
+//		properties.put("DatabaseName", databaseTab.getName());
+//		properties.put("DatabaseUsername", databaseTab.getUserName());
+//		properties.put("DatabasePassword",databaseTab.getPassword());
+//		properties.put("DatabasePort", databaseTab.getPort());
+//		properties.put("DatabaseServer", databaseTab.getServer());
+//		properties.put("DatabasePath", databaseTab.getPath());
+//		
+//		//Workspace node
+//		properties.put("WorkspaceUpload", workspaceTab.getUpload());
+//		properties.put("WorkspaceBucketName", workspaceTab.getBucketName());
+//		properties.put("WorkspaceWorkflowDir", workspaceTab.getWorkflowDir());
+//		properties.put("WorkspaceCompressedWorkspace", workspaceTab.getCompressedWorkspace());
+//		properties.put("CompressedDir",workspaceTab.getCompressedDir());
+//		
+//		//Environment node
+//		properties.put("EnvironmentClusterName", enviromentTab.getClusterName());
+//		properties.put("EnvironmentType", enviromentTab.getType());
+//		properties.put("EnvironmentVerbose", enviromentTab.getVerbose());
+//		
+//		//Credentials node
+//		properties.put("AccessKey",credentialsTab.getAccessKey());
+//		properties.put("SecretAccessKey",credentialsTab.getSecretAccessKey());
+//		
+//		//Binary node
+//		properties.put("Directory",binaryTab.getDirectory());
+//		properties.put("ConceptualVersion",binaryTab.getConceptualVersion());
+//		properties.put("ExecutionVersion",binaryTab.getExecutionVersion());
+//		properties.put("StarterVersion",binaryTab.getStarterVersion());
+//		properties.put("QueryVersion",binaryTab.getQueryVersion());
+//		
+//		//Executionworkflow node
+////		System.out.println("workflow info");
+//		properties.put("WorkflowExpdir",workflowTab.getExpDir());
+////		properties.put("WorkflowRelationName",workflowTab.getRelationName());
+////		properties.put("WorkflowRelationFilename",workflowTab.getRelationFileName());
+//		
+//		//query Node
+//		properties.put("QuerySQL",queryTab.getSql());
+//		
+////		select ea.taskid, ea.actid, ea.machineid, ea.status from eactivation as ea;
+//		
+//		//loopParaPreencherActivity
+//		Map<String,String> activities = activityTab.getMapOnlyActivitiesDone();
+//		for(String key: activities.keySet())
+//		{
+//			properties.put(key, activities.get(key));
+//		}
+//		
+//		return properties;
+//	}
+	
+	public void fillOutSciCumulusDoc() {
+		this.databaseTab.fillOut ();
+		this.workspaceTab.fillOut ();
+		this.enviromentTab.fillOut ();
+		this.credentialsTab.fillOut ();
+		this.binaryTab.fillOut ();
+		this.queryTab.fillOut ();
+		// Another way to fillOut
+		this.workflowTab.fillOut ();
+		this.activityTab.fillOut ();
 	}
 	
 	private class ButtonListener implements ActionListener
@@ -194,11 +205,8 @@ public class MainWindow extends JDialog
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			JButton finishButton = (JButton)e.getSource();
 			MainWindow mainFrame = (MainWindow)SwingUtilities.getWindowAncestor(finishButton);
-			
-			ClassesController cc = mainFrame.getClassesController();
 			
 			boolean hasEmptyField =  mainFrame.hasEmptyField();
 			
@@ -207,12 +215,17 @@ public class MainWindow extends JDialog
 				JOptionPane.showMessageDialog(null, "Has Empty Field", "Error", JOptionPane.ERROR_MESSAGE);
 			}else
 			{
-//				System.out.println("entrou pra fazer o que tem que ser feito");
-				cc.finishXML(mainFrame.fillOutTheMap(),mainFrame.getWorkflowTab().getMapOnlyWorkflowsDone());
+				mainFrame.fillOutSciCumulusDoc();
+				mainFrame.WriteXML ();
 				mainFrame.dispose();
 			}
 						
 		}
 
+	}
+
+	public void WriteXML() {
+		ScicumulusWriter writer = new ScicumulusWriter (this.outputFile);
+		writer.run(this.sciDoc);
 	}
 }

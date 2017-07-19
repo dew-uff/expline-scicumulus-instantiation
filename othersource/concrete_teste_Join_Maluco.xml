@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><SciCumulus><conceptualWorkflow description="" tag="workflow-1"><activity activation="a " description="" tag="act1" type="Map"><relation name="12_OMod_act1" reltype="Output"/><relation name="7_IMod_act1" reltype="Input"/><field decimalplaces="0" input="7_IMod_act1" name="ID" output="12_OMod_act1" type="float"/><field decimalplaces="0" input="7_IMod_act1" name="T1" type="float"/><field decimalplaces="0" input="7_IMod_act1" name="T2" type="int"/><field decimalplaces="0" name="T2" output="12_OMod_act1" type="float"/></activity><activity activation="a " description="" tag="act2" type="Map"><relation name="9_OMod_act2" reltype="Output"/><relation dependency="act1" name="10_IMod_act2" reltype="Input"/><field decimalplaces="0" input="10_IMod_act2" name="ID" type="float"/><field decimalplaces="0" input="10_IMod_act2" name="T2" type="float"/></activity></conceptualWorkflow><credentials access_key="a" secret_access_key="a"/><environment cluster_name="a" type="aCLOUD" verbose="false"/><binary conceptual_version="a" directory="a" execution_version="a" query_version="a" starter_version="a"/><workspace bucket_name="a" compressed_dir="a" compressed_workspace="a" upload="a" workflow_dir="a"/><database Username="a" name="a" password="a" path="" port="a" server=""/><query sql="a&#9;a"/><executionWorkflow execmodel="DYN_FAF" expdir="a" max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1" user_interaction="false"><relation filename="a" name="7_IMod_act1"/></executionWorkflow></SciCumulus>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SciCumulus>
+	<conceptualWorkflow description="" tag="workflow-1">
+		<activity activation="a " description="" tag="act1" type="Map">
+			<relation name="12_OMod_act1" reltype="Output" />
+			<relation name="7_IMod_act1" reltype="Input" />
+			<field decimalplaces="0" input="7_IMod_act1" name="ID"
+				output="12_OMod_act1" type="float" />
+			<field decimalplaces="0" input="7_IMod_act1" name="T1" type="float" />
+			<field decimalplaces="0" input="7_IMod_act1" name="T2" type="int" />
+			<field decimalplaces="0" name="T2" output="12_OMod_act1" type="float" />
+		</activity>
+		<activity activation="a " description="" tag="act2" type="Map">
+			<relation name="9_OMod_act2" reltype="Output" />
+			<relation dependency="act1" name="10_IMod_act2" reltype="Input" />
+			<field decimalplaces="0" input="10_IMod_act2" name="ID" type="float" />
+			<field decimalplaces="0" input="10_IMod_act2" name="T2" type="float" />
+		</activity>
+	</conceptualWorkflow>
+	<credentials access_key="a" secret_access_key="a" />
+	<environment cluster_name="a" type="aCLOUD" verbose="false" />
+	<binary conceptual_version="a" directory="a" execution_version="a"
+		query_version="a" starter_version="a" />
+	<workspace bucket_name="a" compressed_dir="a"
+		compressed_workspace="a" upload="a" workflow_dir="a" />
+	<database Username="a" name="a" password="a" path="" port="a"
+		server="" />
+	<query sql="a&#9;a" />
+	<executionWorkflow execmodel="DYN_FAF" expdir="a"
+		max_failure="5" redundancy="true" reliability="0.9" tag="workflow-1"
+		user_interaction="false">
+		<relation filename="a" name="7_IMod_act1" />
+	</executionWorkflow>
+</SciCumulus>

@@ -1,14 +1,18 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.GridLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Binary;
+
 public class BinaryTab extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbDirectory;
 	private JTextField tfDirectory;	
 	private JLabel lbConceptualVersion;
@@ -19,10 +23,13 @@ public class BinaryTab extends JPanel
 	private JTextField tfStarterVersion;
 	private JLabel lbQueryVersion;
 	private JTextField tfQueryVersion;
-		
-	public BinaryTab()
+	private Binary binary;
+	
+	public BinaryTab(Binary binary)
 	{
 		super();
+		
+		this.binary = binary;
 		
 		initComponents();
 		
@@ -191,5 +198,13 @@ GroupLayout layout = new GroupLayout(this);
 	public String getQueryVersion()
 	{
 		return tfQueryVersion.getText();
+	}
+
+	public void fillOut() {
+		this.binary.setConceptualVersion(getConceptualVersion());
+		this.binary.setDirectory(getDirectory());
+		this.binary.setExecutionVersion(getExecutionVersion());
+		this.binary.setQueryVersion(getQueryVersion());
+		this.binary.setStarterVersion(getStarterVersion());
 	}
 }

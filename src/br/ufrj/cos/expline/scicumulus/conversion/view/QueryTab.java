@@ -6,15 +6,24 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Query;
+
 public class QueryTab extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbSQL;
 	private JTextArea taSQL;	
 	private JScrollPane jsp;
+	private Query query;
 	
-	public QueryTab(){
+	public QueryTab(Query query){
 		
 		super();
+		
+		this.query = query;
 		
 		initComponents();
 		
@@ -91,6 +100,12 @@ public class QueryTab extends JPanel
 	public String getSql()
 	{
 		return taSQL.getText();
+	}
+
+
+
+	public void fillOut() {
+		this.query.setQuery(getSql());
 	}
 
 }

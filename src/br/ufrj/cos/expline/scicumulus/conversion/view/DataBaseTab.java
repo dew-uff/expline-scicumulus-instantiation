@@ -5,8 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Database;
+
 public class DataBaseTab extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbName;
 	private JTextField tfName;	
 	private JLabel lbUserName;
@@ -19,10 +25,12 @@ public class DataBaseTab extends JPanel
 	private JTextField tfServer;
 	private JLabel lbPath;
 	private JTextField tfPath;
+	private Database database;
 	
-	public DataBaseTab()
+	public DataBaseTab(Database database)
 	{
 		super();
+		this.database = database;
 		
 		initComponents();
 		
@@ -223,5 +231,14 @@ GroupLayout layout = new GroupLayout(this);
 	public String getPath()
 	{
 		return tfPath.getText();
+	}
+
+	public void fillOut() {
+		this.database.setName(getName());
+		this.database.setPassword(getPassword());
+		this.database.setPath(getPath());
+		this.database.setPort(getPort());
+		this.database.setServer(getServer());
+		this.database.setUserName(getUserName());
 	}
 }

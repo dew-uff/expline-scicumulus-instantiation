@@ -2,8 +2,8 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.io.File;
 
-import br.ufrj.cos.expline.scicumulus.conversion.mainInterface.Instantiator;
-import br.ufrj.cos.expline.scicumulus.conversion.mainInterface.ScicumulusInstantiator;
+import br.ufrj.cos.expline.scicumulus.conversion.instantiator.Instantiator;
+import br.ufrj.cos.expline.scicumulus.conversion.instantiator.ScicumulusInstantiator;
 
 public class Main 
 {

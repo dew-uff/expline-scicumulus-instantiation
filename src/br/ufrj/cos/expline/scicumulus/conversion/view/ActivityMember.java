@@ -2,40 +2,49 @@ package br.ufrj.cos.expline.scicumulus.conversion.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Activity;
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Field;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class ActivityMember extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String keyInTheMap;
 	private JLabel lbActivation;
 	private JTextField tfActivation;
-	private JComboBox cbLanguage;
+//	private JComboBox cbLanguage;
 	private JButton btParameters;
 	private TitledBorder title;
+	private Activity act;
 	
 	private String parameters;
 	
 	private ParametersWindow parameterWindow;
 	
-	private String paramStringValue;
+//	private String paramStringValue;
 	
-	private HashMap<String,List<String>> itensForComboBox;
+	private Map<String,List<String>> itensForComboBox;
 	
-	private Vector dataVector = null;
+	private Vector<?> dataVector = null;
+	
+	private Map<String, String> translatePortName;
 	
 	public ActivityMember(String key, HashMap<String,List<String>> itensForComboBox)
 	{
@@ -61,9 +70,53 @@ public class ActivityMember extends JPanel
 		
 		initLayout();
 	}
+	
+	public ActivityMember (Activity act) {
+		this.setBounds(0, 0, 560, 50);
+		this.act = act;
+		initComponents();
+		
+		this.keyInTheMap = act.getTag();
+		
+		this.parameters = "";
+		this.translatePortName = new HashMap<>();
+		this.itensForComboBox = getItensForComboBox();
+//		System.out.println("itensForComboBox: "+key+"\n"+itensForComboBox+"\n");
+		
+		
+//		System.out.println("--------- "+this.itensForComboBox.size());
+		
+		title = BorderFactory.createTitledBorder(Util.getActivityTag(keyInTheMap));
+		this.setBorder(title);
+		
+		initLayout();
+	}
+
+	private Map<String, List<String>> getItensForComboBox() {
+		Map<String, List<String>> mapParameters = new HashMap<>();
+		
+		int portIndex = 1;
+		for (Field field : this.act.getFields()) {
+			String inputRelName = field.getInput().getName();
+			if (!inputRelName.isEmpty()) {
+				if (!this.translatePortName.keySet().contains(inputRelName)) this.translatePortName.put(inputRelName, "Port " + portIndex++);		
+			}
+		}
+		
+		for (String port : this.translatePortName.keySet()) {
+			List<String> portParameters = new ArrayList<> ();
+			for (Field field : this.act.getFields()) {
+				String inputRelName = field.getInput().getName();
+				if (inputRelName.equalsIgnoreCase(port)) {
+					portParameters.add(field.getName());
+				}
+			}
+			mapParameters.put(port, portParameters);
+		}
+		return mapParameters;
+	}
 
 	private void initLayout() {
-		// TODO Auto-generated method stub
 		GroupLayout layout = new GroupLayout(this);
 		
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -119,8 +172,8 @@ public class ActivityMember extends JPanel
 		
 		tfActivation = new JTextField();
 		
-		Object argr[] = {"","Java","C/C++","Pascal","Python","Fortran","C#"};
-		cbLanguage = new JComboBox(argr);
+//		Object argr[] = {"","Java","C/C++","Pascal","Python","Fortran","C#"};
+//		cbLanguage = new JComboBox(argr);
 		
 		btParameters = new JButton("Parameters");
 		
@@ -132,7 +185,7 @@ public class ActivityMember extends JPanel
 		
 		parameterWindow = null;
 		
-		paramStringValue = "";
+//		paramStringValue = "";
 	}
 	
 	public String getBorderTitle()
@@ -147,14 +200,13 @@ public class ActivityMember extends JPanel
 	
 	public String getActivation()
 	{
-		// TODO
 		if(this.parameters != null)
 			return tfActivation.getText() + " " + this.parameters;
 		else
 			return tfActivation.getText();
 	}
 	
-	public void setActivation(Vector act)
+	public void setActivation(Vector<?> act)
 	{
 		
 		dataVector = act;
@@ -164,7 +216,7 @@ public class ActivityMember extends JPanel
 			String params = "";
 			for (Object object : dataVector) {
 	//			System.out.println(object.toString());
-				Vector temp = (Vector)object;
+				Vector<?> temp = (Vector<?>)object;
 				
 				String param = (String)temp.get(0);
 				String relType = (String)temp.get(1);
@@ -180,22 +232,24 @@ public class ActivityMember extends JPanel
 //		tfActivation.setText(tfActivation.getText()+" "+this.parameters);
 	}
 	
-	public void setparamStringValue(String value)
-	{
-		this.paramStringValue = value;
-	}
+//	public void setparamStringValue(String value)
+//	{
+//		this.paramStringValue = value;
+//	}
 	
-	public HashMap<String,List<String>> getParameters()
+	public Map<String,List<String>> getParameters()
 	{
 		return itensForComboBox;
 	}
 	
-	private class ParametersListener implements ActionListener
-	{
+	public void fillOut() {
+		this.act.setActivation(getActivation());
+	}
+	
+	private class ParametersListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			JButton button = (JButton) e.getSource();
 			ActivityMember member = (ActivityMember) button.getParent();
 			
@@ -209,6 +263,7 @@ public class ActivityMember extends JPanel
 				else
 				{
 					parameterWindow = new ParametersWindow(/*mw.frame,*/keyInTheMap,member,member.getParameters());
+//					parameterWindow = new ParametersWindow (keyInTheMap, member, act.getFields());
 				}
 //			}
 			

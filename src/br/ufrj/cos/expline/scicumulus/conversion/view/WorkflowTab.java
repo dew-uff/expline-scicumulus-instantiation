@@ -10,45 +10,45 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.ExecutionWorkflow;
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.ExecutionWorkflowRelation;
 
 public class WorkflowTab extends JPanel 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String,String> onlyActivation;
 	private ArrayList<WorkflowMember> workflows;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
 	
 	private JLabel lbExpDir;
-	private JTextField tfExpDir;
+	private JTextField tfExpDir;	
 	
-	private int id;
+	private ExecutionWorkflow execWorkflow;
 	
-	public WorkflowTab(Map<String,String> onlyActivation)
+	public WorkflowTab(ExecutionWorkflow execWorkflow)
 	{
 		super();
-		this.id = 1;
-		this.onlyActivation = onlyActivation;
+		
+		this.execWorkflow = execWorkflow;
+		
+		this.onlyActivation = new HashMap<>();
 		initComponents();
-		
-		
-		
-//		this.setVisible(true);
 		
 		initLayout();
 	}
 
 	private void initLayout() {
-		// TODO Auto-generated method stub
-
 		GroupLayout layout = new GroupLayout(panelScrolled);
 		
 		ParallelGroup pg = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
 		
 		SequentialGroup sg = layout.createSequentialGroup();
-		
-		JSeparator separator = new JSeparator();
 		
 		ParallelGroup ppldk = layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 									.addGroup(layout.createSequentialGroup()
@@ -60,7 +60,6 @@ public class WorkflowTab extends JPanel
 									);
 		pg.addGap(10);
 		pg.addGroup(ppldk);
-//		pg.addComponent(lbExpDir).addComponent(tfExpDir); 
 		pg.addGap(10);
 		
 		sg.addGap(10);
@@ -99,7 +98,6 @@ public class WorkflowTab extends JPanel
 	}
 
 	private void initComponents() {
-		// TODO Auto-generated method stub
 		workflows = new ArrayList<>();
 		
 		panelScrolled = new JPanel();
@@ -116,11 +114,11 @@ public class WorkflowTab extends JPanel
 		
 		tfExpDir = new JTextField();
 		
-		for(String p:onlyActivation.keySet())
+		for(ExecutionWorkflowRelation rel : this.execWorkflow.getExecWorkRelList())
 		{
-			WorkflowMember tempAM = new WorkflowMember(p,this.id);
+			WorkflowMember tempAM = new WorkflowMember(rel);
 			workflows.add(tempAM);
-			this.id++;
+//			this.id++;
 		}
 		
 		
@@ -164,7 +162,6 @@ public class WorkflowTab extends JPanel
 	
 	public HashMap<String,HashMap<String,String>> getMapOnlyWorkflowsDone()
 	{
-		//TODO
 		HashMap<String,HashMap<String,String>> map = new HashMap<>();
 		
 		for(WorkflowMember am:workflows)
@@ -174,5 +171,11 @@ public class WorkflowTab extends JPanel
 		}
 		
 		return map;
+	}
+
+	public void fillOut() {
+		for (WorkflowMember wMember : this.workflows) {
+			wMember.fillOut();
+		}
 	}
 }

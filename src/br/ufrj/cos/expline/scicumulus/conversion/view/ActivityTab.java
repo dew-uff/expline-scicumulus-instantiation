@@ -11,40 +11,34 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import br.ufrj.cos.expline.scicumulus.conversion.Conversion_reader;
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Activity;
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.ConceptualWorkflow;
 import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 
 public class ActivityTab extends JPanel 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String,String> onlyActivation;
 	private ArrayList<ActivityMember> activities;
 	private JPanel panelScrolled;
 	private JScrollPane jsp;
 	private HashMap<String,HashMap<String,List<String>>> activityMap;
+	private ConceptualWorkflow concepWorkflow;
 	
-	public ActivityTab(Map<String,String> onlyActivation)
+	public ActivityTab(ConceptualWorkflow concepWorkflow)
 	{
 		super();
 		
-		this.onlyActivation = onlyActivation;
+		this.concepWorkflow = concepWorkflow;
 		
-		this.activityMap = Conversion_reader.getActivityMap();
-//		System.out.println("------ "+activityMap.size());
-//		for(String p : activityMap.keySet())
-//		{
-//			System.out.println(p);
-//			HashMap<String,String> temp = activityMap.get(p);
-//			System.out.println("sdas"+temp.size());
-//			for(String pw : temp.keySet())
-//			{
-//				System.out.println(pw);
-//			}
-//		}
+		this.onlyActivation = new HashMap<>();
 		
 		initComponents();
 		initActivityMembersLayout();
-		
-		initLayout();
+	
 
 	}
 	
@@ -62,9 +56,10 @@ public class ActivityTab extends JPanel
 		
 		this.add(jsp);
 		
-		for(String p:onlyActivation.keySet())
+		for(Activity act : this.concepWorkflow.getActivities())
 		{
-			ActivityMember tempAM = new ActivityMember( p, this.activityMap.get(Util.getActivityTag(p)) );
+//			ActivityMember tempAM = new ActivityMember( p, this.activityMap.get(Util.getActivityTag(p)) );
+			ActivityMember tempAM = new ActivityMember( act );
 			activities.add(tempAM);
 		}
 		
@@ -73,31 +68,7 @@ public class ActivityTab extends JPanel
 				
 	}
 	
-	private void initLayout()
-	{
-//		constraints.fill = GridBagConstraints.BOTH;
-//		addComponents(panelScrolled, 0, 0, 1, 1);
-	}
-	
-	private void initActivityMembersLayout() 
-	{
-//		int x = 10;
-//		int y = 10;
-//		int height = 0;
-//		for(ActivityMember am:activities)
-//		{
-//			am.setLocation(x, y);
-//			
-//			panelScrolled.add(am);
-//			
-//			x = am.getX();
-//			y = am.getY() + am.getHeight() + 10;
-//			height+= (10+am.getHeight());
-//		}
-//		height += 10;
-//		panelScrolled.setPreferredSize(new Dimension(570,height));
-//		
-
+	private void initActivityMembersLayout() {
 		GroupLayout layout = new GroupLayout(panelScrolled);
 		
 		ParallelGroup pg = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
@@ -137,7 +108,6 @@ public class ActivityTab extends JPanel
 		{
 			if(am.fieldIsEmpty())
 			{
-//				System.out.println("Activity");
 				return false;
 			}
 		}
@@ -154,5 +124,12 @@ public class ActivityTab extends JPanel
 		}
 		
 		return map;
+	}
+
+	public void fillOut() {
+		for(ActivityMember am:activities)
+		{
+			am.fillOut();
+		}
 	}
 }

@@ -1,23 +1,31 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.GridLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Credentials;
+
 public class CredentialsTab extends JPanel
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbAccessKey;
 	private JTextField tfAccessKey;
 	private JLabel lbSecretAccessKey;
 	private JTextField tfSecretAccessKey;
 	
-	public CredentialsTab()
+	private Credentials cred;
+	
+	public CredentialsTab(Credentials cred)
 	{
 		super();
+		
+		this.cred = cred;
 		
 		initComponents();
 		
@@ -112,6 +120,11 @@ public class CredentialsTab extends JPanel
 	public String getSecretAccessKey()
 	{
 		return tfSecretAccessKey.getText();
+	}
+
+	public void fillOut() {
+		this.cred.setAccessKey(getAccessKey());
+		this.cred.setSecretAccessKey(getSecretAccessKey());
 	}
 	
 }

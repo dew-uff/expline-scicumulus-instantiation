@@ -1,14 +1,18 @@
 package br.ufrj.cos.expline.scicumulus.conversion.view;
 
-import java.awt.GridLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.ufrj.cos.expline.scicumulus.conversion.model.sciObjects.Workspace;
+
 public class WorkspaceTab extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbUpload;
 	private JTextField tfUpload;	
 	private JLabel lbBucketName;
@@ -19,10 +23,13 @@ public class WorkspaceTab extends JPanel
 	private JTextField tfCompressedWorkspace;
 	private JLabel lbCompressedDir;
 	private JTextField tfCompressedDir;
+	private Workspace workspace;
 		
-	public WorkspaceTab()
+	public WorkspaceTab(Workspace workspace)
 	{
 		super();
+		
+		this.workspace = workspace;
 		
 		initComponents();
 		
@@ -193,5 +200,13 @@ public class WorkspaceTab extends JPanel
 	public String getCompressedDir()
 	{
 		return tfCompressedDir.getText();
+	}
+
+	public void fillOut() {
+		this.workspace.setBucketName(getBucketName());
+		this.workspace.setCompressedDir(getCompressedDir());
+		this.workspace.setCompressedWorkspace(getCompressedWorkspace());
+		this.workspace.setUpload(getUpload());
+		this.workspace.setWorkflowDir(getWorkflowDir());
 	}
 }

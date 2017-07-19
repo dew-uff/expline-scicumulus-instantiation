@@ -1,7 +1,6 @@
 package br.ufrj.cos.expline.scicumulus.conversion.util.listeners;
 
 import java.awt.Component;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,24 +9,28 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.table.TableCellRenderer;
 
 import br.ufrj.cos.expline.scicumulus.conversion.view.ParametersWindow;
 
 public class InstantiationCellEditor extends DefaultCellEditor {
 	
-	private DefaultComboBoxModel model;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private DefaultComboBoxModel<String> model;
 	
 	public InstantiationCellEditor()
 	{
-		super( new JComboBox() );
-		this.model = ((DefaultComboBoxModel)((JComboBox)getComponent()).getModel());
+		super( new JComboBox<Object>() );
+		JComboBox<String> component = (JComboBox<String>)getComponent();
+		JComboBox<String> jComboBox = component;
+		this.model = ((DefaultComboBoxModel<String>)jComboBox.getModel());
 		
 	}
 	
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value,boolean isSelected, int row, int column) {
-		// TODO Auto-generated method stub
 		ParametersWindow window = (ParametersWindow)SwingUtilities.getWindowAncestor(table);
 		
 		

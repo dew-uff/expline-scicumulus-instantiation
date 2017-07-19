@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
@@ -22,28 +21,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
-import br.ufrj.cos.expline.scicumulus.conversion.util.Util;
 import br.ufrj.cos.expline.scicumulus.conversion.util.listeners.InstantiationCellEditor;
-import br.ufrj.cos.expline.scicumulus.conversion.util.listeners.InstantiationTableModel;
 
 @SuppressWarnings("serial")
 public class ParametersWindow extends JFrame
 {
 	private JPanel mainPanel;
 	
-	private JTable table;
+//	private JTable table;
 	private JButton addButton;
 	private JButton removeButton;
 	private JButton okButton;
 	private JButton cancelButton;
-	private TableModel dataModel;
+//	private TableModel dataModel;
 	
 	private JScrollPane scrollPane;
 	
@@ -55,9 +49,10 @@ public class ParametersWindow extends JFrame
 	
 	private MainWindow mw;
 	
-	private HashMap<String,List<String>> parameters;
+	private Map<String,List<String>> parameters;
 	
 	private Map<String,String> properlyMap;
+
 	
 	public ParametersWindow(String title, ActivityMember member)
 	{
@@ -65,7 +60,7 @@ public class ParametersWindow extends JFrame
 		initClass(title, member);
 	}
 	
-	public ParametersWindow(String title,ActivityMember member,HashMap<String,List<String>> parameters)
+	public ParametersWindow(String title,ActivityMember member,Map<String,List<String>> parameters)
 	{
 		
 		this.parameters = parameters;
@@ -73,19 +68,24 @@ public class ParametersWindow extends JFrame
 		initClass(title, member);
 	}
 	
-	public ParametersWindow(String keyInTheMap, ActivityMember member,HashMap<String, List<String>> parameters2, Vector dataVector) {
+	public ParametersWindow(String keyInTheMap, ActivityMember member,Map<String, List<String>> parameters2, Vector dataVector) {
 		// TODO Auto-generated constructor stub
 		this(keyInTheMap,member,parameters2);
 		
 		carregTabela(dataVector);
 	}
 
-	private void carregTabela(Vector dataVector) {
-		// TODO Auto-generated method stub
+	public ParametersWindow(String keyInTheMap, ActivityMember member,HashMap<String, List<String>> parameters2, Vector<?> dataVector) {
+		this(keyInTheMap,member,parameters2);
+		
+		carregTabela(dataVector);
+	}
+
+	private void carregTabela(Vector<?> dataVector) {
 		DefaultTableModel model = (DefaultTableModel)tableTemp.getModel();
 		for(Object row:dataVector)
 		{
-			Vector infos = (Vector)row;
+			Vector<?> infos = (Vector<?>)row;
 			Object[] rowInfo = {infos.get(0),infos.get(1),infos.get(2)};
 			model.addRow(rowInfo);
 		}
@@ -187,7 +187,11 @@ public class ParametersWindow extends JFrame
 	    
 	    Object[] values = new Object[]{"item1", "item2", "item3"};        // Configura o combobox na primeira coluna vis�vel
 	    
-	    List<String> listOfRelName = Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
+	    List<String> listOfRelName = new ArrayList<>();//Util.getListOfRelNameByActivity(mw.getProperties(),Util.getActivityTag(title));
+	    
+	    for (String portName : this.parameters.keySet()) {
+	    	listOfRelName.add(portName);
+	    }
 	    
 //	    values = listOfRelName.toArray();
 	    if(listOfRelName.size() > 0)
@@ -198,7 +202,7 @@ public class ParametersWindow extends JFrame
 	    values = this.properlyMap.keySet().toArray();
 	    
 	    TableColumn relationColumn = tableTemp.getColumnModel().getColumn(1);
-	    JComboBox relation = new JComboBox(values);
+//	    JComboBox relation = new JComboBox(values);
 //	    relation.addItemListener(new relationComboBoxItemListener());
 	    relationColumn.setCellEditor( new InstantiationCellEditor() );//new DefaultCellEditor( relation ));
 //	    relationColumn.setCellRenderer(cellRenderer);
@@ -258,24 +262,20 @@ public class ParametersWindow extends JFrame
 		return properlyMap;
 	}
 	
-	public void setActivation(Vector activation)
+	public void setActivation(Vector<?> activation)
 	{
 		this.activityMember.setActivation(activation);
 	} 
 	
-	public HashMap<String, List<String>> getParameters() {
+	public Map<String, List<String>> getParameters() {
 		return parameters;
 	}
 
-
-
-	@SuppressWarnings({ "serial", "rawtypes" })
-	public class MyComboBoxRenderer extends JComboBox implements TableCellRenderer {
+	public class MyComboBoxRenderer extends JComboBox<Object> implements TableCellRenderer {
         /**
 		 * 
 		 */
 
-		@SuppressWarnings("unchecked")
 		public MyComboBoxRenderer(Object[] items) {
             super(items);
         }   
@@ -293,7 +293,7 @@ public class ParametersWindow extends JFrame
 					
 					String rightChoice = fakeProperlyMap.get(relation);
 					List<String> pp = window.getParameters().get(rightChoice);
-					DefaultComboBoxModel tr = new DefaultComboBoxModel();
+					DefaultComboBoxModel<Object> tr = new DefaultComboBoxModel<Object>();
 					if(pp != null)
 					{
 						for(String h:pp)
@@ -319,8 +319,7 @@ public class ParametersWindow extends JFrame
         }
     }      
 	
-    @SuppressWarnings("serial")
-	public class MyComboBoxEditor extends DefaultCellEditor {
+    public class MyComboBoxEditor extends DefaultCellEditor {
     	
         @SuppressWarnings({ "unchecked", "rawtypes" })
 		public MyComboBoxEditor(Object[] items) {
@@ -429,10 +428,10 @@ public class ParametersWindow extends JFrame
 //			String value = getOneParamString();
 			JTable table = frame.getTable();
 			
-			int rowsNumber = table.getRowCount();
+//			int rowsNumber = table.getRowCount();
 			
 			DefaultTableModel model = (DefaultTableModel)table.getModel();
-			Vector dataVector = model.getDataVector();
+			Vector<?> dataVector = model.getDataVector();
 			
 //			String params = "";
 //			for (Object object : dataVector) {
@@ -474,12 +473,11 @@ public class ParametersWindow extends JFrame
 						
 		}
 
-		private boolean dataVectorIsFilledOut(Vector dataVector) {
-			// TODO Auto-generated method stub
-			String params = "";
+		private boolean dataVectorIsFilledOut(Vector<?> dataVector) {
+//			String params = "";
 			for (Object object : dataVector) {
 	//			System.out.println(object.toString());
-				Vector temp = (Vector)object;
+				Vector<?> temp = (Vector<?>)object;
 //				System.out.println("--------\n"+temp.toString());
 				String param = (String)temp.get(0);
 				String relType = (String)temp.get(1);
@@ -487,7 +485,7 @@ public class ParametersWindow extends JFrame
 				
 				String field = (String)temp.get(2);
 				
-				if(param.equals("") || relType == null || field == null)
+				if(param.isEmpty() || relType == null || field == null)
 				{
 					return false;
 				}
